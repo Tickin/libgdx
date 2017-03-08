@@ -204,23 +204,17 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public Vector3 mulAdd (Vector3 vec, float scalar) {
-		this.x += vec.x * scalar;
-		this.y += vec.y * scalar;
-		this.z += vec.z * scalar;
-		return this;
+		return this.add(vec.scl(scalar));
 	}
 
 	@Override
 	public Vector3 mulAdd (Vector3 vec, Vector3 mulVec) {
-		this.x += vec.x * mulVec.x;
-		this.y += vec.y * mulVec.y;
-		this.z += vec.z * mulVec.z;
-		return this;
+		return this.add(vec.scl(mulVec));
 	}
 
 	/** @return The euclidean length */
 	public static float len (final float x, final float y, final float z) {
-		return (float)Math.sqrt(x * x + y * y + z * z);
+		return (float)Math.sqrt(squareSum(x, y, z));
 	}
 
 	@Override
@@ -230,7 +224,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	/** @return The squared euclidean length */
 	public static float len2 (final float x, final float y, final float z) {
-		return x * x + y * y + z * z;
+		return squareSum(x, y, z);
 	}
 
 	@Override
@@ -244,12 +238,17 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		return x == vector.x && y == vector.y && z == vector.z;
 	}
 
+	/** @return Squared sum of params */ 
+	private static float squareSum (final float a, final float b, final float c) {
+		return a * a + b * b + c * c;
+	}
+
 	/** @return The euclidean distance between the two specified vectors */
 	public static float dst (final float x1, final float y1, final float z1, final float x2, final float y2, final float z2) {
 		final float a = x2 - x1;
 		final float b = y2 - y1;
 		final float c = z2 - z1;
-		return (float)Math.sqrt(a * a + b * b + c * c);
+		return (float)Math.sqrt(squareSum(a, b, c));
 	}
 
 	@Override
@@ -257,7 +256,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float a = vector.x - x;
 		final float b = vector.y - y;
 		final float c = vector.z - z;
-		return (float)Math.sqrt(a * a + b * b + c * c);
+		return (float)Math.sqrt(squareSum(a, b, c));
 	}
 
 	/** @return the distance between this point and the given point */
@@ -265,7 +264,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float a = x - this.x;
 		final float b = y - this.y;
 		final float c = z - this.z;
-		return (float)Math.sqrt(a * a + b * b + c * c);
+		return (float)Math.sqrt(squareSum(a, b, c));
 	}
 
 	/** @return the squared distance between the given points */
@@ -273,7 +272,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float a = x2 - x1;
 		final float b = y2 - y1;
 		final float c = z2 - z1;
-		return a * a + b * b + c * c;
+		return squareSum(a, b, c);
 	}
 
 	@Override
@@ -281,7 +280,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float a = point.x - x;
 		final float b = point.y - y;
 		final float c = point.z - z;
-		return a * a + b * b + c * c;
+		return squareSum(a, b, c);
 	}
 
 	/** Returns the squared distance between this point and the given point
@@ -293,7 +292,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float a = x - this.x;
 		final float b = y - this.y;
 		final float c = z - this.z;
-		return a * a + b * b + c * c;
+		return squareSum(a, b, c);
 	}
 
 	@Override
@@ -583,7 +582,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float tx = target.x - x * dot;
 		final float ty = target.y - y * dot;
 		final float tz = target.z - z * dot;
-		final float l2 = tx * tx + ty * ty + tz * tz;
+		final float l2 = squareSum(tx, ty, tz);
 		final float dl = st * ((l2 < 0.0001f) ? 1f : 1f / (float)Math.sqrt(l2));
 
 		return scl((float)Math.cos(theta)).add(tx * dl, ty * dl, tz * dl).nor();
