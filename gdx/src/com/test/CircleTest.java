@@ -365,10 +365,10 @@ public class CircleTest {
 	public void TestInvalidOverlaps_NegativeRadiusCircles(){
 		Circle circle1 = new Circle(2,2,-2);
 		Circle circle2 = new Circle(2,2,-5);
-		Circle circle3 = new Circle(10,10,-5);
+		Circle circle3 = new Circle(2,2,5);
 		
 		assertTrue(circle1.overlaps(circle2));
-		assertFalse(circle1.overlaps(circle3));
+		assertTrue(circle1.overlaps(circle3));
 		assertTrue(circle2.overlaps(circle3));
 	}
 	
