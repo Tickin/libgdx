@@ -36,7 +36,7 @@ public class Polyline implements Shape2D {
 	public Polyline (float[] vertices) {
 		if (vertices.length < 4) throw new IllegalArgumentException("polylines must contain at least 2 points.");
 		this.localVertices = vertices;
-	}
+	}	
 
 	/** Returns vertices without scaling or rotation and without being offset by the polyline position. */
 	public float[] getVertices () {
