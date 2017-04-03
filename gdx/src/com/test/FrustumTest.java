@@ -2,7 +2,7 @@
  * @author Kim SeungJu
  */
 
-package testOracle;
+package com.test;
 
 import static org.junit.Assert.*;
 

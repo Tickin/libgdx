@@ -88,6 +88,30 @@ public class CircleTest {
 	 * 		 Circle x(2f):float, y(2f):float, radius(-5f):float
 	 * 		 Circle center(2,5):Vector2, radius(-3):float
 	 * Expected:
+	 * 		return zero radius Circle
+	 * 		(2,2,0)
+	 * 		(2,2,0)
+	 * 		(2,5,0)
+	 */
+	@Test
+	public void TestInvalidConstructor_NegativeRadiusIsZero(){
+		Circle circle1 = new Circle(2,2,-2);
+		
+		Circle circle2 = new Circle(2f,2f,-5f);
+		
+		Circle circle3 = new Circle(vector2_1, -3);
+		
+		assertEquals(circle1.radius, 0, 0.01f);
+		assertEquals(circle2.radius, 0, 0.01f);
+		assertEquals(circle2.radius, 0, 0.01f);
+	}
+	
+	/*
+	 * Purpose: Instantiate Circle class with NegativeRadius
+	 * Input: Circle x(2):float, y(2):float, radius(-2):float
+	 * 		 Circle x(2f):float, y(2f):float, radius(-5f):float
+	 * 		 Circle center(2,5):Vector2, radius(-3):float
+	 * Expected:
 	 * 		return Circle with the absolute value of radius
 	 * 		(2f,2f,2f)
 	 * 		(2f,2f,5f)
