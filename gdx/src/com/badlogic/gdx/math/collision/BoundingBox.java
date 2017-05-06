@@ -46,9 +46,9 @@ public class BoundingBox implements Serializable {
 	public final static int CORNER110 = 6;
 	public final static int CORNER111 = 7;
 	
-	final static int CORNERX = 1;
-	final static int CORNERY = 2;
-	final static int CORNERZ = 4;
+	public final static int CORNERX = 1;
+	public final static int CORNERY = 2;
+	public final static int CORNERZ = 4;
 
 	/** @param out The {@link Vector3} to receive the center of the bounding box.
 	 * @return The vector specified with the out argument. */

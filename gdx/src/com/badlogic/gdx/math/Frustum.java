@@ -167,7 +167,7 @@ public class Frustum {
 				continue;
 			}
 			
-			return result;
+			break;
 		}
 
 		return result;
@@ -194,19 +194,35 @@ public class Frustum {
 	/** Returns whether the given bounding box is in the frustum.
 	 * @return Whether the bounding box is in the frustum */
 	public boolean boundsInFrustum (float x, float y, float z, float halfWidth, float halfHeight, float halfDepth) {
+		boolean result = true;
+		
 		for (int i = 0, len2 = planes.length; i < len2; i++) {
-			if (planes[i].testPoint(x + halfWidth, y + halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x + halfWidth, y + halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x + halfWidth, y - halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x + halfWidth, y - halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y + halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y + halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y - halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y - halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			return false;
+			result = false;
+			
+			if(testBox(x, y, z, halfWidth, halfHeight, halfDepth, planes[i])){
+				result = true;
+				continue;
+			}
+			
+			break;
 		}
 
-		return true;
+		return result;
+	}
+	
+	public boolean testBox(float x, float y, float z, float halfWidth, float halfHeight, float halfDepth, Plane plane){
+		boolean result = false;
+		
+		for(int corner = BoundingBox.CORNER000; corner <= BoundingBox.CORNER111; corner++){
+			float cornerX = x + (((corner & BoundingBox.CORNERX) != 0)? halfWidth : -halfWidth);
+			float cornerY = y + (((corner & BoundingBox.CORNERY) != 0)? halfHeight : -halfHeight);
+			float cornerZ = z + (((corner & BoundingBox.CORNERZ) != 0)? halfDepth : -halfDepth);
+			if(plane.testPoint(cornerX, cornerY, cornerZ) != PlaneSide.Back){
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 
 // /**
@@ -254,3 +270,4 @@ public class Frustum {
 // System.out.println(Arrays.toString(camOrtho.frustum.planes));
 // }
 }
+
