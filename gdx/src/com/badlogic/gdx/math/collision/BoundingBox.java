@@ -36,6 +36,19 @@ public class BoundingBox implements Serializable {
 
 	private final Vector3 cnt = new Vector3();
 	private final Vector3 dim = new Vector3();
+	
+	public final static int CORNER000 = 0;
+	public final static int CORNER001 = 1;
+	public final static int CORNER010 = 2;
+	public final static int CORNER011 = 3;
+	public final static int CORNER100 = 4;
+	public final static int CORNER101 = 5;
+	public final static int CORNER110 = 6;
+	public final static int CORNER111 = 7;
+	
+	final static int CORNERX = 1;
+	final static int CORNERY = 2;
+	final static int CORNERZ = 4;
 
 	/** @param out The {@link Vector3} to receive the center of the bounding box.
 	 * @return The vector specified with the out argument. */
@@ -53,6 +66,13 @@ public class BoundingBox implements Serializable {
 
 	public float getCenterZ () {
 		return cnt.z;
+	}
+	
+	public Vector3 getCorner(final int corner, final Vector3 out){
+		out.x = ((corner & BoundingBox.CORNERX) != 0)?max.x:min.x;
+		out.y = ((corner & BoundingBox.CORNERY) != 0)?max.y:min.y;
+		out.z = ((corner & BoundingBox.CORNERZ) != 0)?max.z:min.z;
+		return out;
 	}
 
 	public Vector3 getCorner000 (final Vector3 out) {
