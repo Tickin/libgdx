@@ -25,18 +25,9 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 /** A truncated rectangular pyramid. Used to define the viewable region and its projection onto the screen.
  * @see Camera#frustum */
 public class Frustum {
-	
-	protected static final Vector3[] clipSpacePlanePoints = {
-		new Vector3(-1, -1, -1),
-		new Vector3( 1, -1, -1),
-		new Vector3( 1,  1, -1),
-		new Vector3(-1,  1, -1), // near clip
-		new Vector3(-1, -1,  1),
-		new Vector3( 1, -1,  1),
-		new Vector3( 1,  1,  1),
-		new Vector3(-1,  1,  1)
-	}; // far clip
-	
+	protected static final Vector3[] clipSpacePlanePoints = {new Vector3(-1, -1, -1), new Vector3(1, -1, -1),
+		new Vector3(1, 1, -1), new Vector3(-1, 1, -1), // near clip
+		new Vector3(-1, -1, 1), new Vector3(1, -1, 1), new Vector3(1, 1, 1), new Vector3(-1, 1, 1)}; // far clip
 	protected static final float[] clipSpacePlanePointsArray = new float[8 * 3];
 
 	static {
@@ -47,18 +38,15 @@ public class Frustum {
 			clipSpacePlanePointsArray[j++] = v.z;
 		}
 	}
-
+	
 	private final static Vector3 tmpV = new Vector3();
 
 	/** the six clipping planes, near, far, left, right, top, bottom **/
 	public final Plane[] planes = new Plane[6];
 
 	/** eight points making up the near and far clipping "rectangles". order is counter clockwise, starting at bottom left **/
-	public final Vector3[] planePoints = {
-		new Vector3(), new Vector3(), new Vector3(), new Vector3(),
-		new Vector3(), new Vector3(), new Vector3(), new Vector3()
-	};
-	
+	public final Vector3[] planePoints = {new Vector3(), new Vector3(), new Vector3(), new Vector3(), new Vector3(),
+		new Vector3(), new Vector3(), new Vector3()};
 	protected final float[] planePointsArray = new float[8 * 3];
 
 	public Frustum () {
@@ -169,19 +157,32 @@ public class Frustum {
 	 * @param bounds The bounding box
 	 * @return Whether the bounding box is in the frustum */
 	public boolean boundsInFrustum (BoundingBox bounds) {
+		boolean result = true;
+		
 		for (int i = 0, len2 = planes.length; i < len2; i++) {
-			if (planes[i].testPoint(bounds.getCorner000(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner001(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner010(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner011(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner100(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner101(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner110(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner111(tmpV)) != PlaneSide.Back) continue;
-			return false;
+			result = false;
+			
+			if(testBox(bounds, planes[i])){
+				result = true;
+				continue;
+			}
+			
+			break;
 		}
 
-		return true;
+		return result;
+	}
+
+	private boolean testBox (BoundingBox bounds, Plane plane) {
+		boolean result = false;
+		
+		for(int corner = BoundingBox.CORNER000; corner <= BoundingBox.CORNER111; corner++){
+			if(plane.testPoint(bounds.getCorner(corner, tmpV)) != PlaneSide.Back){
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 
 	/** Returns whether the given bounding box is in the frustum.
@@ -193,19 +194,35 @@ public class Frustum {
 	/** Returns whether the given bounding box is in the frustum.
 	 * @return Whether the bounding box is in the frustum */
 	public boolean boundsInFrustum (float x, float y, float z, float halfWidth, float halfHeight, float halfDepth) {
+		boolean result = true;
+		
 		for (int i = 0, len2 = planes.length; i < len2; i++) {
-			if (planes[i].testPoint(x + halfWidth, y + halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x + halfWidth, y + halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x + halfWidth, y - halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x + halfWidth, y - halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y + halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y + halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y - halfHeight, z + halfDepth) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(x - halfWidth, y - halfHeight, z - halfDepth) != PlaneSide.Back) continue;
-			return false;
+			result = false;
+			
+			if(testBox(x, y, z, halfWidth, halfHeight, halfDepth, planes[i])){
+				result = true;
+				continue;
+			}
+			
+			break;
 		}
 
-		return true;
+		return result;
+	}
+	
+	public boolean testBox(float x, float y, float z, float halfWidth, float halfHeight, float halfDepth, Plane plane){
+		boolean result = false;
+		
+		for(int corner = BoundingBox.CORNER000; corner <= BoundingBox.CORNER111; corner++){
+			float cornerX = x + (((corner & BoundingBox.CORNERX) != 0)? halfWidth : -halfWidth);
+			float cornerY = y + (((corner & BoundingBox.CORNERY) != 0)? halfHeight : -halfHeight);
+			float cornerZ = z + (((corner & BoundingBox.CORNERZ) != 0)? halfDepth : -halfDepth);
+			if(plane.testPoint(cornerX, cornerY, cornerZ) != PlaneSide.Back){
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 
 // /**

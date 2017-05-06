@@ -464,7 +464,7 @@ public final class Intersector {
 			return true;
 		}
 		float lowest = 0;
-		boolean hit = false; 
+		boolean hit = false;
 
 		// min x
 		hit = setHitOfMinCoord(ray.origin.x, box.min.x, ray.direction.x, hit, lowest, ray.origin, ray.direction, v2.y, v2.z, box.min.y, box.max.y, box.min.z, box.max.z);
