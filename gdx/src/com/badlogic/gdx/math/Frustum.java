@@ -157,19 +157,32 @@ public class Frustum {
 	 * @param bounds The bounding box
 	 * @return Whether the bounding box is in the frustum */
 	public boolean boundsInFrustum (BoundingBox bounds) {
+		boolean result = true;
+		
 		for (int i = 0, len2 = planes.length; i < len2; i++) {
-			if (planes[i].testPoint(bounds.getCorner000(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner001(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner010(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner011(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner100(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner101(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner110(tmpV)) != PlaneSide.Back) continue;
-			if (planes[i].testPoint(bounds.getCorner111(tmpV)) != PlaneSide.Back) continue;
-			return false;
+			result = false;
+			
+			if(testBox(bounds, planes[i])){
+				result = true;
+				continue;
+			}
+			
+			return result;
 		}
 
-		return true;
+		return result;
+	}
+
+	private boolean testBox (BoundingBox bounds, Plane plane) {
+		boolean result = false;
+		
+		for(int corner = BoundingBox.CORNER000; corner <= BoundingBox.CORNER111; corner++){
+			if(plane.testPoint(bounds.getCorner(corner, tmpV)) != PlaneSide.Back){
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 
 	/** Returns whether the given bounding box is in the frustum.
