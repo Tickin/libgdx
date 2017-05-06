@@ -546,7 +546,7 @@ public class InterpolationTest {
 	 * Expected: Float (1)
 	 */
 	@Test
-	public void elasticOutApplyTestGreater() {
+	public void elasticOutApplyTestNonZero() {
 		float a = 1;
 		ElasticOut elasticout = new ElasticOut(5, 7, 11, 19);
 		assertEquals(0, Float.compare(1, elasticout.apply(a)));
@@ -558,7 +558,7 @@ public class InterpolationTest {
 	 * Expected: Float (0)
 	 */
 	@Test
-	public void elasticOutApplyTest2() {
+	public void elasticOutApplyTestZero() {
 		float a = 0;
 		ElasticOut elasticout = new ElasticOut(5, 7, 11, 19);
 		assertEquals(0, Float.compare(0, elasticout.apply(a)));

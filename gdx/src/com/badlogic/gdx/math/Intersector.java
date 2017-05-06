@@ -532,26 +532,25 @@ public final class Intersector {
 				}
 			}
 		}
+		intersection.x = getintersectionCoord(intersection.x, box.min.x, box.max.x);
 		if (hit && intersection != null) {
 			intersection.set(ray.direction).scl(lowest).add(ray.origin);
-			if (intersection.x < box.min.x) {
-				intersection.x = box.min.x;
-			} else if (intersection.x > box.max.x) {
-				intersection.x = box.max.x;
-			}
-			if (intersection.y < box.min.y) {
-				intersection.y = box.min.y;
-			} else if (intersection.y > box.max.y) {
-				intersection.y = box.max.y;
-			}
-			if (intersection.z < box.min.z) {
-				intersection.z = box.min.z;
-			} else if (intersection.z > box.max.z) {
-				intersection.z = box.max.z;
-			}
+			intersection.x = getintersectionCoord(intersection.x, box.min.x, box.max.x);
+			intersection.y = getintersectionCoord(intersection.y, box.min.y, box.max.y);
+			intersection.z = getintersectionCoord(intersection.z, box.min.z, box.max.z);
 		}
 		return hit;
 	}
+
+	private static float getintersectionCoord (float intersectionCoord, float boxMinCoord, float boxMaxCoord) {
+		if (intersection.x < boxMinCoord) {
+			return boxMinCoord;
+		} else if (intersection.x > boxMaxCoord) {
+			return boxMaxCoord;
+		}
+		return intersectionCoord;
+	}
+	
 
 	/** Quick check whether the given {@link Ray} and {@link BoundingBox} intersect.
 	 * 
