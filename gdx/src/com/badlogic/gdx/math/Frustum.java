@@ -270,4 +270,3 @@ public class Frustum {
 // System.out.println(Arrays.toString(camOrtho.frustum.planes));
 // }
 }
-

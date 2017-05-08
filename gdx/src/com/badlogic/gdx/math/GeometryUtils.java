@@ -79,18 +79,12 @@ public final class GeometryUtils {
 	static public float lowestPositiveRoot (float a, float b, float c) {
 		float det = b * b - 4 * a * c;
 		if (det < 0) return Float.NaN;
-
+	
 		float sqrtD = (float)Math.sqrt(det);
 		float invA = 1 / (2 * a);
 		float r1 = (-b - sqrtD) * invA;
 		float r2 = (-b + sqrtD) * invA;
-
-		if (r1 > r2) {
-			float tmp = r2;
-			r2 = r1;
-			r1 = tmp;
-		}
-
+	
 		if (r1 > 0) return r1;
 		if (r2 > 0) return r2;
 		return Float.NaN;
@@ -124,31 +118,32 @@ public final class GeometryUtils {
 	}
 
 	static public float triangleCircumradius (float x1, float y1, float x2, float y2, float x3, float y3) {
-		float m1, m2, mx1, mx2, my1, my2, x, y;
+		float slopeOfp1andp2, slopeOfp2andp3, avgOfx1andx2, avgOfx2andx3, avgOfy1andy2, avgOfy2andy3, centroidx, centroidy;
 		if (Math.abs(y2 - y1) < MathUtils.FLOAT_ROUNDING_ERROR) {
-			m2 = -(x3 - x2) / (y3 - y2);
-			mx2 = (x2 + x3) / 2;
-			my2 = (y2 + y3) / 2;
-			x = (x2 + x1) / 2;
-			y = m2 * (x - mx2) + my2;
+			slopeOfp2andp3 = -(x3 - x2) / (y3 - y2);
+			avgOfx2andx3 = (x2 + x3) / 2;
+			avgOfy2andy3 = (y2 + y3) / 2;
+			centroidx = (x2 + x1) / 2;
+			centroidy = slopeOfp2andp3 * (centroidx - avgOfx2andx3) + avgOfy2andy3;
 		} else if (Math.abs(y3 - y2) < MathUtils.FLOAT_ROUNDING_ERROR) {
-			m1 = -(x2 - x1) / (y2 - y1);
-			mx1 = (x1 + x2) / 2;
-			my1 = (y1 + y2) / 2;
-			x = (x3 + x2) / 2;
-			y = m1 * (x - mx1) + my1;
+			slopeOfp1andp2 = -(x2 - x1) / (y2 - y1);
+			avgOfx1andx2 = (x1 + x2) / 2;
+			avgOfy1andy2 = (y1 + y2) / 2;
+			centroidx = (x3 + x2) / 2;
+			centroidy = slopeOfp1andp2 * (centroidx - avgOfx1andx2) + avgOfy1andy2;
 		} else {
-			m1 = -(x2 - x1) / (y2 - y1);
-			m2 = -(x3 - x2) / (y3 - y2);
-			mx1 = (x1 + x2) / 2;
-			mx2 = (x2 + x3) / 2;
-			my1 = (y1 + y2) / 2;
-			my2 = (y2 + y3) / 2;
-			x = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2);
-			y = m1 * (x - mx1) + my1;
+			slopeOfp1andp2 = -(x2 - x1) / (y2 - y1);
+			slopeOfp2andp3 = -(x3 - x2) / (y3 - y2);
+			avgOfx1andx2 = (x1 + x2) / 2;
+			avgOfx2andx3 = (x2 + x3) / 2;
+			avgOfy1andy2 = (y1 + y2) / 2;
+			avgOfy2andy3 = (y2 + y3) / 2;
+			centroidx = (slopeOfp1andp2 * avgOfx1andx2 - slopeOfp2andp3 * avgOfx2andx3 + avgOfy2andy3 - avgOfy1andy2) / (slopeOfp1andp2 - slopeOfp2andp3);
+			centroidy = slopeOfp1andp2 * (centroidx - avgOfx1andx2) + avgOfy1andy2;
 		}
-		float dx = x1 - x, dy = y1 - y;
-		return (float)Math.sqrt(dx * dx + dy * dy);
+		float distancex = x1 - centroidx;
+		float distancey = y1 - centroidy;
+		return (float)Math.sqrt(distancex * distancex + distancey * distancey);
 	}
 
 	/** Ratio of circumradius to shortest edge as a measure of triangle quality.
