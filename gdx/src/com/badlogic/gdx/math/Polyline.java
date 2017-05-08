@@ -70,30 +70,16 @@ public class Polyline implements Shape2D {
 		final Vector2 origin = this.origin;
 		final float scaleX = this.scaleX;
 		final float scaleY = this.scaleY;
-		final boolean scale = scaleX != 1 || scaleY != 1;
 		final float rotation = this.rotation;
-		final float cos = MathUtils.cosDeg(rotation);
-		final float sin = MathUtils.sinDeg(rotation);
 
 		for (int i = 0, n = localVertices.length; i < n; i += 2) {
-			float x = localVertices[i].x - origin.x;
-			float y = localVertices[i].y - origin.y;
-
-			// scale if needed
-			if (scale) {
-				x *= scaleX;
-				y *= scaleY;
-			}
-
-			// rotate if needed
-			if (rotation != 0) {
-				float oldX = x;
-				x = cos * x - sin * y;
-				y = sin * oldX + cos * y;
-			}
-
-			worldVertices[i].x = position.x + x + origin.x;
-			worldVertices[i].y = position.y + y + origin.y;
+			Vector2 point = localVertices[i];
+			point.sub(origin);
+			point.scl(scaleX, scaleY);
+			point.rotate(rotation);
+			point.add(position);
+			point.add(origin);
+			worldVertices[i].set(point);
 		}
 		return worldVertices;
 	}
