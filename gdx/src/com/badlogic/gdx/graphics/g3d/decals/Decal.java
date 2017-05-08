@@ -197,13 +197,13 @@ public class Decal {
 	 * 
 	 * @param x Position to locate the decal at */
 	public void setX (float x) {
-		this.position.x = x;
+		this.position.setX(x);
 		updated = false;
 	}
 
 	/** @return position on the x axis */
 	public float getX () {
-		return this.position.x;
+		return this.position.getX();
 	}
 
 	/** Moves by the specified amount of units along the y axis
@@ -218,13 +218,13 @@ public class Decal {
 	 * 
 	 * @param y Position to locate the decal at */
 	public void setY (float y) {
-		this.position.y = y;
+		this.position.setY(y);
 		updated = false;
 	}
 
 	/** @return position on the y axis */
 	public float getY () {
-		return this.position.y;
+		return this.position.getY();
 	}
 
 	/** Moves by the specified amount of units along the z axis
@@ -239,13 +239,13 @@ public class Decal {
 	 * 
 	 * @param z Position to locate the decal at */
 	public void setZ (float z) {
-		this.position.z = z;
+		this.position.setZ(z);
 		updated = false;
 	}
 
 	/** @return position on the z axis */
 	public float getZ () {
-		return this.position.z;
+		return this.position.getZ();
 	}
 
 	/** Translates by the specified amount of units
