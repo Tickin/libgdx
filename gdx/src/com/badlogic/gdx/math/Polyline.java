@@ -98,6 +98,21 @@ public class Polyline implements Shape2D {
 		return worldVertices;
 	}
 
+
+	public float[] getTransfromedVertices(){
+		if (dirty){
+			this.getTransformedVertices();
+
+		} 
+	
+		float[] Vertices=new float[worldVertices.length*2];
+		for(int i=0;i<worldVertices.length;i++){
+			Vertices[2*i]=worldVertices[i].x;
+			Vertices[2*i+1]=worldVertices[i].y;
+		}
+		return Vertices;
+		
+	}
 	/** Returns the euclidean length of the polyline without scaling */
 	public float getLength () {
 		if (!calculateLength) return length;
