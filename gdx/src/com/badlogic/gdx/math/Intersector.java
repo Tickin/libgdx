@@ -885,7 +885,7 @@ public final class Intersector {
 		return a * d - b * c;
 	}
 
-	static double detd (double a, double b, double c, double d) {
+	static double det (double a, double b, double c, double d) {
 		return a * d - b * c;
 	}
 
