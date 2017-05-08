@@ -39,8 +39,7 @@ public class Polygon implements Shape2D {
 	 * 
 	 * @throws IllegalArgumentException if less than 6 elements, representing 3 points, are provided */
 	public Polygon (float[] vertices) {
-		if (vertices.length < 6) throw new IllegalArgumentException("polygons must contain at least 3 points.");
-		this.localVertices = vertices;
+		conditionPolygon(vertices);
 	}
 
 	/** Returns the polygon's local vertices without scaling or rotation and without being offset by the polygon position. */
@@ -98,14 +97,14 @@ public class Polygon implements Shape2D {
 	public void setOrigin (float originX, float originY) {
 		this.originX = originX;
 		this.originY = originY;
-		dirty = true;
+		dirty();
 	}
 
 	/** Sets the polygon's position within the world. */
 	public void setPosition (float x, float y) {
 		this.x = x;
 		this.y = y;
-		dirty = true;
+		dirty();
 	}
 
 	/** Sets the polygon's local vertices relative to the origin point, without any scaling, rotating or translations being applied.
@@ -114,42 +113,41 @@ public class Polygon implements Shape2D {
 	 *           representing the y-coordinate.
 	 * @throws IllegalArgumentException if less than 6 elements, representing 3 points, are provided */
 	public void setVertices (float[] vertices) {
-		if (vertices.length < 6) throw new IllegalArgumentException("polygons must contain at least 3 points.");
-		localVertices = vertices;
-		dirty = true;
+		conditionPolygon(vertices);
+		dirty();
 	}
 
 	/** Translates the polygon's position by the specified horizontal and vertical amounts. */
 	public void translate (float x, float y) {
 		this.x += x;
 		this.y += y;
-		dirty = true;
+		dirty();
 	}
 
 	/** Sets the polygon to be rotated by the supplied degrees. */
 	public void setRotation (float degrees) {
 		this.rotation = degrees;
-		dirty = true;
+		dirty();
 	}
 
 	/** Applies additional rotation to the polygon by the supplied degrees. */
 	public void rotate (float degrees) {
 		rotation += degrees;
-		dirty = true;
+		dirty();
 	}
 
 	/** Sets the amount of scaling to be applied to the polygon. */
 	public void setScale (float scaleX, float scaleY) {
 		this.scaleX = scaleX;
 		this.scaleY = scaleY;
-		dirty = true;
+		dirty();
 	}
 
 	/** Applies additional scaling to the polygon by the supplied amount. */
 	public void scale (float amount) {
 		this.scaleX += amount;
 		this.scaleY += amount;
-		dirty = true;
+		dirty();
 	}
 
 	/** Sets the polygon's world vertices to be recalculated when calling {@link #getTransformedVertices() getTransformedVertices}. */
@@ -210,6 +208,12 @@ public class Polygon implements Shape2D {
 		return (intersects & 1) == 1;
 	}
 
+	public void conditionPolygon(float[] vertices)
+	{
+		if (vertices.length < 6) throw new IllegalArgumentException("polygons must contain at least 3 points.");
+		this.localVertices = vertices;
+	}
+	
 	@Override
 	public boolean contains (Vector2 point) {
 		return contains(point.x, point.y);

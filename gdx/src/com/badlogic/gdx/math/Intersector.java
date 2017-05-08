@@ -463,95 +463,105 @@ public final class Intersector {
 			if (intersection != null) intersection.set(ray.origin);
 			return true;
 		}
-		float lowest = 0, t;
+		float lowest = 0;
 		boolean hit = false;
 
 		// min x
-		if (ray.origin.x <= box.min.x && ray.direction.x > 0) {
-			t = (box.min.x - ray.origin.x) / ray.direction.x;
-			if (t >= 0) {
-				v2.set(ray.direction).scl(t).add(ray.origin);
-				if (v2.y >= box.min.y && v2.y <= box.max.y && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
-					hit = true;
-					lowest = t;
-				}
-			}
-		}
+		hit = setHitOfMinCoord(ray.origin.x, box.min.x, ray.direction.x, hit, lowest, ray.origin, ray.direction, v2.y, v2.z, box.min.y, box.max.y, box.min.z, box.max.z);
+		lowest = setLowestOfMinCoord(ray.origin.x, box.min.x, ray.direction.x, hit, lowest, ray.origin, ray.direction, v2.y, v2.z, box.min.y, box.max.y, box.min.z, box.max.z);
 		// max x
-		if (ray.origin.x >= box.max.x && ray.direction.x < 0) {
-			t = (box.max.x - ray.origin.x) / ray.direction.x;
-			if (t >= 0) {
-				v2.set(ray.direction).scl(t).add(ray.origin);
-				if (v2.y >= box.min.y && v2.y <= box.max.y && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
-					hit = true;
-					lowest = t;
-				}
-			}
-		}
+		hit = setHitOfMaxCoord(ray.origin.x, box.min.x, ray.direction.x, hit, lowest, ray.origin, ray.direction, v2.y, v2.z, box.min.y, box.max.y, box.min.z, box.max.z);
+		lowest = setLowestOfMaxCoord(ray.origin.x, box.min.x, ray.direction.x, hit, lowest, ray.origin, ray.direction, v2.y, v2.z, box.min.y, box.max.y, box.min.z, box.max.z);
 		// min y
-		if (ray.origin.y <= box.min.y && ray.direction.y > 0) {
-			t = (box.min.y - ray.origin.y) / ray.direction.y;
-			if (t >= 0) {
-				v2.set(ray.direction).scl(t).add(ray.origin);
-				if (v2.x >= box.min.x && v2.x <= box.max.x && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
-					hit = true;
-					lowest = t;
-				}
-			}
-		}
+		hit = setHitOfMinCoord(ray.origin.y, box.min.y, ray.direction.y, hit, lowest, ray.origin, ray.direction, v2.z, v2.x, box.min.z, box.max.z, box.min.x, box.max.x);
+		lowest = setLowestOfMinCoord(ray.origin.y, box.min.y, ray.direction.y, hit, lowest, ray.origin, ray.direction, v2.z, v2.x, box.min.z, box.max.z, box.min.x, box.max.x);
 		// max y
-		if (ray.origin.y >= box.max.y && ray.direction.y < 0) {
-			t = (box.max.y - ray.origin.y) / ray.direction.y;
-			if (t >= 0) {
-				v2.set(ray.direction).scl(t).add(ray.origin);
-				if (v2.x >= box.min.x && v2.x <= box.max.x && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
-					hit = true;
-					lowest = t;
-				}
-			}
-		}
+		hit = setHitOfMaxCoord(ray.origin.y, box.min.y, ray.direction.y, hit, lowest, ray.origin, ray.direction, v2.z, v2.x, box.min.z, box.max.z, box.min.x, box.max.x);
+		lowest = setLowestOfMaxCoord(ray.origin.y, box.min.y, ray.direction.y, hit, lowest, ray.origin, ray.direction, v2.z, v2.x, box.min.z, box.max.z, box.min.x, box.max.x);
 		// min z
-		if (ray.origin.z <= box.min.z && ray.direction.z > 0) {
-			t = (box.min.z - ray.origin.z) / ray.direction.z;
-			if (t >= 0) {
-				v2.set(ray.direction).scl(t).add(ray.origin);
-				if (v2.x >= box.min.x && v2.x <= box.max.x && v2.y >= box.min.y && v2.y <= box.max.y && (!hit || t < lowest)) {
-					hit = true;
-					lowest = t;
-				}
-			}
-		}
-		// max y
-		if (ray.origin.z >= box.max.z && ray.direction.z < 0) {
-			t = (box.max.z - ray.origin.z) / ray.direction.z;
-			if (t >= 0) {
-				v2.set(ray.direction).scl(t).add(ray.origin);
-				if (v2.x >= box.min.x && v2.x <= box.max.x && v2.y >= box.min.y && v2.y <= box.max.y && (!hit || t < lowest)) {
-					hit = true;
-					lowest = t;
-				}
-			}
-		}
+		hit = setHitOfMinCoord(ray.origin.z, box.min.z, ray.direction.z, hit, lowest, ray.origin, ray.direction, v2.x, v2.y, box.min.x, box.max.x, box.min.y, box.max.y);
+		lowest = setLowestOfMinCoord(ray.origin.z, box.min.z, ray.direction.z, hit, lowest, ray.origin, ray.direction, v2.x, v2.y, box.min.x, box.max.x, box.min.y, box.max.y);
+		// max z
+		hit = setHitOfMaxCoord(ray.origin.z, box.min.z, ray.direction.z, hit, lowest, ray.origin, ray.direction, v2.x, v2.y, box.min.x, box.max.x, box.min.y, box.max.y);
+		lowest = setLowestOfMaxCoord(ray.origin.z, box.min.z, ray.direction.z, hit, lowest, ray.origin, ray.direction, v2.x, v2.y, box.min.x, box.max.x, box.min.y, box.max.y);
 		if (hit && intersection != null) {
 			intersection.set(ray.direction).scl(lowest).add(ray.origin);
-			if (intersection.x < box.min.x) {
-				intersection.x = box.min.x;
-			} else if (intersection.x > box.max.x) {
-				intersection.x = box.max.x;
-			}
-			if (intersection.y < box.min.y) {
-				intersection.y = box.min.y;
-			} else if (intersection.y > box.max.y) {
-				intersection.y = box.max.y;
-			}
-			if (intersection.z < box.min.z) {
-				intersection.z = box.min.z;
-			} else if (intersection.z > box.max.z) {
-				intersection.z = box.max.z;
+			intersection.x = getintersectionCoord(intersection.x, box.min.x, box.max.x);
+			intersection.y = getintersectionCoord(intersection.y, box.min.y, box.max.y);
+			intersection.z = getintersectionCoord(intersection.z, box.min.z, box.max.z);
+		}
+		return hit;
+	}
+
+	private static boolean setHitOfMinCoord(float rayOriginCoord, float boxCoord, float rayDircoord,
+		boolean hit, float lowest, Vector3 origin, Vector3 direction,
+		float v2OtherCoord1, float v2OtherCoord2, float boxOtherCoord1Min, float boxOtherCoord1Max, float boxOtherCoord2Min, float boxOtherCoord2Max) {
+		if (rayOriginCoord <= boxCoord && rayDircoord > 0) {
+			float t = (boxCoord - rayOriginCoord) / rayDircoord;
+			if (t >= 0) {
+				v2.set(direction).scl(t).add(origin);
+				if (v2OtherCoord2 >= boxOtherCoord2Min && v2OtherCoord2 <= boxOtherCoord2Max && v2OtherCoord1 >= boxOtherCoord1Min && v2OtherCoord1 <= boxOtherCoord1Max && (!hit || t < lowest)) {
+					return true;
+				}
 			}
 		}
 		return hit;
 	}
+
+	private static boolean setHitOfMaxCoord(float rayOriginCoord, float boxCoord, float rayDircoord,
+		boolean hit, float lowest, Vector3 origin, Vector3 direction,
+		float v2OtherCoord1, float v2OtherCoord2, float boxOtherCoord1Min, float boxOtherCoord1Max, float boxOtherCoord2Min, float boxOtherCoord2Max) {
+		if (rayOriginCoord >= boxCoord && rayDircoord < 0) {
+			float t = (boxCoord - rayOriginCoord) / rayDircoord;
+			if (t >= 0) {
+				v2.set(direction).scl(t).add(origin);
+				if (v2OtherCoord2 >= boxOtherCoord2Min && v2OtherCoord2 <= boxOtherCoord2Max && v2OtherCoord1 >= boxOtherCoord1Min && v2OtherCoord1 <= boxOtherCoord1Max && (!hit || t < lowest)) {
+					return true;
+				}
+			}
+		}
+		return hit;
+	}
+
+	private static float setLowestOfMinCoord(float rayOriginCoord, float boxCoord, float rayDircoord,
+		boolean hit, float lowest, Vector3 origin, Vector3 direction,
+		float v2OtherCoord1, float v2OtherCoord2, float boxOtherCoord1Min, float boxOtherCoord1Max, float boxOtherCoord2Min, float boxOtherCoord2Max) {
+		if (rayOriginCoord <= boxCoord && rayDircoord > 0) {
+			float t = (boxCoord - rayOriginCoord) / rayDircoord;
+			if (t >= 0) {
+				v2.set(direction).scl(t).add(origin);
+				if (v2OtherCoord2 >= boxOtherCoord2Min && v2OtherCoord2 <= boxOtherCoord2Max && v2OtherCoord1 >= boxOtherCoord1Min && v2OtherCoord1 <= boxOtherCoord1Max && (!hit || t < lowest)) {
+					return t;
+				}
+			}
+		}
+		return lowest;
+	}
+
+	private static float setLowestOfMaxCoord(float rayOriginCoord, float boxCoord, float rayDircoord,
+		boolean hit, float lowest, Vector3 origin, Vector3 direction,
+		float v2OtherCoord1, float v2OtherCoord2, float boxOtherCoord1Min, float boxOtherCoord1Max, float boxOtherCoord2Min, float boxOtherCoord2Max) {
+		if (rayOriginCoord >= boxCoord && rayDircoord < 0) {
+			float t = (boxCoord - rayOriginCoord) / rayDircoord;
+			if (t >= 0) {
+				v2.set(direction).scl(t).add(origin);
+				if (v2OtherCoord2 >= boxOtherCoord2Min && v2OtherCoord2 <= boxOtherCoord2Max && v2OtherCoord1 >= boxOtherCoord1Min && v2OtherCoord1 <= boxOtherCoord1Max && (!hit || t < lowest)) {
+					return t;
+				}
+			}
+		}
+		return lowest;
+	}
+
+	private static float getintersectionCoord (float intersectionCoord, float boxMinCoord, float boxMaxCoord) {
+		if (intersection.x < boxMinCoord) {
+			return boxMinCoord;
+		} else if (intersection.x > boxMaxCoord) {
+			return boxMaxCoord;
+		}
+		return intersectionCoord;
+	}
+	
 
 	/** Quick check whether the given {@link Ray} and {@link BoundingBox} intersect.
 	 * 
@@ -875,7 +885,7 @@ public final class Intersector {
 		return a * d - b * c;
 	}
 
-	static double detd (double a, double b, double c, double d) {
+	static double det (double a, double b, double c, double d) {
 		return a * d - b * c;
 	}
 
