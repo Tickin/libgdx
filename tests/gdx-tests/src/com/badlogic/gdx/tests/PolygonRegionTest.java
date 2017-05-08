@@ -55,8 +55,8 @@ public class PolygonRegionTest extends GdxTest {
 		region2 = new PolygonRegion(new TextureRegion(texture), new float[] {0, 0, 100, 100, 0, 100}, new short[] {0, 1, 2});
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.position.x = 0;
-		camera.position.y = 0;
+		camera.position.setX(0);
+		camera.position.setY(0);
 
 		batch = new PolygonSpriteBatch();
 		debugRenderer = new PolygonRegionDebugRenderer();

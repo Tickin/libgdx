@@ -56,7 +56,7 @@ public class ConeShapeBuilder extends BaseShapeBuilder {
 			u = 1f - us * i;
 			curr1.position.set(MathUtils.cos(angle) * hw, 0f, MathUtils.sin(angle) * hd);
 			curr1.normal.set(curr1.position).nor();
-			curr1.position.y = -hh;
+			curr1.position.setY(-hh);
 			curr1.uv.set(u, 1);
 			i1 = builder.vertex(curr1);
 			if (i != 0) builder.triangle(base, i1, i2); // FIXME don't duplicate lines and points

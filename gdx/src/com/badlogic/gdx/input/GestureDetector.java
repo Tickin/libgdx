@@ -54,7 +54,7 @@ public class GestureDetector extends InputAdapter {
 	private final Task longPressTask = new Task() {
 		@Override
 		public void run () {
-			if (!longPressFired) longPressFired = listener.longPress(pointer1.x, pointer1.y);
+			if (!longPressFired) longPressFired = listener.longPress(pointer1.getX(), pointer1.getY());
 		}
 	};
 
@@ -201,10 +201,10 @@ public class GestureDetector extends InputAdapter {
 			// we are in pan mode again, reset velocity tracker
 			if (pointer == 0) {
 				// first pointer has lifted off, set up panning to use the second pointer...
-				tracker.start(pointer2.x, pointer2.y, Gdx.input.getCurrentEventTime());
+				tracker.start(pointer2.getX(), pointer2.getY(), Gdx.input.getCurrentEventTime());
 			} else {
 				// second pointer has lifted off, set up panning to use the first pointer...
-				tracker.start(pointer1.x, pointer1.y, Gdx.input.getCurrentEventTime());
+				tracker.start(pointer1.getX(), pointer1.getY(), Gdx.input.getCurrentEventTime());
 			}
 			return false;
 		}

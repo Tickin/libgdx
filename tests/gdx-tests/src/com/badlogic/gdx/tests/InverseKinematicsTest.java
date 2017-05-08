@@ -87,14 +87,14 @@ public class InverseKinematicsTest extends GdxTest {
 		renderer.begin(ShapeType.Line);
 		renderer.setColor(0, 1, 0, 1);
 		for (int i = 0; i < bones.length - 1; i++) {
-			renderer.line(bones[i].position.x, bones[i].position.y, bones[i + 1].position.x, bones[i + 1].position.y);
+			renderer.line(bones[i].position.getX(), bones[i].position.getY(), bones[i + 1].position.getX(), bones[i + 1].position.getY());
 		}
 		renderer.end();
 
 		renderer.begin(ShapeType.Point);
 		renderer.setColor(1, 0, 0, 1);
 		for (int i = 0; i < bones.length; i++) {
-			renderer.point(bones[i].position.x, bones[i].position.y, 0);
+			renderer.point(bones[i].position.getX(), bones[i].position.getY(), 0);
 		}
 		renderer.end();
 	}
@@ -109,15 +109,15 @@ public class InverseKinematicsTest extends GdxTest {
 			Bone bone = bones[i];
 			endPoint.set(bone.position);
 
-			diff.set(endPoint.x, endPoint.y).sub(bones[i + 1].position.x, bones[i + 1].position.y);
+			diff.set(endPoint.getX(), endPoint.getY()).sub(bones[i + 1].position.getX(), bones[i + 1].position.getY());
 			diff.add(0, gravity);
-			diff.add(bones[i + 1].inertia.x, bones[i + 1].inertia.y);
+			diff.add(bones[i + 1].inertia.getX(), bones[i + 1].inertia.getY());
 			diff.nor().scl(bones[i + 1].len);
 
-			float x = endPoint.x - diff.x;
-			float y = endPoint.y - diff.y;
+			float x = endPoint.getX() - diff.getX();
+			float y = endPoint.getY() - diff.getY();
 			float delta = Gdx.graphics.getDeltaTime();
-			bones[i + 1].inertia.add((bones[i + 1].position.x - x) * delta, (bones[i + 1].position.y - y) * delta, 0).scl(0.99f);
+			bones[i + 1].inertia.add((bones[i + 1].position.getX() - x) * delta, (bones[i + 1].position.getY() - y) * delta, 0).scl(0.99f);
 			bones[i + 1].position.set(x, y, 0);
 		}
 	}

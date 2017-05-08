@@ -64,8 +64,8 @@ public class ExtendViewport extends Viewport {
 		Vector2 scaled = Scaling.fit.apply(worldWidth, worldHeight, screenWidth, screenHeight);
 
 		// Extend in the short direction.
-		int viewportWidth = Math.round(scaled.x);
-		int viewportHeight = Math.round(scaled.y);
+		int viewportWidth = Math.round(scaled.getX());
+		int viewportHeight = Math.round(scaled.getY());
 		if (viewportWidth < screenWidth) {
 			float toViewportSpace = viewportHeight / worldHeight;
 			float toWorldSpace = worldHeight / viewportHeight;

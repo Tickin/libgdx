@@ -79,9 +79,9 @@ public class PrismaticJointDef extends JointDef {
 		jd.collideConnected = collideConnected;
 		jd.enableLimit = enableLimit;
 		jd.enableMotor = enableMotor;
-		jd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		jd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
-		jd.localAxisA.set(localAxisA.x, localAxisA.y);
+		jd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		jd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
+		jd.localAxisA.set(localAxisA.getX(), localAxisA.getY());
 		jd.lowerTranslation = lowerTranslation;
 		jd.maxMotorForce = maxMotorForce;
 		jd.motorSpeed = motorSpeed;

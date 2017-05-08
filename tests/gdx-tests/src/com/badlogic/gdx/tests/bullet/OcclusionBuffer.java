@@ -177,7 +177,7 @@ public class OcclusionBuffer implements Disposable {
 		bufferWidth = width;
 		bufferHeight = height;
 		bufferHalfExt = new Vector2(width * 0.5f, height * 0.5f);
-		bufferOffset = new Vector2(bufferHalfExt.x + 0.5f, bufferHalfExt.y + 0.5f);
+		bufferOffset = new Vector2(bufferHalfExt.getX() + 0.5f, bufferHalfExt.getY() + 0.5f);
 		buffer = BufferUtils.newFloatBuffer(width * height);
 		for (int i = 0; i < 8; i++) {
 			box[i] = new Vector3();
@@ -276,7 +276,7 @@ public class OcclusionBuffer implements Disposable {
 		for (int i = 0; i < 8; i++) {
 			// Multiply the world coordinates by the camera combined matrix, but do not divide by w component yet.
 			Vector3 v = vertices[i];
-			tmpVertices[i].set(v.x, v.y, v.z, 1).mul(projectionMatrix);
+			tmpVertices[i].set(v.getX(), v.getY(), v.getZ(), 1).mul(projectionMatrix);
 		}
 		if (policy.evaluate(tmpVertices)) return true;
 
@@ -353,14 +353,14 @@ public class OcclusionBuffer implements Disposable {
 	 * @return With query policy, true if any pixel in the triangle passes a depth test. False otherwise. */
 	private boolean drawTriangle (Vector3 a, Vector3 b, Vector3 c, Policy policy) {
 		// Check if triangle faces away from the camera (back-face culling).
-		if (((tmpV1.set(b).sub(a)).crs(tmpV2.set(c).sub(a))).z <= 0) return false;
+		if (((tmpV1.set(b).sub(a)).crs(tmpV2.set(c).sub(a))).getZ() <= 0) return false;
 		// Triangle coordinates and size.
 		// Note that x, y, z in e.g. triX corresponds to x components of vertices a, b, c,
 		// which means triX.x is the x coordinate of a.
-		triX.set((int)(a.x * bufferHalfExt.x + bufferOffset.x), (int)(b.x * bufferHalfExt.x + bufferOffset.x),
-				(int)(c.x * bufferHalfExt.x + bufferOffset.x));
-		triY.set((int)(a.y * bufferHalfExt.y + bufferOffset.y), (int)(b.y * bufferHalfExt.y + bufferOffset.y),
-				(int)(c.y * bufferHalfExt.y + bufferOffset.y));
+		triX.set((int)(a.getX() * bufferHalfExt.getX() + bufferOffset.getX()), (int)(b.getX() * bufferHalfExt.getX() + bufferOffset.getX()),
+				(int)(c.getX() * bufferHalfExt.getX() + bufferOffset.getX()));
+		triY.set((int)(a.getY() * bufferHalfExt.getY() + bufferOffset.getY()), (int)(b.getY() * bufferHalfExt.getY() + bufferOffset.getY()),
+				(int)(c.getY() * bufferHalfExt.getY() + bufferOffset.getY()));
 		// X/Y extents
 		int xMin = Math.max(0, Math.min(triX.x, Math.min(triX.y, triX.z)));
 		int xMax = Math.min(bufferWidth, 1 + Math.max(triX.x, Math.max(triX.y, triX.z)));
@@ -378,9 +378,9 @@ public class OcclusionBuffer implements Disposable {
 		// Depth interpolation
 		float ia = 1f
 				/ (float)(triX.x * triY.y - triX.y * triY.x + triX.z * triY.x - triX.x * triY.z + triX.y * triY.z - triX.z * triY.y);
-		float dzx = ia * (triY.x * (c.z - b.z) + triY.y * (a.z - c.z) + triY.z * (b.z - a.z));
-		float dzy = ia * (triX.x * (b.z - c.z) + triX.y * (c.z - a.z) + triX.z * (a.z - b.z)) - (dzx * width);
-		float drawDepth = ia * (a.z * cursor.y + b.z * cursor.z + c.z * cursor.x);
+		float dzx = ia * (triY.x * (c.getZ() - b.getZ()) + triY.y * (a.getZ() - c.getZ()) + triY.z * (b.getZ() - a.getZ()));
+		float dzy = ia * (triX.x * (b.getZ() - c.getZ()) + triX.y * (c.getZ() - a.getZ()) + triX.z * (a.getZ() - b.getZ())) - (dzx * width);
+		float drawDepth = ia * (a.getZ() * cursor.y + b.getZ() * cursor.z + c.getZ() * cursor.x);
 		int bufferRow = (yMin * bufferHeight);
 		// Loop over pixels and process the triangle pixel depth versus the existing value in buffer.
 		for (int iy = yMin; iy < yMax; iy++) {
@@ -414,14 +414,14 @@ public class OcclusionBuffer implements Disposable {
 	 * @param halfExt Half extents
 	 * @param vertices Vertices output */
 	private static void setAABBVertices (Vector3 center, Vector3 halfExt, Vector3[] vertices) {
-		vertices[0].set(center.x - halfExt.x, center.y - halfExt.y, center.z - halfExt.z);
-		vertices[1].set(center.x + halfExt.x, center.y - halfExt.y, center.z - halfExt.z);
-		vertices[2].set(center.x + halfExt.x, center.y + halfExt.y, center.z - halfExt.z);
-		vertices[3].set(center.x - halfExt.x, center.y + halfExt.y, center.z - halfExt.z);
-		vertices[4].set(center.x - halfExt.x, center.y - halfExt.y, center.z + halfExt.z);
-		vertices[5].set(center.x + halfExt.x, center.y - halfExt.y, center.z + halfExt.z);
-		vertices[6].set(center.x + halfExt.x, center.y + halfExt.y, center.z + halfExt.z);
-		vertices[7].set(center.x - halfExt.x, center.y + halfExt.y, center.z + halfExt.z);
+		vertices[0].set(center.getX() - halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[1].set(center.getX() + halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[2].set(center.getX() + halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[3].set(center.getX() - halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[4].set(center.getX() - halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() + halfExt.getZ());
+		vertices[5].set(center.getX() + halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() + halfExt.getZ());
+		vertices[6].set(center.getX() + halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() + halfExt.getZ());
+		vertices[7].set(center.getX() - halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() + halfExt.getZ());
 	}
 
 	/** Sets the projection matrix to be used for rendering. Usually this will be set to Camera.combined.

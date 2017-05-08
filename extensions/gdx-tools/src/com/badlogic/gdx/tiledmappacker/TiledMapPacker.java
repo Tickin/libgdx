@@ -329,12 +329,12 @@ public class TiledMapPacker {
 				tile = new BufferedImage(tileWidth, tileHeight, BufferedImage.TYPE_4BYTE_ABGR);
 
 				g = tile.createGraphics();
-				g.drawImage(layout.image, 0, 0, tileWidth, tileHeight, (int)tileLocation.x, (int)tileLocation.y, (int)tileLocation.x
-					+ tileWidth, (int)tileLocation.y + tileHeight, null);
+				g.drawImage(layout.image, 0, 0, tileWidth, tileHeight, (int)tileLocation.getX(), (int)tileLocation.getY(), (int)tileLocation.getX()
+					+ tileWidth, (int)tileLocation.getY() + tileHeight, null);
 
 				if (verbose) {
-					System.out.println("Adding " + tileWidth + "x" + tileHeight + " (" + (int)tileLocation.x + ", "
-						+ (int)tileLocation.y + ")");
+					System.out.println("Adding " + tileWidth + "x" + tileHeight + " (" + (int)tileLocation.getX() + ", "
+						+ (int)tileLocation.getY() + ")");
 				}
 				// AtlasTmxMapLoader expects every tileset's index to begin at zero for the first tile in every tileset.
 				// so the region's adjusted gid is (gid - layout.firstgid). firstgid will be added back in AtlasTmxMapLoader on load

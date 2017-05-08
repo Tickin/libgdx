@@ -43,21 +43,21 @@ public class DebugDrawer extends btIDebugDraw implements Disposable {
 
 	@Override
 	public void drawLine (Vector3 from, Vector3 to, Vector3 color) {
-		shapeRenderer.setColor(color.x, color.y, color.z, 1f);
+		shapeRenderer.setColor(color.getX(), color.getY(), color.getZ(), 1f);
 		shapeRenderer.line(from, to);
 	}
 
 	@Override
 	public void drawContactPoint (Vector3 pointOnB, Vector3 normalOnB, float distance, int lifeTime, Vector3 color) {
-		shapeRenderer.setColor(color.x, color.y, color.z, 1f);
-		shapeRenderer.point(pointOnB.x, pointOnB.y, pointOnB.z);
+		shapeRenderer.setColor(color.getX(), color.getY(), color.getZ(), 1f);
+		shapeRenderer.point(pointOnB.getX(), pointOnB.getY(), pointOnB.getZ());
 
 		shapeRenderer.line(pointOnB, normalOnB.scl(distance).add(pointOnB));
 	}
 
 	@Override
 	public void drawTriangle (Vector3 v0, Vector3 v1, Vector3 v2, Vector3 color, float arg4) {
-		shapeRenderer.setColor(color.x, color.y, color.z, arg4);
+		shapeRenderer.setColor(color.getX(), color.getY(), color.getZ(), arg4);
 		shapeRenderer.line(v0, v1);
 		shapeRenderer.line(v1, v2);
 		shapeRenderer.line(v2, v0);
@@ -90,7 +90,7 @@ public class DebugDrawer extends btIDebugDraw implements Disposable {
 			spriteBatch.begin();
 
 			// the text will be centered on the position
-			font.draw(spriteBatch, textString, location.x, location.y, 0, textString.length(), 0, Align.center, false);
+			font.draw(spriteBatch, textString, location.getX(), location.getY(), 0, textString.length(), 0, Align.center, false);
 
 			spriteBatch.end();
 			shapeRenderer.begin(ShapeType.Line);

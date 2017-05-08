@@ -414,8 +414,8 @@ public class SelectBox<T> extends Widget implements Disableable {
 			Drawable listBackground = list.getStyle().background;
 			if (listBackground != null) height += listBackground.getTopHeight() + listBackground.getBottomHeight();
 
-			float heightBelow = screenPosition.y;
-			float heightAbove = stage.getCamera().viewportHeight - screenPosition.y - selectBox.getHeight();
+			float heightBelow = screenPosition.getY();
+			float heightAbove = stage.getCamera().viewportHeight - screenPosition.getY() - selectBox.getHeight();
 			boolean below = true;
 			if (height > heightBelow) {
 				if (heightAbove > heightBelow) {
@@ -426,10 +426,10 @@ public class SelectBox<T> extends Widget implements Disableable {
 			}
 
 			if (below)
-				setY(screenPosition.y - height);
+				setY(screenPosition.getY() - height);
 			else
-				setY(screenPosition.y + selectBox.getHeight());
-			setX(screenPosition.x);
+				setY(screenPosition.getY() + selectBox.getHeight());
+			setX(screenPosition.getX());
 			setHeight(height);
 			validate();
 			float width = Math.max(getPrefWidth(), selectBox.getWidth());

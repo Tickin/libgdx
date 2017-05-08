@@ -154,7 +154,7 @@ public class ScrollPane extends WidgetGroup {
 			public void touchDragged (InputEvent event, float x, float y, int pointer) {
 				if (pointer != draggingPointer) return;
 				if (touchScrollH) {
-					float delta = x - lastPoint.x;
+					float delta = x - lastPoint.getX();
 					float scrollH = handlePosition + delta;
 					handlePosition = scrollH;
 					scrollH = Math.max(hScrollBounds.x, scrollH);
@@ -163,7 +163,7 @@ public class ScrollPane extends WidgetGroup {
 					if (total != 0) setScrollPercentX((scrollH - hScrollBounds.x) / total);
 					lastPoint.set(x, y);
 				} else if (touchScrollV) {
-					float delta = y - lastPoint.y;
+					float delta = y - lastPoint.getY();
 					float scrollV = handlePosition + delta;
 					handlePosition = scrollV;
 					scrollV = Math.max(vScrollBounds.y, scrollV);

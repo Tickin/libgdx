@@ -121,7 +121,7 @@ public class ParticleEffect implements Disposable, ResourceData.Configurable {
 	/** Applies the scale to the current transformation matrix of each controller. */
 	public void scale (Vector3 scale) {
 		for (int i = 0, n = controllers.size; i < n; i++)
-			controllers.get(i).scale(scale.x, scale.y, scale.z);
+			controllers.get(i).scale(scale.getX(), scale.getY(), scale.getZ());
 	}
 
 	/** @return all particle controllers. */

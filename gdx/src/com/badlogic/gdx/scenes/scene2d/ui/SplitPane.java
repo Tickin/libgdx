@@ -102,10 +102,10 @@ public class SplitPane extends WidgetGroup {
 
 				Drawable handle = style.handle;
 				if (!vertical) {
-					float delta = x - lastPoint.x;
+					float delta = x - lastPoint.getX();
 					float availWidth = getWidth() - handle.getMinWidth();
-					float dragX = handlePosition.x + delta;
-					handlePosition.x = dragX;
+					float dragX = handlePosition.getX() + delta;
+					handlePosition.setX(dragX);
 					dragX = Math.max(0, dragX);
 					dragX = Math.min(availWidth, dragX);
 					splitAmount = dragX / availWidth;
@@ -113,10 +113,10 @@ public class SplitPane extends WidgetGroup {
 					if (splitAmount > maxAmount) splitAmount = maxAmount;
 					lastPoint.set(x, y);
 				} else {
-					float delta = y - lastPoint.y;
+					float delta = y - lastPoint.getY();
 					float availHeight = getHeight() - handle.getMinHeight();
-					float dragY = handlePosition.y + delta;
-					handlePosition.y = dragY;
+					float dragY = handlePosition.getY() + delta;
+					handlePosition.setY(dragY);
 					dragY = Math.max(0, dragY);
 					dragY = Math.min(availHeight, dragY);
 					splitAmount = 1 - (dragY / availHeight);

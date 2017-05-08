@@ -44,8 +44,8 @@ public class Circle implements Serializable, Shape2D {
 	 * @param position The position {@link Vector2}.
 	 * @param radius The radius */
 	public Circle (Vector2 position, float radius) {
-		this.x = position.x;
-		this.y = position.y;
+		this.x = position.getX();
+		this.y = position.getY();
 		this.radius = radius;
 	}
 
@@ -63,9 +63,9 @@ public class Circle implements Serializable, Shape2D {
 	 * @param center The center of the new circle
 	 * @param edge Any point on the edge of the given circle */
 	public Circle (Vector2 center, Vector2 edge) {
-		this.x = center.x;
-		this.y = center.y;
-		this.radius = Vector2.len(center.x - edge.x, center.y - edge.y);
+		this.x = center.getX();
+		this.y = center.getY();
+		this.radius = Vector2.len(center.getX() - edge.getX(), center.getY() - edge.getY());
 	}
 
 	/** Sets a new location and radius for this circle.
@@ -84,8 +84,8 @@ public class Circle implements Serializable, Shape2D {
 	 * @param position Position {@link Vector2} for this circle.
 	 * @param radius Circle radius */
 	public void set (Vector2 position, float radius) {
-		this.x = position.x;
-		this.y = position.y;
+		this.x = position.getX();
+		this.y = position.getY();
 		this.radius = radius;
 	}
 
@@ -103,16 +103,16 @@ public class Circle implements Serializable, Shape2D {
 	 * @param center The new center of the circle
 	 * @param edge Any point on the edge of the given circle */
 	public void set (Vector2 center, Vector2 edge) {
-		this.x = center.x;
-		this.y = center.y;
-		this.radius = Vector2.len(center.x - edge.x, center.y - edge.y);
+		this.x = center.getX();
+		this.y = center.getY();
+		this.radius = Vector2.len(center.getX() - edge.getX(), center.getY() - edge.getY());
 	}
 
 	/** Sets the x and y-coordinates of circle center from vector
 	 * @param position The position vector */
 	public void setPosition (Vector2 position) {
-		this.x = position.x;
-		this.y = position.y;
+		this.x = position.getX();
+		this.y = position.getY();
 	}
 
 	/** Sets the x and y-coordinates of circle center
@@ -159,8 +159,8 @@ public class Circle implements Serializable, Shape2D {
 	 * 
 	 * @return true if this circle contains this point; false otherwise. */
 	public boolean contains (Vector2 point) {
-		float dx = x - point.x;
-		float dy = y - point.y;
+		float dx = x - point.getX();
+		float dy = y - point.getY();
 		return dx * dx + dy * dy <= radius * radius;
 	}
 

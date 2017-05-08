@@ -196,7 +196,7 @@ public class SelectTest extends GdxTest {
 			Dummy d = (Dummy)obj;
 			// we only care about position/distance
 			float epsilon = 0.0001f;
-			float diff = Math.abs(d.pos.x - this.pos.x) + Math.abs(d.pos.y - this.pos.y);
+			float diff = Math.abs(d.pos.getX() - this.pos.getX()) + Math.abs(d.pos.getY() - this.pos.getY());
 			if (diff > epsilon) return false;
 			return true;
 
@@ -217,13 +217,13 @@ public class SelectTest extends GdxTest {
 
 		public void setRandomPos () {
 			float max = 100;
-			this.pos.x = -max + MathUtils.random(max * 2);
-			this.pos.y = -max + MathUtils.random(max * 2);
+			this.pos.setX(-max + MathUtils.random(max * 2));
+			this.pos.setY(-max + MathUtils.random(max * 2));
 			float xShift = 100;
 			if (player.contains(this, true)) {
-				this.pos.x -= xShift;
+				this.pos.setX(this.pos.getX() - xShift);
 			} else if (enemy.contains(this, true)) {
-				this.pos.x += xShift;
+				this.pos.setX(this.pos.getX() + xShift);
 			} else {
 				throw new RuntimeException("unhandled");
 			}
@@ -231,7 +231,7 @@ public class SelectTest extends GdxTest {
 
 		@Override
 		public String toString () {
-			return String.format("Dummy at: %.2f, %.2f", pos.x, pos.y);
+			return String.format("Dummy at: %.2f, %.2f", pos.getX(), pos.getY());
 		}
 	}
 

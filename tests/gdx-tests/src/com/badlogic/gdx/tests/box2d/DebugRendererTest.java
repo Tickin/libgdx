@@ -60,7 +60,7 @@ public class DebugRendererTest extends Box2DTest {
 			shape.setAsBox(1, 2f);
 
 			BodyDef def = new BodyDef();
-			def.position.y = 10;
+			def.position.setY(10);
 			def.angle = (float)Math.toRadians(90);
 			def.type = BodyType.DynamicBody;
 
@@ -68,8 +68,8 @@ public class DebugRendererTest extends Box2DTest {
 			body.createFixture(shape, 1);
 
 			def = new BodyDef();
-			def.position.x = 10;
-			def.position.y = 10;
+			def.position.setX(10);
+			def.position.setY(10);
 			def.angle = 0;
 			def.type = BodyType.DynamicBody;
 

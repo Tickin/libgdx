@@ -138,8 +138,8 @@ public class Rectangle implements Serializable, Shape2D {
 	 * @param position The position vector
 	 * @return this rectangle for chaining */
 	public Rectangle setPosition (Vector2 position) {
-		this.x = position.x;
-		this.y = position.y;
+		this.x = position.getX();
+		this.y = position.getY();
 
 		return this;
 	}
@@ -192,7 +192,7 @@ public class Rectangle implements Serializable, Shape2D {
 	/** @param point The coordinates vector
 	 * @return whether the point is contained in the rectangle */
 	public boolean contains (Vector2 point) {
-		return contains(point.x, point.y);
+		return contains(point.getX(), point.getY());
 	}
 
 	/** @param circle the circle
@@ -265,7 +265,7 @@ public class Rectangle implements Serializable, Shape2D {
 	 * @param vec the vector describing the point
 	 * @return this rectangle for chaining */
 	public Rectangle merge (Vector2 vec) {
-		return merge(vec.x, vec.y);
+		return merge(vec.getX(), vec.getY());
 	}
 
 	/** Merges this rectangle with a list of points. The rectangle should not have negative width or negative height.
@@ -287,8 +287,8 @@ public class Rectangle implements Serializable, Shape2D {
 	 * @param vector the Vector2 to use
 	 * @return the given vector with results stored inside */
 	public Vector2 getCenter (Vector2 vector) {
-		vector.x = x + width / 2;
-		vector.y = y + height / 2;
+		vector.setX(x + width / 2);
+		vector.setY(y + height / 2);
 		return vector;
 	}
 
@@ -305,7 +305,7 @@ public class Rectangle implements Serializable, Shape2D {
 	 * @param position the position
 	 * @return this for chaining */
 	public Rectangle setCenter (Vector2 position) {
-		setPosition(position.x - width / 2, position.y - height / 2);
+		setPosition(position.getX() - width / 2, position.getY() - height / 2);
 		return this;
 	}
 

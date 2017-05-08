@@ -113,13 +113,13 @@ public class VehicleTest extends BaseBulletTest {
 		Vector3 direction = new Vector3(0, -1, 0);
 		Vector3 axis = new Vector3(-1, 0, 0);
 		wheelInfo = vehicle.addWheel(point.set(chassisHalfExtents).scl(0.9f, -0.8f, 0.7f), direction, axis,
-			wheelHalfExtents.z * 0.3f, wheelHalfExtents.z, tuning, true);
+			wheelHalfExtents.getZ() * 0.3f, wheelHalfExtents.getZ(), tuning, true);
 		wheelInfo = vehicle.addWheel(point.set(chassisHalfExtents).scl(-0.9f, -0.8f, 0.7f), direction, axis,
-			wheelHalfExtents.z * 0.3f, wheelHalfExtents.z, tuning, true);
+			wheelHalfExtents.getZ() * 0.3f, wheelHalfExtents.getZ(), tuning, true);
 		wheelInfo = vehicle.addWheel(point.set(chassisHalfExtents).scl(0.9f, -0.8f, -0.5f), direction, axis,
-			wheelHalfExtents.z * 0.3f, wheelHalfExtents.z, tuning, false);
+			wheelHalfExtents.getZ() * 0.3f, wheelHalfExtents.getZ(), tuning, false);
 		wheelInfo = vehicle.addWheel(point.set(chassisHalfExtents).scl(-0.9f, -0.8f, -0.5f), direction, axis,
-			wheelHalfExtents.z * 0.3f, wheelHalfExtents.z, tuning, false);
+			wheelHalfExtents.getZ() * 0.3f, wheelHalfExtents.getZ(), tuning, false);
 	}
 
 	float maxForce = 100f;
@@ -170,8 +170,8 @@ public class VehicleTest extends BaseBulletTest {
 		}
 
 		chassis.transform.getTranslation(camera.position);
-		tmpV.set(camera.position).sub(5, 0, 5).y = 0f;
-		camera.position.add(tmpV.nor().scl(-6f)).y = 4.f;
+		tmpV.set(camera.position).sub(5, 0, 5).setY(0f);
+		camera.position.add(tmpV.nor().scl(-6f)).setY(4.f);
 		chassis.transform.getTranslation(tmpV);
 		camera.lookAt(tmpV);
 		camera.up.set(Vector3.Y);

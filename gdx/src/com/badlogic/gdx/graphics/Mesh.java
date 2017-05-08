@@ -764,7 +764,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
 	public float calculateRadius (final Vector3 center, int offset, int count, final Matrix4 transform) {
-		return calculateRadius(center.x, center.y, center.z, offset, count, transform);
+		return calculateRadius(center.getX(), center.getY(), center.getZ(), offset, count, transform);
 	}
 
 	/** Calculates the squared radius of the bounding sphere around the specified center for the specified part.
@@ -784,7 +784,7 @@ public class Mesh implements Disposable {
 	 * @param count the amount of indices the part contains.
 	 * @return the squared radius of the bounding sphere. */
 	public float calculateRadius (final Vector3 center, int offset, int count) {
-		return calculateRadius(center.x, center.y, center.z, offset, count, null);
+		return calculateRadius(center.getX(), center.getY(), center.getZ(), offset, count, null);
 	}
 
 	/** Calculates the squared radius of the bounding sphere around the specified center for the specified part.
@@ -800,7 +800,7 @@ public class Mesh implements Disposable {
 	 * @param center The center of the bounding sphere
 	 * @return the squared radius of the bounding sphere. */
 	public float calculateRadius (final Vector3 center) {
-		return calculateRadius(center.x, center.y, center.z, 0, getNumIndices(), null);
+		return calculateRadius(center.getX(), center.getY(), center.getZ(), 0, getNumIndices(), null);
 	}
 
 	/** @return the backing shortbuffer holding the indices. Does not have to be a direct buffer on Android! */
@@ -934,24 +934,24 @@ public class Mesh implements Disposable {
 		case 1:
 			for (int i = 0; i < count; i++) {
 				tmp.set(vertices[idx], 0, 0).mul(matrix);
-				vertices[idx] = tmp.x;
+				vertices[idx] = tmp.getX();
 				idx += vertexSize;
 			}
 			break;
 		case 2:
 			for (int i = 0; i < count; i++) {
 				tmp.set(vertices[idx], vertices[idx + 1], 0).mul(matrix);
-				vertices[idx] = tmp.x;
-				vertices[idx + 1] = tmp.y;
+				vertices[idx] = tmp.getX();
+				vertices[idx + 1] = tmp.getY();
 				idx += vertexSize;
 			}
 			break;
 		case 3:
 			for (int i = 0; i < count; i++) {
 				tmp.set(vertices[idx], vertices[idx + 1], vertices[idx + 2]).mul(matrix);
-				vertices[idx] = tmp.x;
-				vertices[idx + 1] = tmp.y;
-				vertices[idx + 2] = tmp.z;
+				vertices[idx] = tmp.getX();
+				vertices[idx + 1] = tmp.getY();
+				vertices[idx + 2] = tmp.getZ();
 				idx += vertexSize;
 			}
 			break;
@@ -998,8 +998,8 @@ public class Mesh implements Disposable {
 		int idx = offset + (start * vertexSize);
 		for (int i = 0; i < count; i++) {
 			tmp.set(vertices[idx], vertices[idx + 1]).mul(matrix);
-			vertices[idx] = tmp.x;
-			vertices[idx + 1] = tmp.y;
+			vertices[idx] = tmp.getX();
+			vertices[idx + 1] = tmp.getY();
 			idx += vertexSize;
 		}
 	}

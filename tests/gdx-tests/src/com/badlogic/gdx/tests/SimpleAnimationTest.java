@@ -69,14 +69,14 @@ public class SimpleAnimationTest extends GdxTest {
 
 		spriteBatch.begin();
 		TextureRegion frame = currentWalk.getKeyFrame(currentFrameTime, true);
-		spriteBatch.draw(frame, position.x, position.y);
+		spriteBatch.draw(frame, position.getX(), position.getY());
 		spriteBatch.end();
 	}
 
 	@Override
 	public boolean touchDown (int x, int y, int pointer, int button) {
-		position.x = x;
-		position.y = Gdx.graphics.getHeight() - y;
+		position.setX(x);
+		position.setY(Gdx.graphics.getHeight() - y);
 		return true;
 	}
 

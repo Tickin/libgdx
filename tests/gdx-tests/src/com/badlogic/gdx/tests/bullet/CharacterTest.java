@@ -122,7 +122,7 @@ public class CharacterTest extends BaseBulletTest {
 		if (Gdx.input.isKeyPressed(Keys.UP))
 			walkDirection.add(characterDirection);
 		if (Gdx.input.isKeyPressed(Keys.DOWN))
-			walkDirection.add(-characterDirection.x, -characterDirection.y, -characterDirection.z);
+			walkDirection.add(-characterDirection.getX(), -characterDirection.getY(), -characterDirection.getZ());
 		walkDirection.scl(4f * Gdx.graphics.getDeltaTime());
 		// And update the character controller
 		characterController.setWalkDirection(walkDirection);

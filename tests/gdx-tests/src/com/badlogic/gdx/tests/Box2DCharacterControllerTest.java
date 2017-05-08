@@ -184,7 +184,7 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		cam.position.set(player.getPosition().x, player.getPosition().y, 0);
+		cam.position.set(player.getPosition().getX(), player.getPosition().getY(), 0);
 		cam.update();
 		renderer.render(world, cam.combined);
 
@@ -200,15 +200,15 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 		}
 
 		// cap max velocity on x
-		if (Math.abs(vel.x) > MAX_VELOCITY) {
-			vel.x = Math.signum(vel.x) * MAX_VELOCITY;
-			player.setLinearVelocity(vel.x, vel.y);
+		if (Math.abs(vel.getX()) > MAX_VELOCITY) {
+			vel.setX(Math.signum(vel.getX()) * MAX_VELOCITY);
+			player.setLinearVelocity(vel.getX(), vel.getY());
 		}
 
 		// calculate stilltime & damp
 		if (!Gdx.input.isKeyPressed(Keys.A) && !Gdx.input.isKeyPressed(Keys.D)) {
 			stillTime += Gdx.graphics.getDeltaTime();
-			player.setLinearVelocity(vel.x * 0.9f, vel.y);
+			player.setLinearVelocity(vel.getX() * 0.9f, vel.getY());
 		} else {
 			stillTime = 0;
 		}
@@ -230,7 +230,7 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 			// character hops :)
 			if (groundedPlatform != null && groundedPlatform instanceof MovingPlatform
 				&& ((MovingPlatform)groundedPlatform).dist == 0) {
-				player.applyLinearImpulse(0, -24, pos.x, pos.y, true);
+				player.applyLinearImpulse(0, -24, pos.getX(), pos.getY(), true);
 			}
 		}
 
@@ -242,23 +242,23 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 		}
 
 		// apply left impulse, but only if max velocity is not reached yet
-		if (Gdx.input.isKeyPressed(Keys.A) && vel.x > -MAX_VELOCITY) {
-			player.applyLinearImpulse(-2f, 0, pos.x, pos.y, true);
+		if (Gdx.input.isKeyPressed(Keys.A) && vel.getX() > -MAX_VELOCITY) {
+			player.applyLinearImpulse(-2f, 0, pos.getX(), pos.getY(), true);
 		}
 
 		// apply right impulse, but only if max velocity is not reached yet
-		if (Gdx.input.isKeyPressed(Keys.D) && vel.x < MAX_VELOCITY) {
-			player.applyLinearImpulse(2f, 0, pos.x, pos.y, true);
+		if (Gdx.input.isKeyPressed(Keys.D) && vel.getX() < MAX_VELOCITY) {
+			player.applyLinearImpulse(2f, 0, pos.getX(), pos.getY(), true);
 		}
 
 		// jump, but only when grounded
 		if (jump) {
 			jump = false;
 			if (grounded) {
-				player.setLinearVelocity(vel.x, 0);
+				player.setLinearVelocity(vel.getX(), 0);
 				System.out.println("jump before: " + player.getLinearVelocity());
-				player.setTransform(pos.x, pos.y + 0.01f, 0);
-				player.applyLinearImpulse(0, 40, pos.x, pos.y, true);
+				player.setTransform(pos.getX(), pos.getY() + 0.01f, 0);
+				player.applyLinearImpulse(0, 40, pos.getX(), pos.getY(), true);
 				System.out.println("jump, " + player.getLinearVelocity());
 			}
 		}
@@ -278,9 +278,9 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 // }
 		player.setAwake(true);
 
-		cam.project(point.set(pos.x, pos.y, 0));
+		cam.project(point.set(pos.getX(), pos.getY(), 0));
 		batch.begin();
-		font.draw(batch, "friction: " + playerPhysicsFixture.getFriction() + "\ngrounded: " + grounded, point.x + 20, point.y);
+		font.draw(batch, "friction: " + playerPhysicsFixture.getFriction() + "\ngrounded: " + grounded, point.getX() + 20, point.getY());
 		batch.end();
 	}
 
@@ -296,7 +296,7 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 				WorldManifold manifold = contact.getWorldManifold();
 				boolean below = true;
 				for (int j = 0; j < manifold.getNumberOfContactPoints(); j++) {
-					below &= (manifold.getPoints()[j].y < pos.y - 1.5f);
+					below &= (manifold.getPoints()[j].getY() < pos.getY() - 1.5f);
 				}
 
 				if (below) {
@@ -337,10 +337,10 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 
 		if (button == Input.Buttons.LEFT) {
 			if (last == null) {
-				last = new Vector2(point.x, point.y);
+				last = new Vector2(point.getX(), point.getY());
 			} else {
-				createEdge(BodyType.StaticBody, last.x, last.y, point.x, point.y, 0);
-				last.set(point.x, point.y);
+				createEdge(BodyType.StaticBody, last.getX(), last.getY(), point.getX(), point.getY(), 0);
+				last.set(point.getX(), point.getY());
 			}
 		} else {
 			last = null;
@@ -378,10 +378,10 @@ public class Box2DCharacterControllerTest extends GdxTest implements Application
 
 		public MovingPlatform (float x, float y, float width, float height, float dx, float dy, float da, float maxDist) {
 			platform = createBox(BodyType.KinematicBody, width, height, 1);
-			pos.x = x;
-			pos.y = y;
-			dir.x = dx;
-			dir.y = dy;
+			pos.setX(x);
+			pos.setY(y);
+			dir.setX(dx);
+			dir.setY(dy);
 			this.maxDist = maxDist;
 			platform.setTransform(pos, 0);
 			platform.getFixtureList().get(0).setUserData("p");

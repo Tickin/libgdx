@@ -123,14 +123,14 @@ public class ScissorStack {
 		tmp.set(area.x, area.y, 0);
 		tmp.mul(batchTransform);
 		camera.project(tmp, viewportX, viewportY, viewportWidth, viewportHeight);
-		scissor.x = tmp.x;
-		scissor.y = tmp.y;
+		scissor.x = tmp.getX();
+		scissor.y = tmp.getY();
 
 		tmp.set(area.x + area.width, area.y + area.height, 0);
 		tmp.mul(batchTransform);
 		camera.project(tmp, viewportX, viewportY, viewportWidth, viewportHeight);
-		scissor.width = tmp.x - scissor.x;
-		scissor.height = tmp.y - scissor.y;
+		scissor.width = tmp.getX() - scissor.x;
+		scissor.height = tmp.getY() - scissor.y;
 	}
 
 	/** @return the current viewport in OpenGL ES window coordinates based on the currently applied scissor */

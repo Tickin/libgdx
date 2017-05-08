@@ -212,7 +212,7 @@ public class Polygon implements Shape2D {
 
 	@Override
 	public boolean contains (Vector2 point) {
-		return contains(point.x, point.y);
+		return contains(point.getX(), point.getY());
 	}
 
 	/** Returns the x-coordinate of the polygon's position within the world. */

@@ -145,10 +145,10 @@ public class TiledMapLayerOffsetTest extends GdxTest {
 		final float margin = 3;
 		final float width = camera.viewportWidth * camera.zoom - margin * 2;
 		final float height = camera.viewportHeight * camera.zoom - margin * 2;
-		final float w = width * Math.abs(camera.up.y) + height * Math.abs(camera.up.x);
-		final float h = height * Math.abs(camera.up.y) + width * Math.abs(camera.up.x);
-		final float x = camera.position.x - w / 2;
-		final float y = camera.position.y - h / 2;
+		final float w = width * Math.abs(camera.up.getY()) + height * Math.abs(camera.up.getX());
+		final float h = height * Math.abs(camera.up.getY()) + width * Math.abs(camera.up.getX());
+		final float x = camera.position.getX() - w / 2;
+		final float y = camera.position.getY() - h / 2;
 		renderer.setView(camera.combined, x, y, w, h);
 		renderer.render();
 

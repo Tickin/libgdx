@@ -151,8 +151,8 @@ public class BodyTypes extends Box2DTest {
 			Vector2 p = m_platform.getTransform().getPosition();
 			Vector2 v = m_platform.getLinearVelocity();
 
-			if ((p.x < -10 && v.x < 0) || (p.x > 10 && v.x > 0)) {
-				v.x = -v.x;
+			if ((p.getX() < -10 && v.getX() < 0) || (p.getX() > 10 && v.getX() > 0)) {
+				v.setX(-v.getX());
 				m_platform.setLinearVelocity(v);
 			}
 		}

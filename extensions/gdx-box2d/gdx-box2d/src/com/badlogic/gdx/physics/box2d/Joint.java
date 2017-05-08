@@ -88,8 +88,8 @@ public abstract class Joint {
 
 	public Vector2 getAnchorA () {
 		jniGetAnchorA(addr, tmp);
-		anchorA.x = tmp[0];
-		anchorA.y = tmp[1];
+		anchorA.setX(tmp[0]);
+		anchorA.setY(tmp[1]);
 		return anchorA;
 	}
 
@@ -105,8 +105,8 @@ public abstract class Joint {
 
 	public Vector2 getAnchorB () {
 		jniGetAnchorB(addr, tmp);
-		anchorB.x = tmp[0];
-		anchorB.y = tmp[1];
+		anchorB.setX(tmp[0]);
+		anchorB.setY(tmp[1]);
 		return anchorB;
 	}
 
@@ -131,8 +131,8 @@ public abstract class Joint {
 
 	public Vector2 getReactionForce (float inv_dt) {
 		jniGetReactionForce(addr, inv_dt, tmp);
-		reactionForce.x = tmp[0];
-		reactionForce.y = tmp[1];
+		reactionForce.setX(tmp[0]);
+		reactionForce.setY(tmp[1]);
 		return reactionForce;
 	}
 

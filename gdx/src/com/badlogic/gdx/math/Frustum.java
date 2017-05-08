@@ -33,9 +33,9 @@ public class Frustum {
 	static {
 		int j = 0;
 		for (Vector3 v : clipSpacePlanePoints) {
-			clipSpacePlanePointsArray[j++] = v.x;
-			clipSpacePlanePointsArray[j++] = v.y;
-			clipSpacePlanePointsArray[j++] = v.z;
+			clipSpacePlanePointsArray[j++] = v.getX();
+			clipSpacePlanePointsArray[j++] = v.getY();
+			clipSpacePlanePointsArray[j++] = v.getZ();
 		}
 	}
 	
@@ -63,9 +63,9 @@ public class Frustum {
 		Matrix4.prj(inverseProjectionView.val, planePointsArray, 0, 8, 3);
 		for (int i = 0, j = 0; i < 8; i++) {
 			Vector3 v = planePoints[i];
-			v.x = planePointsArray[j++];
-			v.y = planePointsArray[j++];
-			v.z = planePointsArray[j++];
+			v.setX(planePointsArray[j++]);
+			v.setY(planePointsArray[j++]);
+			v.setZ(planePointsArray[j++]);
 		}
 
 		planes[0].set(planePoints[1], planePoints[0], planePoints[2]);
@@ -109,7 +109,7 @@ public class Frustum {
 	 * @return Whether the sphere is in the frustum */
 	public boolean sphereInFrustum (Vector3 center, float radius) {
 		for (int i = 0; i < 6; i++)
-			if ((planes[i].normal.x * center.x + planes[i].normal.y * center.y + planes[i].normal.z * center.z) < (-radius - planes[i].d))
+			if ((planes[i].normal.getX() * center.getX() + planes[i].normal.getY() * center.getY() + planes[i].normal.getZ() * center.getZ()) < (-radius - planes[i].d))
 				return false;
 		return true;
 	}
@@ -123,7 +123,7 @@ public class Frustum {
 	 * @return Whether the sphere is in the frustum */
 	public boolean sphereInFrustum (float x, float y, float z, float radius) {
 		for (int i = 0; i < 6; i++)
-			if ((planes[i].normal.x * x + planes[i].normal.y * y + planes[i].normal.z * z) < (-radius - planes[i].d)) return false;
+			if ((planes[i].normal.getX() * x + planes[i].normal.getY() * y + planes[i].normal.getZ() * z) < (-radius - planes[i].d)) return false;
 		return true;
 	}
 
@@ -134,7 +134,7 @@ public class Frustum {
 	 * @return Whether the sphere is in the frustum */
 	public boolean sphereInFrustumWithoutNearFar (Vector3 center, float radius) {
 		for (int i = 2; i < 6; i++)
-			if ((planes[i].normal.x * center.x + planes[i].normal.y * center.y + planes[i].normal.z * center.z) < (-radius - planes[i].d))
+			if ((planes[i].normal.getX() * center.getX() + planes[i].normal.getY() * center.getY() + planes[i].normal.getZ() * center.getZ()) < (-radius - planes[i].d))
 				return false;
 		return true;
 	}
@@ -148,7 +148,7 @@ public class Frustum {
 	 * @return Whether the sphere is in the frustum */
 	public boolean sphereInFrustumWithoutNearFar (float x, float y, float z, float radius) {
 		for (int i = 2; i < 6; i++)
-			if ((planes[i].normal.x * x + planes[i].normal.y * y + planes[i].normal.z * z) < (-radius - planes[i].d)) return false;
+			if ((planes[i].normal.getX() * x + planes[i].normal.getY() * y + planes[i].normal.getZ() * z) < (-radius - planes[i].d)) return false;
 		return true;
 	}
 
@@ -175,7 +175,7 @@ public class Frustum {
 	/** Returns whether the given bounding box is in the frustum.
 	 * @return Whether the bounding box is in the frustum */
 	public boolean boundsInFrustum (Vector3 center, Vector3 dimensions) {
-		return boundsInFrustum(center.x, center.y, center.z, dimensions.x / 2, dimensions.y / 2, dimensions.z / 2);
+		return boundsInFrustum(center.getX(), center.getY(), center.getZ(), dimensions.getX() / 2, dimensions.getY() / 2, dimensions.getZ() / 2);
 	}
 
 	/** Returns whether the given bounding box is in the frustum.

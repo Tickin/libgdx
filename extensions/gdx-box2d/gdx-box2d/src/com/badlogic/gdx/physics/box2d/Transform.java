@@ -54,11 +54,11 @@ public class Transform {
 	/** Transforms the given vector by this transform
 	 * @param v the vector */
 	public Vector2 mul (Vector2 v) {
-		float x = vals[POS_X] + vals[COS] * v.x + -vals[SIN] * v.y;
-		float y = vals[POS_Y] + vals[SIN] * v.x + vals[COS] * v.y;
+		float x = vals[POS_X] + vals[COS] * v.getX() + -vals[SIN] * v.getY();
+		float y = vals[POS_Y] + vals[SIN] * v.getX() + vals[COS] * v.getY();
 
-		v.x = x;
-		v.y = y;
+		v.setX(x);
+		v.setY(y);
 		return v;
 	}
 
@@ -84,14 +84,14 @@ public class Transform {
 	}
 	/** Set where the body should "look at" */
 	public void setOrientation (Vector2 orientation) {
-		this.vals[COS] = orientation.x;
-		this.vals[SIN] = orientation.y;
+		this.vals[COS] = orientation.getX();
+		this.vals[SIN] = orientation.getY();
 	}
 
 	/** Sets the position of this transform
 	 * @param pos the position */
 	public void setPosition (Vector2 pos) {
-		this.vals[POS_X] = pos.x;
-		this.vals[POS_Y] = pos.y;
+		this.vals[POS_X] = pos.getX();
+		this.vals[POS_Y] = pos.getY();
 	}
 }

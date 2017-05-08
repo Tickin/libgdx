@@ -51,8 +51,8 @@ public class Polyline implements Shape2D {
 	public float[] getVertices () {
 		float[] localVerticesArray = new float[localVertices.length * 2];
 		for (int i = 0; i < localVertices.length; i++) {
-			localVerticesArray[2 * i] = localVertices[i].x;
-			localVerticesArray[2 * i + 1] = localVertices[i].y;
+			localVerticesArray[2 * i] = localVertices[i].getX();
+			localVerticesArray[2 * i + 1] = localVertices[i].getY();
 		}
 		return localVerticesArray;
 	}
@@ -93,8 +93,8 @@ public class Polyline implements Shape2D {
 	
 		float[] Vertices=new float[worldVertices.length*2];
 		for(int i=0;i<worldVertices.length;i++){
-			Vertices[2*i]=worldVertices[i].x;
-			Vertices[2*i+1]=worldVertices[i].y;
+			Vertices[2*i]=worldVertices[i].getX();
+			Vertices[2*i+1]=worldVertices[i].getY();
 		}
 		return Vertices;
 		
@@ -106,8 +106,8 @@ public class Polyline implements Shape2D {
 
 		length = 0;
 		for (int i = 0, n = localVertices.length - 2; i < n; i += 2) {
-			float x = localVertices[i + 1].x - localVertices[i].x;
-			float y = localVertices[i + 1].y - localVertices[i].y;
+			float x = localVertices[i + 1].getX() - localVertices[i].getX();
+			float y = localVertices[i + 1].getY() - localVertices[i].getY();
 			length += (float)Math.hypot(x, y);
 		}
 
@@ -121,8 +121,8 @@ public class Polyline implements Shape2D {
 
 		scaledLength = 0;
 		for (int i = 0, n = localVertices.length - 2; i < n; i += 2) {
-			float x = (localVertices[i + 1].x - localVertices[i].x) * scaleX;
-			float y = (localVertices[i + 1].y - localVertices[i].y) * scaleY;
+			float x = (localVertices[i + 1].getX() - localVertices[i].getX()) * scaleX;
+			float y = (localVertices[i + 1].getY() - localVertices[i].getY()) * scaleY;
 			scaledLength += (float)Math.hypot(x,y);
 		}
 
@@ -138,11 +138,11 @@ public class Polyline implements Shape2D {
 	}
 
 	public float getOriginX () {
-		return origin.x;
+		return origin.getX();
 	}
 
 	public float getOriginY () {
-		return origin.y;
+		return origin.getY();
 	}
 
 	public float getRotation () {

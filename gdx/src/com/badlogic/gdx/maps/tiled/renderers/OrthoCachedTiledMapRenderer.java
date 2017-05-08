@@ -87,7 +87,7 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		spriteCache.setProjectionMatrix(camera.combined);
 		float width = camera.viewportWidth * camera.zoom + maxTileWidth * 2 * unitScale;
 		float height = camera.viewportHeight * camera.zoom + maxTileHeight * 2 * unitScale;
-		viewBounds.set(camera.position.x - width / 2, camera.position.y - height / 2, width, height);
+		viewBounds.set(camera.position.getX() - width / 2, camera.position.getY() - height / 2, width, height);
 
 		if ((canCacheMoreW && viewBounds.x < cacheBounds.x - tolerance) || //
 			(canCacheMoreS && viewBounds.y < cacheBounds.y - tolerance) || //

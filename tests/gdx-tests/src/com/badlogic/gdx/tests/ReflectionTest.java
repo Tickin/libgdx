@@ -71,8 +71,8 @@ public class ReflectionTest extends GdxTest {
 			Vector2 fromJson = json.fromJson(Vector2.class, jsonString);
 			println("JSON serialized: " + jsonString);
 			println("JSON deserialized: " + fromJson);
-			fromJson.x += 1;
-			fromJson.y += 1;
+			fromJson.setX(fromJson.getX() + 1);
+			fromJson.setY(fromJson.getY() + 1);
 			println("JSON deserialized + 1/1: " + fromJson);
 
 			Object array = ArrayReflection.newInstance(int.class, 5);

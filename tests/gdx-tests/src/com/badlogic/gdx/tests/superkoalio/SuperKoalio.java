@@ -131,7 +131,7 @@ public class SuperKoalio extends GdxTest {
 		updateKoala(deltaTime);
 
 		// let the camera follow the koala, x-axis only
-		camera.position.x = koala.position.x;
+		camera.position.setX(koala.position.getX());
 		camera.update();
 
 		// set the TiledMapRenderer view based on what the
@@ -156,19 +156,19 @@ public class SuperKoalio extends GdxTest {
 
 		// check input and apply to velocity & state
 		if ((Gdx.input.isKeyPressed(Keys.SPACE) || isTouched(0.5f, 1)) && koala.grounded) {
-			koala.velocity.y += Koala.JUMP_VELOCITY;
+			koala.velocity.setY(koala.velocity.getY() + Koala.JUMP_VELOCITY);
 			koala.state = Koala.State.Jumping;
 			koala.grounded = false;
 		}
 
 		if (Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A) || isTouched(0, 0.25f)) {
-			koala.velocity.x = -Koala.MAX_VELOCITY;
+			koala.velocity.setX(-Koala.MAX_VELOCITY);
 			if (koala.grounded) koala.state = Koala.State.Walking;
 			koala.facesRight = false;
 		}
 
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D) || isTouched(0.25f, 0.5f)) {
-			koala.velocity.x = Koala.MAX_VELOCITY;
+			koala.velocity.setX(Koala.MAX_VELOCITY);
 			if (koala.grounded) koala.state = Koala.State.Walking;
 			koala.facesRight = true;
 		}
@@ -180,12 +180,12 @@ public class SuperKoalio extends GdxTest {
 		koala.velocity.add(0, GRAVITY);
 
 		// clamp the velocity to the maximum, x-axis only
-		koala.velocity.x = MathUtils.clamp(koala.velocity.x,
-				-Koala.MAX_VELOCITY, Koala.MAX_VELOCITY);
+		koala.velocity.setX(MathUtils.clamp(koala.velocity.getX(),
+				-Koala.MAX_VELOCITY, Koala.MAX_VELOCITY));
 
 		// If the velocity is < 1, set it to 0 and set state to Standing
-		if (Math.abs(koala.velocity.x) < 1) {
-			koala.velocity.x = 0;
+		if (Math.abs(koala.velocity.getX()) < 1) {
+			koala.velocity.setX(0);
 			if (koala.grounded) koala.state = Koala.State.Standing;
 		}
 
@@ -197,52 +197,52 @@ public class SuperKoalio extends GdxTest {
 		// if the koala is moving right, check the tiles to the right of it's
 		// right bounding box edge, otherwise check the ones to the left
 		Rectangle koalaRect = rectPool.obtain();
-		koalaRect.set(koala.position.x, koala.position.y, Koala.WIDTH, Koala.HEIGHT);
+		koalaRect.set(koala.position.getX(), koala.position.getY(), Koala.WIDTH, Koala.HEIGHT);
 		int startX, startY, endX, endY;
-		if (koala.velocity.x > 0) {
-			startX = endX = (int)(koala.position.x + Koala.WIDTH + koala.velocity.x);
+		if (koala.velocity.getX() > 0) {
+			startX = endX = (int)(koala.position.getX() + Koala.WIDTH + koala.velocity.getX());
 		} else {
-			startX = endX = (int)(koala.position.x + koala.velocity.x);
+			startX = endX = (int)(koala.position.getX() + koala.velocity.getX());
 		}
-		startY = (int)(koala.position.y);
-		endY = (int)(koala.position.y + Koala.HEIGHT);
+		startY = (int)(koala.position.getY());
+		endY = (int)(koala.position.getY() + Koala.HEIGHT);
 		getTiles(startX, startY, endX, endY, tiles);
-		koalaRect.x += koala.velocity.x;
+		koalaRect.x += koala.velocity.getX();
 		for (Rectangle tile : tiles) {
 			if (koalaRect.overlaps(tile)) {
-				koala.velocity.x = 0;
+				koala.velocity.setX(0);
 				break;
 			}
 		}
-		koalaRect.x = koala.position.x;
+		koalaRect.x = koala.position.getX();
 
 		// if the koala is moving upwards, check the tiles to the top of its
 		// top bounding box edge, otherwise check the ones to the bottom
-		if (koala.velocity.y > 0) {
-			startY = endY = (int)(koala.position.y + Koala.HEIGHT + koala.velocity.y);
+		if (koala.velocity.getY() > 0) {
+			startY = endY = (int)(koala.position.getY() + Koala.HEIGHT + koala.velocity.getY());
 		} else {
-			startY = endY = (int)(koala.position.y + koala.velocity.y);
+			startY = endY = (int)(koala.position.getY() + koala.velocity.getY());
 		}
-		startX = (int)(koala.position.x);
-		endX = (int)(koala.position.x + Koala.WIDTH);
+		startX = (int)(koala.position.getX());
+		endX = (int)(koala.position.getX() + Koala.WIDTH);
 		getTiles(startX, startY, endX, endY, tiles);
-		koalaRect.y += koala.velocity.y;
+		koalaRect.y += koala.velocity.getY();
 		for (Rectangle tile : tiles) {
 			if (koalaRect.overlaps(tile)) {
 				// we actually reset the koala y-position here
 				// so it is just below/above the tile we collided with
 				// this removes bouncing :)
-				if (koala.velocity.y > 0) {
-					koala.position.y = tile.y - Koala.HEIGHT;
+				if (koala.velocity.getY() > 0) {
+					koala.position.setY(tile.y - Koala.HEIGHT);
 					// we hit a block jumping upwards, let's destroy it!
 					TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("walls");
 					layer.setCell((int)tile.x, (int)tile.y, null);
 				} else {
-					koala.position.y = tile.y + tile.height;
+					koala.position.setY(tile.y + tile.height);
 					// if we hit the ground, mark us as grounded so we can jump
 					koala.grounded = true;
 				}
-				koala.velocity.y = 0;
+				koala.velocity.setY(0);
 				break;
 			}
 		}
@@ -255,7 +255,7 @@ public class SuperKoalio extends GdxTest {
 
 		// Apply damping to the velocity on the x-axis so we don't
 		// walk infinitely once a key was pressed
-		koala.velocity.x *= Koala.DAMPING;
+		koala.velocity.setX(koala.velocity.getX() * Koala.DAMPING);
 	}
 
 	private boolean isTouched (float startX, float endX) {
@@ -307,9 +307,9 @@ public class SuperKoalio extends GdxTest {
 		Batch batch = renderer.getBatch();
 		batch.begin();
 		if (koala.facesRight) {
-			batch.draw(frame, koala.position.x, koala.position.y, Koala.WIDTH, Koala.HEIGHT);
+			batch.draw(frame, koala.position.getX(), koala.position.getY(), Koala.WIDTH, Koala.HEIGHT);
 		} else {
-			batch.draw(frame, koala.position.x + Koala.WIDTH, koala.position.y, -Koala.WIDTH, Koala.HEIGHT);
+			batch.draw(frame, koala.position.getX() + Koala.WIDTH, koala.position.getY(), -Koala.WIDTH, Koala.HEIGHT);
 		}
 		batch.end();
 	}
@@ -319,7 +319,7 @@ public class SuperKoalio extends GdxTest {
 		debugRenderer.begin(ShapeType.Line);
 
 		debugRenderer.setColor(Color.RED);
-		debugRenderer.rect(koala.position.x, koala.position.y, Koala.WIDTH, Koala.HEIGHT);
+		debugRenderer.rect(koala.position.getX(), koala.position.getY(), Koala.WIDTH, Koala.HEIGHT);
 
 		debugRenderer.setColor(Color.YELLOW);
 		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("walls");

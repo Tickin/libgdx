@@ -56,7 +56,7 @@ public class Vector2dTest extends GdxTest {
 	}
 
 	private void renderVectorAt (float x, float y, Vector2 v) {
-		renderer.line(x, y, x + v.x, y + v.y);
+		renderer.line(x, y, x + v.getX(), y + v.getY());
 	}
 
 	@Override
@@ -69,8 +69,8 @@ public class Vector2dTest extends GdxTest {
 		// Render the 'lerp' vector target as a circle
 		renderer.begin(ShapeType.Filled);
 		renderer.setColor(1.0f, 0, 0, 0.3f);
-		renderer.circle(-2 + lerpTarget.x, 2 + lerpTarget.y, 0.08f, 16);
-		renderer.circle(-4 + lerpTarget2.x, 0 + lerpTarget2.y, 0.08f, 16);
+		renderer.circle(-2 + lerpTarget.getX(), 2 + lerpTarget.getY(), 0.08f, 16);
+		renderer.circle(-4 + lerpTarget2.getX(), 0 + lerpTarget2.getY(), 0.08f, 16);
 		renderer.end();
 
 		renderer.begin(ShapeType.Line);

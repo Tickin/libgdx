@@ -94,8 +94,8 @@ public class Image extends Widget {
 		float height = getHeight();
 
 		Vector2 size = scaling.apply(regionWidth, regionHeight, width, height);
-		imageWidth = size.x;
-		imageHeight = size.y;
+		imageWidth = size.getX();
+		imageHeight = size.getY();
 
 		if ((align & Align.left) != 0)
 			imageX = 0;

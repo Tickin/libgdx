@@ -38,9 +38,9 @@ public final class LineSpawnShapeValue extends PrimitiveSpawnShapeValue {
 		float depth = spawnDepth + (spawnDepthDiff * spawnDepthValue.getScale(percent));
 
 		float a = MathUtils.random();
-		vector.x = a * width;
-		vector.y = a * height;
-		vector.z = a * depth;
+		vector.setX(a * width);
+		vector.setY(a * height);
+		vector.setZ(a * depth);
 	}
 
 	@Override

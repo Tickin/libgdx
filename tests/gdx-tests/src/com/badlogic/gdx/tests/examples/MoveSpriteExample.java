@@ -58,7 +58,7 @@ public class MoveSpriteExample extends GdxTest {
 
 		// draw the sprite
 		batch.begin();
-		batch.draw(texture, spritePosition.x, spritePosition.y);
+		batch.draw(texture, spritePosition.getX(), spritePosition.getY());
 		batch.end();
 
 		// if a finger is down, set the sprite's x/y coordinate.

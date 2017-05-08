@@ -170,7 +170,7 @@ public class PairCacheTest extends BaseBulletTest {
 							pt.getPositionWorldOnA(tmpV1);
 							pt.getPositionWorldOnB(tmpV2);
 						}
-						shapeRenderer.line(tmpV1.x, tmpV1.y, tmpV1.z, tmpV2.x, tmpV2.y, tmpV2.z, otherObjectColor, Color.WHITE);
+						shapeRenderer.line(tmpV1.getX(), tmpV1.getY(), tmpV1.getZ(), tmpV2.getX(), tmpV2.getY(), tmpV2.getZ(), otherObjectColor, Color.WHITE);
 					}
 				}
 			}

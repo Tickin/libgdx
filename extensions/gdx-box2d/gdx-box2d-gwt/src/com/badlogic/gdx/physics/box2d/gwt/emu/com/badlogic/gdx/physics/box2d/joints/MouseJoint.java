@@ -36,7 +36,7 @@ public class MouseJoint extends Joint {
 
 	/** Use this to update the target point. */
 	public void setTarget (Vector2 target) {
-		tmp.set(target.x, target.y);
+		tmp.set(target.getX(), target.getY());
 		joint.setTarget(tmp);
 	}
 

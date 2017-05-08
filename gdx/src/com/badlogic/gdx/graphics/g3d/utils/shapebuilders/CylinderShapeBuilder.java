@@ -58,11 +58,11 @@ public class CylinderShapeBuilder extends BaseShapeBuilder {
 			u = 1f - us * i;
 			curr1.position.set(MathUtils.cos(angle) * hw, 0f, MathUtils.sin(angle) * hd);
 			curr1.normal.set(curr1.position).nor();
-			curr1.position.y = -hh;
+			curr1.position.setY(-hh);
 			curr1.uv.set(u, 1);
 			curr2.position.set(curr1.position);
 			curr2.normal.set(curr1.normal);
-			curr2.position.y = hh;
+			curr2.position.setY(hh);
 			curr2.uv.set(u, 0);
 			i2 = builder.vertex(curr1);
 			i1 = builder.vertex(curr2);

@@ -61,8 +61,8 @@ public class DistanceJointDef extends JointDef {
 		fd.dampingRatio = dampingRatio;
 		fd.frequencyHz = frequencyHz;
 		fd.length = length;
-		fd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		fd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
+		fd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		fd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
 		fd.type = org.jbox2d.dynamics.joints.JointType.DISTANCE;
 		return fd;
 	}

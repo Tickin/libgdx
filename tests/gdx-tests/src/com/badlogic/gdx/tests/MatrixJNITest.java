@@ -120,13 +120,13 @@ public class MatrixJNITest extends GdxTest {
 	}
 
 	private void check (Vector3 vec, float[] fvec) {
-		if (vec.x != fvec[0] || vec.y != fvec[1] || vec.z != fvec[2]) throw new GdxRuntimeException("vectors are not equal");
+		if (vec.getX() != fvec[0] || vec.getY() != fvec[1] || vec.getZ() != fvec[2]) throw new GdxRuntimeException("vectors are not equal");
 	}
 
 	private void check (Vector3 vec, float[] fvec, int numVecs, int stride) {
 		int offset = 0;
 		for (int i = 0; i < numVecs; i++) {
-			if (vec.x != fvec[0] || vec.y != fvec[1] || vec.z != fvec[2]) throw new GdxRuntimeException("vectors are not equal");
+			if (vec.getX() != fvec[0] || vec.getY() != fvec[1] || vec.getZ() != fvec[2]) throw new GdxRuntimeException("vectors are not equal");
 		}
 	}
 

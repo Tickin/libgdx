@@ -48,7 +48,7 @@ public class MotorJoint extends Joint {
 	*/
 
 	public void setLinearOffset(Vector2 linearOffset) {
-		jniSetLinearOffset(addr, linearOffset.x, linearOffset.y);
+		jniSetLinearOffset(addr, linearOffset.getX(), linearOffset.getY());
 	}
 
 	private native void jniSetLinearOffset (long addr, float linearOffsetX, float linearOffsetY); /*

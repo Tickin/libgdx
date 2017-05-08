@@ -42,8 +42,8 @@ public class ParallaxTest extends GdxTest {
 		public Matrix4 calculateParallaxMatrix (float parallaxX, float parallaxY) {
 			update();
 			tmp.set(position);
-			tmp.x *= parallaxX;
-			tmp.y *= parallaxY;
+			tmp.setX(tmp.getX() * parallaxX);
+			tmp.setY(tmp.getY() * parallaxY);
 
 			parallaxView.setToLookAt(tmp, tmp2.set(tmp).add(direction), up);
 			parallaxCombined.set(projection);
@@ -87,23 +87,23 @@ public class ParallaxTest extends GdxTest {
 
 		// keep camera in foreground layer bounds
 		boolean updateCamera = false;
-		if (camera.position.x < -1024 + camera.viewportWidth / 2) {
-			camera.position.x = -1024 + (int)(camera.viewportWidth / 2);
+		if (camera.position.getX() < -1024 + camera.viewportWidth / 2) {
+			camera.position.setX(-1024 + (int)(camera.viewportWidth / 2));
 			updateCamera = true;
 		}
 
-		if (camera.position.x > 1024 - camera.viewportWidth / 2) {
-			camera.position.x = 1024 - (int)(camera.viewportWidth / 2);
+		if (camera.position.getX() > 1024 - camera.viewportWidth / 2) {
+			camera.position.setX(1024 - (int)(camera.viewportWidth / 2));
 			updateCamera = true;
 		}
 
-		if (camera.position.y < 0) {
-			camera.position.y = 0;
+		if (camera.position.getY() < 0) {
+			camera.position.setY(0);
 			updateCamera = true;
 		}
 		// arbitrary height of scene
-		if (camera.position.y > 400 - camera.viewportHeight / 2) {
-			camera.position.y = 400 - (int)(camera.viewportHeight / 2);
+		if (camera.position.getY() > 400 - camera.viewportHeight / 2) {
+			camera.position.setY(400 - (int)(camera.viewportHeight / 2));
 			updateCamera = true;
 		}
 

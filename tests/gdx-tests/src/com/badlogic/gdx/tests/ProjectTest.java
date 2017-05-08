@@ -96,8 +96,8 @@ public class ProjectTest extends GdxTest {
 		for (int i = 0; i < instances.length; i++) {
 			instances[i].transform.getTranslation(tmp);
 			cam.project(tmp);
-			if (tmp.z < 0) continue;
-			batch.draw(logo, tmp.x, tmp.y);
+			if (tmp.getZ() < 0) continue;
+			batch.draw(logo, tmp.getX(), tmp.getY());
 		}
 		batch.end();
 	}

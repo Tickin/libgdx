@@ -336,9 +336,9 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 	// Required
 	private static void putVertex (float[] vertices, int offset, Vector3 p, float u, float v, float r, float g, float b, float a) {
 		// Position
-		vertices[offset + CPU_POSITION_OFFSET] = p.x;
-		vertices[offset + CPU_POSITION_OFFSET + 1] = p.y;
-		vertices[offset + CPU_POSITION_OFFSET + 2] = p.z;
+		vertices[offset + CPU_POSITION_OFFSET] = p.getX();
+		vertices[offset + CPU_POSITION_OFFSET + 1] = p.getY();
+		vertices[offset + CPU_POSITION_OFFSET + 2] = p.getZ();
 		// UV
 		vertices[offset + CPU_UV_OFFSET] = u;
 		vertices[offset + CPU_UV_OFFSET + 1] = v;
@@ -505,32 +505,32 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 				if (cosRotation != 1) {
 					TMP_M3.setToRotation(look, cosRotation, sinRotation);
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x - TMP_V2.x, -TMP_V1.y - TMP_V2.y, -TMP_V1.z - TMP_V2.z).mul(TMP_M3).add(px, py, pz), u,
+						TMP_V6.set(-TMP_V1.getX() - TMP_V2.getX(), -TMP_V1.getY() - TMP_V2.getY(), -TMP_V1.getZ() - TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u,
 						v2, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x - TMP_V2.x, TMP_V1.y - TMP_V2.y, TMP_V1.z - TMP_V2.z).mul(TMP_M3).add(px, py, pz), u2, v2,
+						TMP_V6.set(TMP_V1.getX() - TMP_V2.getX(), TMP_V1.getY() - TMP_V2.getY(), TMP_V1.getZ() - TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u2, v2,
 						r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x + TMP_V2.x, TMP_V1.y + TMP_V2.y, TMP_V1.z + TMP_V2.z).mul(TMP_M3).add(px, py, pz), u2, v,
+						TMP_V6.set(TMP_V1.getX() + TMP_V2.getX(), TMP_V1.getY() + TMP_V2.getY(), TMP_V1.getZ() + TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u2, v,
 						r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x + TMP_V2.x, -TMP_V1.y + TMP_V2.y, -TMP_V1.z + TMP_V2.z).mul(TMP_M3).add(px, py, pz), u, v,
+						TMP_V6.set(-TMP_V1.getX() + TMP_V2.getX(), -TMP_V1.getY() + TMP_V2.getY(), -TMP_V1.getZ() + TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u, v,
 						r, g, b, a);
 				} else {
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x - TMP_V2.x + px, -TMP_V1.y - TMP_V2.y + py, -TMP_V1.z - TMP_V2.z + pz), u, v2, r, g, b, a);
+						TMP_V6.set(-TMP_V1.getX() - TMP_V2.getX() + px, -TMP_V1.getY() - TMP_V2.getY() + py, -TMP_V1.getZ() - TMP_V2.getZ() + pz), u, v2, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x - TMP_V2.x + px, TMP_V1.y - TMP_V2.y + py, TMP_V1.z - TMP_V2.z + pz), u2, v2, r, g, b, a);
+						TMP_V6.set(TMP_V1.getX() - TMP_V2.getX() + px, TMP_V1.getY() - TMP_V2.getY() + py, TMP_V1.getZ() - TMP_V2.getZ() + pz), u2, v2, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x + TMP_V2.x + px, TMP_V1.y + TMP_V2.y + py, TMP_V1.z + TMP_V2.z + pz), u2, v, r, g, b, a);
+						TMP_V6.set(TMP_V1.getX() + TMP_V2.getX() + px, TMP_V1.getY() + TMP_V2.getY() + py, TMP_V1.getZ() + TMP_V2.getZ() + pz), u2, v, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x + TMP_V2.x + px, -TMP_V1.y + TMP_V2.y + py, -TMP_V1.z + TMP_V2.z + pz), u, v, r, g, b, a);
+						TMP_V6.set(-TMP_V1.getX() + TMP_V2.getX() + px, -TMP_V1.getY() + TMP_V2.getY() + py, -TMP_V1.getZ() + TMP_V2.getZ() + pz), u, v, r, g, b, a);
 				}
 			}
 		}
@@ -577,32 +577,32 @@ public class BillboardParticleBatch extends BufferedParticleBatch<BillboardContr
 				if (cosRotation != 1) {
 					TMP_M3.setToRotation(look, cosRotation, sinRotation);
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x - TMP_V2.x, -TMP_V1.y - TMP_V2.y, -TMP_V1.z - TMP_V2.z).mul(TMP_M3).add(px, py, pz), u,
+						TMP_V6.set(-TMP_V1.getX() - TMP_V2.getX(), -TMP_V1.getY() - TMP_V2.getY(), -TMP_V1.getZ() - TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u,
 						v2, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x - TMP_V2.x, TMP_V1.y - TMP_V2.y, TMP_V1.z - TMP_V2.z).mul(TMP_M3).add(px, py, pz), u2, v2,
+						TMP_V6.set(TMP_V1.getX() - TMP_V2.getX(), TMP_V1.getY() - TMP_V2.getY(), TMP_V1.getZ() - TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u2, v2,
 						r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x + TMP_V2.x, TMP_V1.y + TMP_V2.y, TMP_V1.z + TMP_V2.z).mul(TMP_M3).add(px, py, pz), u2, v,
+						TMP_V6.set(TMP_V1.getX() + TMP_V2.getX(), TMP_V1.getY() + TMP_V2.getY(), TMP_V1.getZ() + TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u2, v,
 						r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x + TMP_V2.x, -TMP_V1.y + TMP_V2.y, -TMP_V1.z + TMP_V2.z).mul(TMP_M3).add(px, py, pz), u, v,
+						TMP_V6.set(-TMP_V1.getX() + TMP_V2.getX(), -TMP_V1.getY() + TMP_V2.getY(), -TMP_V1.getZ() + TMP_V2.getZ()).mul(TMP_M3).add(px, py, pz), u, v,
 						r, g, b, a);
 				} else {
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x - TMP_V2.x + px, -TMP_V1.y - TMP_V2.y + py, -TMP_V1.z - TMP_V2.z + pz), u, v2, r, g, b, a);
+						TMP_V6.set(-TMP_V1.getX() - TMP_V2.getX() + px, -TMP_V1.getY() - TMP_V2.getY() + py, -TMP_V1.getZ() - TMP_V2.getZ() + pz), u, v2, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x - TMP_V2.x + px, TMP_V1.y - TMP_V2.y + py, TMP_V1.z - TMP_V2.z + pz), u2, v2, r, g, b, a);
+						TMP_V6.set(TMP_V1.getX() - TMP_V2.getX() + px, TMP_V1.getY() - TMP_V2.getY() + py, TMP_V1.getZ() - TMP_V2.getZ() + pz), u2, v2, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(TMP_V1.x + TMP_V2.x + px, TMP_V1.y + TMP_V2.y + py, TMP_V1.z + TMP_V2.z + pz), u2, v, r, g, b, a);
+						TMP_V6.set(TMP_V1.getX() + TMP_V2.getX() + px, TMP_V1.getY() + TMP_V2.getY() + py, TMP_V1.getZ() + TMP_V2.getZ() + pz), u2, v, r, g, b, a);
 					baseOffset += currentVertexSize;
 					putVertex(vertices, baseOffset,
-						TMP_V6.set(-TMP_V1.x + TMP_V2.x + px, -TMP_V1.y + TMP_V2.y + py, -TMP_V1.z + TMP_V2.z + pz), u, v, r, g, b, a);
+						TMP_V6.set(-TMP_V1.getX() + TMP_V2.getX() + px, -TMP_V1.getY() + TMP_V2.getY() + py, -TMP_V1.getZ() + TMP_V2.getZ() + pz), u, v, r, g, b, a);
 				}
 			}
 		}

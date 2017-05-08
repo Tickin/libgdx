@@ -52,15 +52,15 @@ public class ArrowShapeBuilder extends BaseShapeBuilder {
 		Matrix4 userTransform = builder.getVertexTransform(obtainM4());
 		Matrix4 transform = obtainM4();
 		float[] val = transform.val;
-		val[Matrix4.M00] = left.x;
-		val[Matrix4.M01] = up.x;
-		val[Matrix4.M02] = forward.x;
-		val[Matrix4.M10] = left.y;
-		val[Matrix4.M11] = up.y;
-		val[Matrix4.M12] = forward.y;
-		val[Matrix4.M20] = left.z;
-		val[Matrix4.M21] = up.z;
-		val[Matrix4.M22] = forward.z;
+		val[Matrix4.M00] = left.getX();
+		val[Matrix4.M01] = up.getX();
+		val[Matrix4.M02] = forward.getX();
+		val[Matrix4.M10] = left.getY();
+		val[Matrix4.M11] = up.getY();
+		val[Matrix4.M12] = forward.getY();
+		val[Matrix4.M20] = left.getZ();
+		val[Matrix4.M21] = up.getZ();
+		val[Matrix4.M22] = forward.getZ();
 		Matrix4 temp = obtainM4();
 
 		// Stem

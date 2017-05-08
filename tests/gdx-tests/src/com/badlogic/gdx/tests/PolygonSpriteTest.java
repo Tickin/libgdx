@@ -55,8 +55,8 @@ public class PolygonSpriteTest extends GdxTest {
 		renderer = new ShapeRenderer();
 
 		camera = new OrthographicCamera(480, 320);
-		camera.position.x = 240;
-		camera.position.y = 160;
+		camera.position.setX(240);
+		camera.position.setY(160);
 		camera.update();
 
 		batch = new PolygonSpriteBatch();

@@ -74,8 +74,8 @@ public class SimpleTest extends Box2DTest {
 			// ground and create a new body
 			BodyDef boxBodyDef = new BodyDef();
 			boxBodyDef.type = BodyType.DynamicBody;
-			boxBodyDef.position.x = -24 + (float)(Math.random() * 48);
-			boxBodyDef.position.y = 10 + (float)(Math.random() * 100);
+			boxBodyDef.position.setX(-24 + (float)(Math.random() * 48));
+			boxBodyDef.position.setY(10 + (float)(Math.random() * 100));
 			Body boxBody = world.createBody(boxBodyDef);
 
 			// add the boxPoly shape as a fixture
@@ -92,8 +92,8 @@ public class SimpleTest extends Box2DTest {
 		for (int i = 0; i < 10; i++) {
 			BodyDef circleBodyDef = new BodyDef();
 			circleBodyDef.type = BodyType.DynamicBody;
-			circleBodyDef.position.x = -24 + (float)(Math.random() * 48);
-			circleBodyDef.position.y = 10 + (float)(Math.random() * 100);
+			circleBodyDef.position.setX(-24 + (float)(Math.random() * 48));
+			circleBodyDef.position.setY(10 + (float)(Math.random() * 100));
 			Body circleBody = world.createBody(circleBodyDef);
 
 			// add the boxPoly shape as a fixture

@@ -298,26 +298,26 @@ public class Decal {
 	 * 
 	 * @param scale New scale along x axis */
 	public void setScaleX (float scale) {
-		this.scale.x = scale;
+		this.scale.setX(scale);
 		updated = false;
 	}
 
 	/** @return Scale on the x axis */
 	public float getScaleX () {
-		return this.scale.x;
+		return this.scale.getX();
 	}
 
 	/** Sets scale along the y axis
 	 * 
 	 * @param scale New scale along y axis */
 	public void setScaleY (float scale) {
-		this.scale.y = scale;
+		this.scale.setY(scale);
 		updated = false;
 	}
 
 	/** @return Scale on the y axis */
 	public float getScaleY () {
-		return this.scale.y;
+		return this.scale.getY();
 	}
 
 	/** Sets scale along both the x and y axis
@@ -341,26 +341,26 @@ public class Decal {
 	 * 
 	 * @param width Width in world units */
 	public void setWidth (float width) {
-		this.dimensions.x = width;
+		this.dimensions.setX(width);
 		updated = false;
 	}
 
 	/** @return width in world units */
 	public float getWidth () {
-		return this.dimensions.x;
+		return this.dimensions.getX();
 	}
 
 	/** Sets the height in world units
 	 * 
 	 * @param height Height in world units */
 	public void setHeight (float height) {
-		this.dimensions.y = height;
+		this.dimensions.setY(height);
 		updated = false;
 	}
 
 	/** @return height in world units */
 	public float getHeight () {
-		return dimensions.y;
+		return dimensions.getY();
 	}
 
 	/** Sets the width and height in world units
@@ -401,15 +401,15 @@ public class Decal {
 		float x, y, z, w;
 		float tx, ty;
 		if (transformationOffset != null) {
-			tx = -transformationOffset.x;
-			ty = -transformationOffset.y;
+			tx = -transformationOffset.getX();
+			ty = -transformationOffset.getY();
 		} else {
 			tx = ty = 0;
 		}
 		/** Transform the first vertex */
 		// first apply the scale to the vector
-		x = (vertices[X1] + tx) * scale.x;
-		y = (vertices[Y1] + ty) * scale.y;
+		x = (vertices[X1] + tx) * scale.getX();
+		y = (vertices[Y1] + ty) * scale.getY();
 		z = vertices[Z1];
 		// then transform the vector using the rotation quaternion
 		vertices[X1] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
@@ -430,8 +430,8 @@ public class Decal {
 		vertices[Z1] += position.getZ();
 		/** Transform the second vertex */
 		// first apply the scale to the vector
-		x = (vertices[X2] + tx) * scale.x;
-		y = (vertices[Y2] + ty) * scale.y;
+		x = (vertices[X2] + tx) * scale.getX();
+		y = (vertices[Y2] + ty) * scale.getY();
 		z = vertices[Z2];
 		// then transform the vector using the rotation quaternion
 		vertices[X2] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
@@ -452,8 +452,8 @@ public class Decal {
 		vertices[Z2] += position.getZ();
 		/** Transform the third vertex */
 		// first apply the scale to the vector
-		x = (vertices[X3] + tx) * scale.x;
-		y = (vertices[Y3] + ty) * scale.y;
+		x = (vertices[X3] + tx) * scale.getX();
+		y = (vertices[Y3] + ty) * scale.getY();
 		z = vertices[Z3];
 		// then transform the vector using the rotation quaternion
 		vertices[X3] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
@@ -474,8 +474,8 @@ public class Decal {
 		vertices[Z3] += position.getZ();
 		/** Transform the fourth vertex */
 		// first apply the scale to the vector
-		x = (vertices[X4] + tx) * scale.x;
-		y = (vertices[Y4] + ty) * scale.y;
+		x = (vertices[X4] + tx) * scale.getX();
+		y = (vertices[Y4] + ty) * scale.getY();
 		z = vertices[Z4];
 		// then transform the vector using the rotation quaternion
 		vertices[X4] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
@@ -499,10 +499,10 @@ public class Decal {
 
 	/** Resets the position components of the vertices array based ont he dimensions (preparation for transformation) */
 	protected void resetVertices () {
-		float left = -dimensions.x / 2f;
-		float right = left + dimensions.x;
-		float top = dimensions.y / 2f;
-		float bottom = top - dimensions.y;
+		float left = -dimensions.getX() / 2f;
+		float right = left + dimensions.getX();
+		float top = dimensions.getY() / 2f;
+		float bottom = top - dimensions.getY();
 
 		// left top
 		vertices[X1] = left;
@@ -669,8 +669,8 @@ public class Decal {
 		Decal decal = new Decal();
 		decal.setTextureRegion(textureRegion);
 		decal.setBlending(srcBlendFactor, dstBlendFactor);
-		decal.dimensions.x = width;
-		decal.dimensions.y = height;
+		decal.dimensions.setX(width);
+		decal.dimensions.setY(height);
 		decal.setColor(1, 1, 1, 1);
 		return decal;
 	}
@@ -689,8 +689,8 @@ public class Decal {
 		Decal decal = new Decal(material);
 		decal.setTextureRegion(textureRegion);
 		decal.setBlending(srcBlendFactor, dstBlendFactor);
-		decal.dimensions.x = width;
-		decal.dimensions.y = height;
+		decal.dimensions.setX(width);
+		decal.dimensions.setY(height);
 		decal.setColor(1, 1, 1, 1);
 		return decal;
 	}
