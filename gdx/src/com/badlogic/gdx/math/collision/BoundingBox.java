@@ -264,14 +264,17 @@ public class BoundingBox implements Serializable {
 	 * @param transform The transformation matrix to apply to bounds, before using it to extend this bounding box.
 	 * @return This bounding box for chaining. */
 	public BoundingBox ext (BoundingBox bounds, Matrix4 transform) {
-		ext(tmpVector.set(bounds.min.x, bounds.min.y, bounds.min.z).mul(transform));
-		ext(tmpVector.set(bounds.min.x, bounds.min.y, bounds.max.z).mul(transform));
-		ext(tmpVector.set(bounds.min.x, bounds.max.y, bounds.min.z).mul(transform));
-		ext(tmpVector.set(bounds.min.x, bounds.max.y, bounds.max.z).mul(transform));
-		ext(tmpVector.set(bounds.max.x, bounds.min.y, bounds.min.z).mul(transform));
-		ext(tmpVector.set(bounds.max.x, bounds.min.y, bounds.max.z).mul(transform));
-		ext(tmpVector.set(bounds.max.x, bounds.max.y, bounds.min.z).mul(transform));
-		ext(tmpVector.set(bounds.max.x, bounds.max.y, bounds.max.z).mul(transform));
+		return ext(bounds.min.x, bounds.min.y, bounds.min.z, bounds.max.x, bounds.max.y, bounds.max.z, transform);
+	}
+	
+	public BoundingBox ext (float minX, float minY, float minZ, float maxX, float maxY, float maxZ, Matrix4 transform){
+		for(int i=0; i<8; i++){
+			tmpVector.x = ((i&CORNERX) != 0)?minX:maxX;
+			tmpVector.y = ((i&CORNERY) != 0)?minY:maxY;
+			tmpVector.z = ((i&CORNERZ) != 0)?minZ:maxZ;
+			ext(tmpVector.mul(transform));
+		}
+		
 		return this;
 	}
 
@@ -283,15 +286,7 @@ public class BoundingBox implements Serializable {
 	public BoundingBox mul (Matrix4 transform) {
 		final float x0 = min.x, y0 = min.y, z0 = min.z, x1 = max.x, y1 = max.y, z1 = max.z;
 		inf();
-		ext(tmpVector.set(x0, y0, z0).mul(transform));
-		ext(tmpVector.set(x0, y0, z1).mul(transform));
-		ext(tmpVector.set(x0, y1, z0).mul(transform));
-		ext(tmpVector.set(x0, y1, z1).mul(transform));
-		ext(tmpVector.set(x1, y0, z0).mul(transform));
-		ext(tmpVector.set(x1, y0, z1).mul(transform));
-		ext(tmpVector.set(x1, y1, z0).mul(transform));
-		ext(tmpVector.set(x1, y1, z1).mul(transform));
-		return this;
+		return ext(x0,y0,z0,x1,y1,z1,transform);
 	}
 
 	/** Returns whether the given bounding box is contained in this bounding box.
