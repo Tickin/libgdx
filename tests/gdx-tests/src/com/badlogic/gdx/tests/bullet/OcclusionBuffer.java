@@ -58,7 +58,7 @@ public class OcclusionBuffer implements Disposable {
 					// This means a bounding box will not be considered occluded when any of its vertices
 					// are behind the camera frustum near plane.
 					for (Quaternion vertex : vertices) {
-						if (vertex.z + vertex.w <= 0) return true;
+						if (vertex.getZ() + vertex.getW() <= 0) return true;
 					}
 					return false;
 			}
@@ -91,19 +91,19 @@ public class OcclusionBuffer implements Disposable {
 		 * @return This vector for chaining */
 		public Quaternion mul (final Matrix4 matrix) {
 			final float[] val = matrix.val;
-			return this.set(x * val[Matrix4.M00] + y * val[Matrix4.M01] + z * val[Matrix4.M02] + w * val[Matrix4.M03],
-					x * val[Matrix4.M10] + y * val[Matrix4.M11] + z * val[Matrix4.M12] + w * val[Matrix4.M13],
-					x * val[Matrix4.M20] + y * val[Matrix4.M21] + z * val[Matrix4.M22] + w * val[Matrix4.M23],
-					x * val[Matrix4.M30] + y * val[Matrix4.M31] + z * val[Matrix4.M32] + w * val[Matrix4.M33]);
+			return this.set(getX() * val[Matrix4.M00] + getY() * val[Matrix4.M01] + getZ() * val[Matrix4.M02] + getW() * val[Matrix4.M03],
+					getX() * val[Matrix4.M10] + getY() * val[Matrix4.M11] + getZ() * val[Matrix4.M12] + getW() * val[Matrix4.M13],
+					getX() * val[Matrix4.M20] + getY() * val[Matrix4.M21] + getZ() * val[Matrix4.M22] + getW() * val[Matrix4.M23],
+					getX() * val[Matrix4.M30] + getY() * val[Matrix4.M31] + getZ() * val[Matrix4.M32] + getW() * val[Matrix4.M33]);
 		}
 
 		/** Multiply the x,y,z,w components of the passed in quaternion with the scalar and add them to the components of this
 		 * quaternion */
 		public Quaternion mulAdd (final Quaternion quaternion, float scalar) {
-			this.x += quaternion.x * scalar;
-			this.y += quaternion.y * scalar;
-			this.z += quaternion.z * scalar;
-			this.w += quaternion.w * scalar;
+			this.setX(this.getX() + quaternion.getX() * scalar);
+			this.setY(this.getY() + quaternion.getY() * scalar);
+			this.setZ(this.getZ() + quaternion.getZ() * scalar);
+			this.setW(this.getW() + quaternion.getW() * scalar);
 			return this;
 		}
 
@@ -118,19 +118,19 @@ public class OcclusionBuffer implements Disposable {
 
 		/** Subtract the x,y,z,w components of the passed in quaternion to the ones of this quaternion */
 		public Quaternion sub (float qx, float qy, float qz, float qw) {
-			this.x -= qx;
-			this.y -= qy;
-			this.z -= qz;
-			this.w -= qw;
+			this.setX(this.getX() - qx);
+			this.setY(this.getY() - qy);
+			this.setZ(this.getZ() - qz);
+			this.setW(this.getW() - qw);
 			return this;
 		}
 
 		/** Subtract the x,y,z,w components of the passed in quaternion to the ones of this quaternion */
 		public Quaternion sub (Quaternion quaternion) {
-			this.x -= quaternion.x;
-			this.y -= quaternion.y;
-			this.z -= quaternion.z;
-			this.w -= quaternion.w;
+			this.setX(this.getX() - quaternion.getX());
+			this.setY(this.getY() - quaternion.getY());
+			this.setZ(this.getZ() - quaternion.getZ());
+			this.setW(this.getW() - quaternion.getW());
 			return this;
 		}
 	}
@@ -205,7 +205,7 @@ public class OcclusionBuffer implements Disposable {
 		int numVertsBehind = 0;
 		float[] s = new float[4];
 		for (int i = 0; i < numVerts; i++) {
-			s[i] = verticesIn[i].z + verticesIn[i].w;
+			s[i] = verticesIn[i].getZ() + verticesIn[i].getW();
 			if (s[i] < 0) numVertsBehind++;
 		}
 		if (numVertsBehind == numVerts) {
@@ -218,7 +218,7 @@ public class OcclusionBuffer implements Disposable {
 			for (int i = numVerts - 1, j = 0; j < numVerts; i = j++) {
 				Quaternion a = tmpQ1.set(verticesIn[i]);
 				Quaternion b = tmpQ2.set(verticesIn[j]);
-				float t = s[i] / (a.w + a.z - b.w - b.z);
+				float t = s[i] / (a.getW() + a.getZ() - b.getW() - b.getZ());
 				if ((t > 0) && (t < 1)) verticesOut[newNumVerts++].set(a).mulAdd(b.sub(a), t);
 				if (s[j] > 0) verticesOut[newNumVerts++].set(verticesIn[j]);
 			}
@@ -291,8 +291,8 @@ public class OcclusionBuffer implements Disposable {
 			// Divide by w to project vertices to camera space
 			for (int j = 0; j < numVertices; j++) {
 				Quaternion q = clippedQuad[j];
-				q.z = 1 / q.w;
-				vertices[j].set(q.x * q.z, q.y * q.z, q.z);
+				q.setZ(1 / q.getW());
+				vertices[j].set(q.getX() * q.getZ(), q.getY() * q.getZ(), q.getZ());
 			}
 			// Perform draw/query
 			for (int j = 2; j < numVertices; j++) {

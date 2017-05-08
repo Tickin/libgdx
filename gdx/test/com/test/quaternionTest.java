@@ -346,13 +346,13 @@ public class quaternionTest {
 		x=0; y=0; z=0; w=1f;
 		quaternion.set(x,y,z,w);
 		assertTrue(quaternion.isIdentity());
-		quaternion.x=1;		
+		quaternion.setX(1);		
 		assertFalse(quaternion.isIdentity());
-		quaternion.x=0; quaternion.y=1;
+		quaternion.setX(0); quaternion.setY(1);
 		assertFalse(quaternion.isIdentity());
-		quaternion.y=0; quaternion.z=1;
+		quaternion.setY(0); quaternion.setZ(1);
 		assertFalse(quaternion.isIdentity());
-		quaternion.z=0; quaternion.w=2;
+		quaternion.setZ(0); quaternion.setW(2);
 		assertFalse(quaternion.isIdentity());
 
 	}
@@ -363,7 +363,7 @@ public class quaternionTest {
 		float rad= (float)Math.PI;
 		quaternion.setFromAxisRad(x, y, z, rad);
 		quaternion2.set(x,y,z,w);
-		quaternion2.w=1f;
+		quaternion2.setW(1f);
 		assertEquals(quaternion, quaternion2);
 		
 	}

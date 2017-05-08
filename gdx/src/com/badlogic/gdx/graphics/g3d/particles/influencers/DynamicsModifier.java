@@ -60,10 +60,10 @@ public abstract class DynamicsModifier extends Influencer {
 					accellerationChannel.data[accelOffset + ParticleChannels.ZOffset]).nor(), axisY = TMP_V2.set(TMP_V1)
 					.crs(Vector3.Y).nor().crs(TMP_V1).nor(), axisX = TMP_V3.set(axisY).crs(axisZ).nor();
 				TMP_Q.setFromAxes(false, axisX.x, axisY.x, axisZ.x, axisX.y, axisY.y, axisZ.y, axisX.z, axisY.z, axisZ.z);
-				rotationChannel.data[i + ParticleChannels.XOffset] = TMP_Q.x;
-				rotationChannel.data[i + ParticleChannels.YOffset] = TMP_Q.y;
-				rotationChannel.data[i + ParticleChannels.ZOffset] = TMP_Q.z;
-				rotationChannel.data[i + ParticleChannels.WOffset] = TMP_Q.w;
+				rotationChannel.data[i + ParticleChannels.XOffset] = TMP_Q.getX();
+				rotationChannel.data[i + ParticleChannels.YOffset] = TMP_Q.getY();
+				rotationChannel.data[i + ParticleChannels.ZOffset] = TMP_Q.getZ();
+				rotationChannel.data[i + ParticleChannels.WOffset] = TMP_Q.getW();
 			}
 		}
 

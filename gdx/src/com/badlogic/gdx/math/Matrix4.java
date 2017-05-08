@@ -133,7 +133,7 @@ public class Matrix4 implements Serializable {
 	 * @param quaternion The quaternion that is to be used to set this matrix.
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 set (Quaternion quaternion) {
-		return set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+		return set(quaternion.getX(), quaternion.getY(), quaternion.getZ(), quaternion.getW());
 	}
 
 	/** Sets the matrix to a rotation matrix representing the quaternion.
@@ -152,7 +152,7 @@ public class Matrix4 implements Serializable {
 	 * @param orientation The rotation, must be normalized
 	 * @return This matrix for chaining */
 	public Matrix4 set (Vector3 position, Quaternion orientation) {
-		return set(position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w);
+		return set(position.x, position.y, position.z, orientation.getX(), orientation.getY(), orientation.getZ(), orientation.getW());
 	}
 
 	/** Sets the matrix to a rotation matrix representing the translation and quaternion.
@@ -200,7 +200,7 @@ public class Matrix4 implements Serializable {
 	 * @param scale The scale
 	 * @return This matrix for chaining */
 	public Matrix4 set (Vector3 position, Quaternion orientation, Vector3 scale) {
-		return set(position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w, scale.x,
+		return set(position.x, position.y, position.z, orientation.getX(), orientation.getY(), orientation.getZ(), orientation.getW(), scale.x,
 			scale.y, scale.z);
 	}
 

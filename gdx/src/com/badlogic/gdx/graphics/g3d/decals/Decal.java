@@ -167,7 +167,7 @@ public class Decal {
 	public void setRotation (Vector3 dir, Vector3 up) {
 		tmp.set(up).crs(dir).nor();
 		tmp2.set(dir).crs(tmp).nor();
-		rotation.setFromAxes(tmp.x, tmp2.x, dir.x, tmp.y, tmp2.y, dir.y, tmp.z, tmp2.z, dir.z);
+		rotation.setFromAxes(tmp.getX(), tmp2.getX(), dir.getX(), tmp.getY(), tmp2.getY(), dir.getY(), tmp.getZ(), tmp2.getZ(), dir.getZ());
 		updated = false;
 	}
 
@@ -189,7 +189,7 @@ public class Decal {
 	 * 
 	 * @param units Units to move the decal */
 	public void translateX (float units) {
-		this.position.x += units;
+		this.position.setX(this.position.getX() + units);
 		updated = false;
 	}
 
@@ -210,7 +210,7 @@ public class Decal {
 	 * 
 	 * @param units Units to move the decal */
 	public void translateY (float units) {
-		this.position.y += units;
+		this.position.setY(this.position.getY() + units);
 		updated = false;
 	}
 
@@ -231,7 +231,7 @@ public class Decal {
 	 * 
 	 * @param units Units to move the decal */
 	public void translateZ (float units) {
-		this.position.z += units;
+		this.position.setZ(this.position.getZ() + units);
 		updated = false;
 	}
 
@@ -412,88 +412,88 @@ public class Decal {
 		y = (vertices[Y1] + ty) * scale.y;
 		z = vertices[Z1];
 		// then transform the vector using the rotation quaternion
-		vertices[X1] = rotation.w * x + rotation.y * z - rotation.z * y;
-		vertices[Y1] = rotation.w * y + rotation.z * x - rotation.x * z;
-		vertices[Z1] = rotation.w * z + rotation.x * y - rotation.y * x;
-		w = -rotation.x * x - rotation.y * y - rotation.z * z;
+		vertices[X1] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
+		vertices[Y1] = rotation.getW() * y + rotation.getZ() * x - rotation.getX() * z;
+		vertices[Z1] = rotation.getW() * z + rotation.getX() * y - rotation.getY() * x;
+		w = -rotation.getX() * x - rotation.getY() * y - rotation.getZ() * z;
 		rotation.conjugate();
 		x = vertices[X1];
 		y = vertices[Y1];
 		z = vertices[Z1];
-		vertices[X1] = w * rotation.x + x * rotation.w + y * rotation.z - z * rotation.y;
-		vertices[Y1] = w * rotation.y + y * rotation.w + z * rotation.x - x * rotation.z;
-		vertices[Z1] = w * rotation.z + z * rotation.w + x * rotation.y - y * rotation.x;
+		vertices[X1] = w * rotation.getX() + x * rotation.getW() + y * rotation.getZ() - z * rotation.getY();
+		vertices[Y1] = w * rotation.getY() + y * rotation.getW() + z * rotation.getX() - x * rotation.getZ();
+		vertices[Z1] = w * rotation.getZ() + z * rotation.getW() + x * rotation.getY() - y * rotation.getX();
 		rotation.conjugate(); // <- don't forget to conjugate the rotation back to normal
 		// finally translate the vector according to position
-		vertices[X1] += position.x - tx;
-		vertices[Y1] += position.y - ty;
-		vertices[Z1] += position.z;
+		vertices[X1] += position.getX() - tx;
+		vertices[Y1] += position.getY() - ty;
+		vertices[Z1] += position.getZ();
 		/** Transform the second vertex */
 		// first apply the scale to the vector
 		x = (vertices[X2] + tx) * scale.x;
 		y = (vertices[Y2] + ty) * scale.y;
 		z = vertices[Z2];
 		// then transform the vector using the rotation quaternion
-		vertices[X2] = rotation.w * x + rotation.y * z - rotation.z * y;
-		vertices[Y2] = rotation.w * y + rotation.z * x - rotation.x * z;
-		vertices[Z2] = rotation.w * z + rotation.x * y - rotation.y * x;
-		w = -rotation.x * x - rotation.y * y - rotation.z * z;
+		vertices[X2] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
+		vertices[Y2] = rotation.getW() * y + rotation.getZ() * x - rotation.getX() * z;
+		vertices[Z2] = rotation.getW() * z + rotation.getX() * y - rotation.getY() * x;
+		w = -rotation.getX() * x - rotation.getY() * y - rotation.getZ() * z;
 		rotation.conjugate();
 		x = vertices[X2];
 		y = vertices[Y2];
 		z = vertices[Z2];
-		vertices[X2] = w * rotation.x + x * rotation.w + y * rotation.z - z * rotation.y;
-		vertices[Y2] = w * rotation.y + y * rotation.w + z * rotation.x - x * rotation.z;
-		vertices[Z2] = w * rotation.z + z * rotation.w + x * rotation.y - y * rotation.x;
+		vertices[X2] = w * rotation.getX() + x * rotation.getW() + y * rotation.getZ() - z * rotation.getY();
+		vertices[Y2] = w * rotation.getY() + y * rotation.getW() + z * rotation.getX() - x * rotation.getZ();
+		vertices[Z2] = w * rotation.getZ() + z * rotation.getW() + x * rotation.getY() - y * rotation.getX();
 		rotation.conjugate(); // <- don't forget to conjugate the rotation back to normal
 		// finally translate the vector according to position
-		vertices[X2] += position.x - tx;
-		vertices[Y2] += position.y - ty;
-		vertices[Z2] += position.z;
+		vertices[X2] += position.getX() - tx;
+		vertices[Y2] += position.getY() - ty;
+		vertices[Z2] += position.getZ();
 		/** Transform the third vertex */
 		// first apply the scale to the vector
 		x = (vertices[X3] + tx) * scale.x;
 		y = (vertices[Y3] + ty) * scale.y;
 		z = vertices[Z3];
 		// then transform the vector using the rotation quaternion
-		vertices[X3] = rotation.w * x + rotation.y * z - rotation.z * y;
-		vertices[Y3] = rotation.w * y + rotation.z * x - rotation.x * z;
-		vertices[Z3] = rotation.w * z + rotation.x * y - rotation.y * x;
-		w = -rotation.x * x - rotation.y * y - rotation.z * z;
+		vertices[X3] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
+		vertices[Y3] = rotation.getW() * y + rotation.getZ() * x - rotation.getX() * z;
+		vertices[Z3] = rotation.getW() * z + rotation.getX() * y - rotation.getY() * x;
+		w = -rotation.getX() * x - rotation.getY() * y - rotation.getZ() * z;
 		rotation.conjugate();
 		x = vertices[X3];
 		y = vertices[Y3];
 		z = vertices[Z3];
-		vertices[X3] = w * rotation.x + x * rotation.w + y * rotation.z - z * rotation.y;
-		vertices[Y3] = w * rotation.y + y * rotation.w + z * rotation.x - x * rotation.z;
-		vertices[Z3] = w * rotation.z + z * rotation.w + x * rotation.y - y * rotation.x;
+		vertices[X3] = w * rotation.getX() + x * rotation.getW() + y * rotation.getZ() - z * rotation.getY();
+		vertices[Y3] = w * rotation.getY() + y * rotation.getW() + z * rotation.getX() - x * rotation.getZ();
+		vertices[Z3] = w * rotation.getZ() + z * rotation.getW() + x * rotation.getY() - y * rotation.getX();
 		rotation.conjugate(); // <- don't forget to conjugate the rotation back to normal
 		// finally translate the vector according to position
-		vertices[X3] += position.x - tx;
-		vertices[Y3] += position.y - ty;
-		vertices[Z3] += position.z;
+		vertices[X3] += position.getX() - tx;
+		vertices[Y3] += position.getY() - ty;
+		vertices[Z3] += position.getZ();
 		/** Transform the fourth vertex */
 		// first apply the scale to the vector
 		x = (vertices[X4] + tx) * scale.x;
 		y = (vertices[Y4] + ty) * scale.y;
 		z = vertices[Z4];
 		// then transform the vector using the rotation quaternion
-		vertices[X4] = rotation.w * x + rotation.y * z - rotation.z * y;
-		vertices[Y4] = rotation.w * y + rotation.z * x - rotation.x * z;
-		vertices[Z4] = rotation.w * z + rotation.x * y - rotation.y * x;
-		w = -rotation.x * x - rotation.y * y - rotation.z * z;
+		vertices[X4] = rotation.getW() * x + rotation.getY() * z - rotation.getZ() * y;
+		vertices[Y4] = rotation.getW() * y + rotation.getZ() * x - rotation.getX() * z;
+		vertices[Z4] = rotation.getW() * z + rotation.getX() * y - rotation.getY() * x;
+		w = -rotation.getX() * x - rotation.getY() * y - rotation.getZ() * z;
 		rotation.conjugate();
 		x = vertices[X4];
 		y = vertices[Y4];
 		z = vertices[Z4];
-		vertices[X4] = w * rotation.x + x * rotation.w + y * rotation.z - z * rotation.y;
-		vertices[Y4] = w * rotation.y + y * rotation.w + z * rotation.x - x * rotation.z;
-		vertices[Z4] = w * rotation.z + z * rotation.w + x * rotation.y - y * rotation.x;
+		vertices[X4] = w * rotation.getX() + x * rotation.getW() + y * rotation.getZ() - z * rotation.getY();
+		vertices[Y4] = w * rotation.getY() + y * rotation.getW() + z * rotation.getX() - x * rotation.getZ();
+		vertices[Z4] = w * rotation.getZ() + z * rotation.getW() + x * rotation.getY() - y * rotation.getX();
 		rotation.conjugate(); // <- don't forget to conjugate the rotation back to normal
 		// finally translate the vector according to position
-		vertices[X4] += position.x - tx;
-		vertices[Y4] += position.y - ty;
-		vertices[Z4] += position.z;
+		vertices[X4] += position.getX() - tx;
+		vertices[Y4] += position.getY() - ty;
+		vertices[Z4] += position.getZ();
 		updated = true;
 	}
 
