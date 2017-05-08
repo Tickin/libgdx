@@ -19,6 +19,7 @@ package com.badlogic.gdx.math.collision;
 import java.io.Serializable;
 import java.util.List;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 
@@ -171,10 +172,15 @@ public class BoundingBox implements Serializable {
 	 * @param maximum The maximum vector
 	 * @return This bounding box for chaining. */
 	public BoundingBox set (Vector3 minimum, Vector3 maximum) {
-		min.set(minimum.x < maximum.x ? minimum.x : maximum.x, minimum.y < maximum.y ? minimum.y : maximum.y,
-			minimum.z < maximum.z ? minimum.z : maximum.z);
-		max.set(minimum.x > maximum.x ? minimum.x : maximum.x, minimum.y > maximum.y ? minimum.y : maximum.y,
-			minimum.z > maximum.z ? minimum.z : maximum.z);
+		
+		min.set(MathUtils.min(minimum.x, maximum.x), 
+			MathUtils.min(minimum.y, maximum.y),
+			MathUtils.min(minimum.z, maximum.z));
+		
+		max.set(MathUtils.max(minimum.x, maximum.x), 
+			MathUtils.max(minimum.y, maximum.y),
+			MathUtils.max(minimum.z, maximum.z));
+		
 		cnt.set(min).add(max).scl(0.5f);
 		dim.set(max).sub(min);
 		return this;
