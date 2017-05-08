@@ -158,14 +158,14 @@ public class Box2DDebugRenderer {
 			float radius = shape.getRadius();
 			vertices[0].set(shape.getPosition());
 			transform.mul(vertices[0]);
-			lower.set(vertices[0].x - radius, vertices[0].y - radius);
-			upper.set(vertices[0].x + radius, vertices[0].y + radius);
+			lower.set(vertices[0].getX() - radius, vertices[0].getY() - radius);
+			upper.set(vertices[0].getX() + radius, vertices[0].getY() + radius);
 
 			// define vertices in ccw fashion...
-			vertices[0].set(lower.x, lower.y);
-			vertices[1].set(upper.x, lower.y);
-			vertices[2].set(upper.x, upper.y);
-			vertices[3].set(lower.x, upper.y);
+			vertices[0].set(lower.getX(), lower.getY());
+			vertices[1].set(upper.getX(), lower.getY());
+			vertices[2].set(upper.getX(), upper.getY());
+			vertices[3].set(lower.getX(), upper.getY());
 
 			drawSolidPolygon(vertices, 4, AABB_COLOR, true);
 		} else if (fixture.getType() == Type.Polygon) {
@@ -178,17 +178,17 @@ public class Box2DDebugRenderer {
 			for (int i = 1; i < vertexCount; i++) {
 				shape.getVertex(i, vertices[i]);
 				transform.mul(vertices[i]);
-				lower.x = Math.min(lower.x, vertices[i].x);
-				lower.y = Math.min(lower.y, vertices[i].y);
-				upper.x = Math.max(upper.x, vertices[i].x);
-				upper.y = Math.max(upper.y, vertices[i].y);
+				lower.setX(Math.min(lower.getX(), vertices[i].getX()));
+				lower.setY(Math.min(lower.getY(), vertices[i].getY()));
+				upper.setX(Math.max(upper.getX(), vertices[i].getX()));
+				upper.setY(Math.max(upper.getY(), vertices[i].getY()));
 			}
 
 			// define vertices in ccw fashion...
-			vertices[0].set(lower.x, lower.y);
-			vertices[1].set(upper.x, lower.y);
-			vertices[2].set(upper.x, upper.y);
-			vertices[3].set(lower.x, upper.y);
+			vertices[0].set(lower.getX(), lower.getY());
+			vertices[1].set(upper.getX(), lower.getY());
+			vertices[2].set(upper.getX(), upper.getY());
+			vertices[3].set(lower.getX(), upper.getY());
 
 			drawSolidPolygon(vertices, 4, AABB_COLOR, true);
 		}
@@ -244,17 +244,17 @@ public class Box2DDebugRenderer {
 		float angleInc = 2 * (float)Math.PI / 20;
 		renderer.setColor(color.r, color.g, color.b, color.a);
 		for (int i = 0; i < 20; i++, angle += angleInc) {
-			v.set((float)Math.cos(angle) * radius + center.x, (float)Math.sin(angle) * radius + center.y);
+			v.set((float)Math.cos(angle) * radius + center.getX(), (float)Math.sin(angle) * radius + center.getY());
 			if (i == 0) {
 				lv.set(v);
 				f.set(v);
 				continue;
 			}
-			renderer.line(lv.x, lv.y, v.x, v.y);
+			renderer.line(lv.getX(), lv.getY(), v.getX(), v.getY());
 			lv.set(v);
 		}
-		renderer.line(f.x, f.y, lv.x, lv.y);
-		renderer.line(center.x, center.y, 0, center.x + axis.x * radius, center.y + axis.y * radius, 0);
+		renderer.line(f.getX(), f.getY(), lv.getX(), lv.getY());
+		renderer.line(center.getX(), center.getY(), 0, center.getX() + axis.getX() * radius, center.getY() + axis.getY() * radius, 0);
 	}
 
 	private void drawSolidPolygon (Vector2[] vertices, int vertexCount, Color color, boolean closed) {
@@ -266,10 +266,10 @@ public class Box2DDebugRenderer {
 				f.set(v);
 				continue;
 			}
-			renderer.line(lv.x, lv.y, v.x, v.y);
+			renderer.line(lv.getX(), lv.getY(), v.getX(), v.getY());
 			lv.set(v);
 		}
-		if (closed) renderer.line(f.x, f.y, lv.x, lv.y);
+		if (closed) renderer.line(f.getX(), f.getY(), lv.getX(), lv.getY());
 	}
 
 	private void drawJoint (Joint joint) {
@@ -303,14 +303,14 @@ public class Box2DDebugRenderer {
 
 	private void drawSegment (Vector2 x1, Vector2 x2, Color color) {
 		renderer.setColor(color);
-		renderer.line(x1.x, x1.y, x2.x, x2.y);
+		renderer.line(x1.getX(), x1.getY(), x2.getX(), x2.getY());
 	}
 
 	private void drawContact (Contact contact) {
 		WorldManifold worldManifold = contact.getWorldManifold();
 		if (worldManifold.getNumberOfContactPoints() == 0) return;
 		Vector2 point = worldManifold.getPoints()[0];
-		renderer.point(point.x, point.y, 0);
+		renderer.point(point.getX(), point.getY(), 0);
 	}
 
 	public boolean isDrawBodies () {

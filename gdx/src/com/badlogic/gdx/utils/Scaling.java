@@ -54,45 +54,45 @@ public enum Scaling {
 			float targetRatio = targetHeight / targetWidth;
 			float sourceRatio = sourceHeight / sourceWidth;
 			float scale = targetRatio > sourceRatio ? targetWidth / sourceWidth : targetHeight / sourceHeight;
-			temp.x = sourceWidth * scale;
-			temp.y = sourceHeight * scale;
+			temp.setX(sourceWidth * scale);
+			temp.setY(sourceHeight * scale);
 			break;
 		}
 		case fill: {
 			float targetRatio = targetHeight / targetWidth;
 			float sourceRatio = sourceHeight / sourceWidth;
 			float scale = targetRatio < sourceRatio ? targetWidth / sourceWidth : targetHeight / sourceHeight;
-			temp.x = sourceWidth * scale;
-			temp.y = sourceHeight * scale;
+			temp.setX(sourceWidth * scale);
+			temp.setY(sourceHeight * scale);
 			break;
 		}
 		case fillX: {
 			float scale = targetWidth / sourceWidth;
-			temp.x = sourceWidth * scale;
-			temp.y = sourceHeight * scale;
+			temp.setX(sourceWidth * scale);
+			temp.setY(sourceHeight * scale);
 			break;
 		}
 		case fillY: {
 			float scale = targetHeight / sourceHeight;
-			temp.x = sourceWidth * scale;
-			temp.y = sourceHeight * scale;
+			temp.setX(sourceWidth * scale);
+			temp.setY(sourceHeight * scale);
 			break;
 		}
 		case stretch:
-			temp.x = targetWidth;
-			temp.y = targetHeight;
+			temp.setX(targetWidth);
+			temp.setY(targetHeight);
 			break;
 		case stretchX:
-			temp.x = targetWidth;
-			temp.y = sourceHeight;
+			temp.setX(targetWidth);
+			temp.setY(sourceHeight);
 			break;
 		case stretchY:
-			temp.x = sourceWidth;
-			temp.y = targetHeight;
+			temp.setX(sourceWidth);
+			temp.setY(targetHeight);
 			break;
 		case none:
-			temp.x = sourceWidth;
-			temp.y = sourceHeight;
+			temp.setX(sourceWidth);
+			temp.setY(sourceHeight);
 			break;
 		}
 		return temp;

@@ -53,7 +53,7 @@ public class ChainShape extends Shape {
 	public void createLoop (Vector2[] vertices) {
 		Vec2[] v = new Vec2[vertices.length];
 		for (int i = 0; i < vertices.length; i++) {
-			v[i] = new Vec2(vertices[i].x, vertices[i].y);
+			v[i] = new Vec2(vertices[i].getX(), vertices[i].getY());
 		}		
 		shape.createLoop(v, v.length);
 		isLooped = true;
@@ -73,7 +73,7 @@ public class ChainShape extends Shape {
 	public void createChain (Vector2[] vertices) {
 		Vec2[] v = new Vec2[vertices.length];
 		for (int i = 0; i < vertices.length; i++) {
-			v[i] = new Vec2(vertices[i].x, vertices[i].y);
+			v[i] = new Vec2(vertices[i].getX(), vertices[i].getY());
 		}
 		shape.createChain(v, v.length);
 		isLooped = false;
@@ -81,7 +81,7 @@ public class ChainShape extends Shape {
 
 	/** Establish connectivity to a vertex that precedes the first vertex. Don't call this for loops. */
 	public void setPrevVertex (Vector2 prevVertex) {
-		shape.setPrevVertex(new Vec2(prevVertex.x, prevVertex.y));
+		shape.setPrevVertex(new Vec2(prevVertex.getX(), prevVertex.getY()));
 	}
 
 	/** Establish connectivity to a vertex that precedes the first vertex. Don't call this for loops. */
@@ -91,7 +91,7 @@ public class ChainShape extends Shape {
 
 	/** Establish connectivity to a vertex that follows the last vertex. Don't call this for loops. */
 	public void setNextVertex (Vector2 nextVertex) {
-		shape.setNextVertex(new Vec2(nextVertex.x, nextVertex.y));
+		shape.setNextVertex(new Vec2(nextVertex.getX(), nextVertex.getY()));
 	}
 
 	/** Establish connectivity to a vertex that follows the last vertex. Don't call this for loops. */

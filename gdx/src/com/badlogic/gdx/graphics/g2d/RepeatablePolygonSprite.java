@@ -150,16 +150,16 @@ public class RepeatablePolygonSprite {
     private float[] offset(float[] vertices) {
         offset.set(vertices[0], vertices[1]);
         for(int i = 0; i < vertices.length-1; i+=2) {
-            if(offset.x > vertices[i]) {
-                offset.x = vertices[i];
+            if(offset.getX() > vertices[i]) {
+                offset.setX(vertices[i]);
             }
-            if(offset.y > vertices[i+1]) {
-                offset.y = vertices[i+1];
+            if(offset.getY() > vertices[i+1]) {
+                offset.setY(vertices[i+1]);
             }
         }
         for(int i = 0; i < vertices.length; i+=2) {
-            vertices[i] -= offset.x;
-            vertices[i+1] -= offset.y;
+            vertices[i] -= offset.getX();
+            vertices[i+1] -= offset.getY();
         }
 
         return vertices;
@@ -181,8 +181,8 @@ public class RepeatablePolygonSprite {
             int row = i % rows;
 
             for(int j = 0; j < verts.length; j+=2) {
-                fullVerts[idx++] = verts[j] + offset.x + x;
-                fullVerts[idx++] = verts[j+1] + offset.y + y;
+                fullVerts[idx++] = verts[j] + offset.getX() + x;
+                fullVerts[idx++] = verts[j+1] + offset.getY() + y;
 
                 fullVerts[idx++] = color.toFloatBits();
 

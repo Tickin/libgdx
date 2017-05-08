@@ -94,7 +94,7 @@ public class SimpleStageCullingTest extends GdxTest {
 			// view. This assumes that the camera has no zoom and is
 			// not rotated!
 			actorRect.set(stageX, stageY, getWidth(), getHeight());
-			camRect.set(camera.position.x - camera.viewportWidth / 2.0f, camera.position.y - camera.viewportHeight / 2.0f,
+			camRect.set(camera.position.getX() - camera.viewportWidth / 2.0f, camera.position.getY() - camera.viewportHeight / 2.0f,
 				camera.viewportWidth, camera.viewportHeight);
 			visible = camRect.overlaps(actorRect);
 			return !visible;

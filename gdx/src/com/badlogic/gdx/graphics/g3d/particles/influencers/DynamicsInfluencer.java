@@ -194,10 +194,10 @@ public class DynamicsInfluencer extends Influencer {
 					+ ParticleChannels.XOffset], qy = rotationChannel.data[offset + ParticleChannels.YOffset], qz = rotationChannel.data[offset
 					+ ParticleChannels.ZOffset], qw = rotationChannel.data[offset + ParticleChannels.WOffset];
 				TMP_Q.set(wx, wy, wz, 0).mul(qx, qy, qz, qw).mul(0.5f * controller.deltaTime).add(qx, qy, qz, qw).nor();
-				rotationChannel.data[offset + ParticleChannels.XOffset] = TMP_Q.x;
-				rotationChannel.data[offset + ParticleChannels.YOffset] = TMP_Q.y;
-				rotationChannel.data[offset + ParticleChannels.ZOffset] = TMP_Q.z;
-				rotationChannel.data[offset + ParticleChannels.WOffset] = TMP_Q.w;
+				rotationChannel.data[offset + ParticleChannels.XOffset] = TMP_Q.getX();
+				rotationChannel.data[offset + ParticleChannels.YOffset] = TMP_Q.getY();
+				rotationChannel.data[offset + ParticleChannels.ZOffset] = TMP_Q.getZ();
+				rotationChannel.data[offset + ParticleChannels.WOffset] = TMP_Q.getW();
 			}
 		}
 	}

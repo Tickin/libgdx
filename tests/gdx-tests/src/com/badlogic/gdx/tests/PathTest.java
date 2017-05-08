@@ -132,13 +132,13 @@ public class PathTest extends GdxTest {
 
 			if (zigzag) {
 				tmpV2.nor();
-				tmpV2.set(-tmpV2.y, tmpV2.x);
+				tmpV2.set(-tmpV2.getY(), tmpV2.getX());
 				tmpV2.scl((float)Math.sin(zt) * ZIGZAG_SCALE);
 				tmpV.add(tmpV2);
 			}
 
-			obj.setPosition(tmpV.x, tmpV.y);
-			obj2.setPosition(tmpV4.x, tmpV4.y);
+			obj.setPosition(tmpV.getX(), tmpV.getY());
+			obj2.setPosition(tmpV4.getX(), tmpV4.getY());
 
 		}
 
@@ -147,7 +147,7 @@ public class PathTest extends GdxTest {
 		while (val <= 1f) {
 			renderer.color(0f, 0f, 0f, 1f);
 			paths.get(currentPath).valueAt(/* out: */tmpV, val);
-			renderer.vertex(tmpV.x, tmpV.y, 0);
+			renderer.vertex(tmpV.getX(), tmpV.getY(), 0);
 			val += SAMPLE_POINT_DISTANCE;
 		}
 		renderer.end();
@@ -161,7 +161,7 @@ public class PathTest extends GdxTest {
 	private void touch (int x, int y) {
 		t = paths.get(currentPath).locate(tmpV.set(x, Gdx.graphics.getHeight() - y));
 		paths.get(currentPath).valueAt(tmpV, t);
-		obj.setPosition(tmpV.x, tmpV.y);
+		obj.setPosition(tmpV.getX(), tmpV.getY());
 		wait = 0.2f;
 	}
 

@@ -69,13 +69,13 @@ public final class RectangleSpawnShapeValue extends PrimitiveSpawnShapeValue {
 					tz = MathUtils.random(depth) - depth / 2;
 				}
 			}
-			vector.x = tx;
-			vector.y = ty;
-			vector.z = tz;
+			vector.setX(tx);
+			vector.setY(ty);
+			vector.setZ(tz);
 		} else {
-			vector.x = MathUtils.random(width) - width / 2;
-			vector.y = MathUtils.random(height) - height / 2;
-			vector.z = MathUtils.random(depth) - depth / 2;
+			vector.setX(MathUtils.random(width) - width / 2);
+			vector.setY(MathUtils.random(height) - height / 2);
+			vector.setZ(MathUtils.random(depth) - depth / 2);
 		}
 	}
 

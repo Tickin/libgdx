@@ -98,7 +98,7 @@ public class DragAndDrop {
 					target = newTarget;
 				}
 				// Notify new target of drag.
-				if (newTarget != null) isValidTarget = newTarget.drag(source, payload, tmpVector.x, tmpVector.y, pointer);
+				if (newTarget != null) isValidTarget = newTarget.drag(source, payload, tmpVector.getX(), tmpVector.getY(), pointer);
 
 				if (dragActor != null) dragActor.setTouchable(dragActorTouchable);
 
@@ -133,7 +133,7 @@ public class DragAndDrop {
 				if (isValidTarget) {
 					float stageX = event.getStageX() + touchOffsetX, stageY = event.getStageY() + touchOffsetY;
 					target.actor.stageToLocalCoordinates(tmpVector.set(stageX, stageY));
-					target.drop(source, payload, tmpVector.x, tmpVector.y, pointer);
+					target.drop(source, payload, tmpVector.getX(), tmpVector.getY(), pointer);
 				}
 				source.dragStop(event, x, y, pointer, payload, isValidTarget ? target : null);
 				if (target != null) target.reset(source, payload);

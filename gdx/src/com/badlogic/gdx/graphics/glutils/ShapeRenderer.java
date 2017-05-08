@@ -244,7 +244,7 @@ public class ShapeRenderer implements Disposable {
 
 	/** @see #line(float, float, float, float, float, float) */
 	public final void line (Vector3 v0, Vector3 v1) {
-		line(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, color, color);
+		line(v0.getX(), v0.getY(), v0.getZ(), v1.getX(), v1.getY(), v1.getZ(), color, color);
 	}
 
 	/** @see #line(float, float, float, float, float, float) */
@@ -254,7 +254,7 @@ public class ShapeRenderer implements Disposable {
 
 	/** @see #line(float, float, float, float, float, float) */
 	public final void line (Vector2 v0, Vector2 v1) {
-		line(v0.x, v0.y, 0.0f, v1.x, v1.y, 0.0f, color, color);
+		line(v0.getX(), v0.getY(), 0.0f, v1.getX(), v1.getY(), 0.0f, color, color);
 	}
 
 	/** @see #line(float, float, float, float, float, float, Color, Color) */
@@ -561,8 +561,8 @@ public class ShapeRenderer implements Disposable {
 		float colorBits = color.toFloatBits();
 		Vector2 t = tmp.set(y2 - y1, x1 - x2).nor();
 		width *= 0.5f;
-		float tx = t.x * width;
-		float ty = t.y * width;
+		float tx = t.getX() * width;
+		float ty = t.getY() * width;
 		if (shapeType == ShapeType.Line) {
 			renderer.color(colorBits);
 			renderer.vertex(x1 + tx, y1 + ty, 0);
@@ -607,8 +607,8 @@ public class ShapeRenderer implements Disposable {
 		float col2Bits = c2.toFloatBits();
 		Vector2 t = tmp.set(y2 - y1, x1 - x2).nor();
 		width *= 0.5f;
-		float tx = t.x * width;
-		float ty = t.y * width;
+		float tx = t.getX() * width;
+		float ty = t.getY() * width;
 		if (shapeType == ShapeType.Line) {
 			renderer.color(col1Bits);
 			renderer.vertex(x1 + tx, y1 + ty, 0);
@@ -648,7 +648,7 @@ public class ShapeRenderer implements Disposable {
 
 	/** @see #rectLine(float, float, float, float, float) */
 	public void rectLine (Vector2 p1, Vector2 p2, float width) {
-		rectLine(p1.x, p1.y, p2.x, p2.y, width);
+		rectLine(p1.getX(), p1.getY(), p2.getX(), p2.getY(), width);
 	}
 
 	/** Draws a cube using {@link ShapeType#Line} or {@link ShapeType#Filled}. The x, y and z specify the bottom, left, front corner
@@ -822,7 +822,7 @@ public class ShapeRenderer implements Disposable {
 
 	/** @see #x(float, float, float) */
 	public void x (Vector2 p, float size) {
-		x(p.x, p.y, size);
+		x(p.getX(), p.getY(), size);
 	}
 
 	/** Calls {@link #arc(float, float, float, float, float, int)} by estimating the number of segments needed for a smooth arc. */

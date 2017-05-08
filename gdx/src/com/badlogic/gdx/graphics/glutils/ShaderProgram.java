@@ -606,11 +606,11 @@ public class ShaderProgram implements Disposable {
 	 * @param name the name of the uniform
 	 * @param values x and y as the first and second values respectively */
 	public void setUniformf (String name, Vector2 values) {
-		setUniformf(name, values.x, values.y);
+		setUniformf(name, values.getX(), values.getY());
 	}
 
 	public void setUniformf (int location, Vector2 values) {
-		setUniformf(location, values.x, values.y);
+		setUniformf(location, values.getX(), values.getY());
 	}
 
 	/** Sets the uniform with the given name. The {@link ShaderProgram} must be bound for this to work.
@@ -618,11 +618,11 @@ public class ShaderProgram implements Disposable {
 	 * @param name the name of the uniform
 	 * @param values x, y and z as the first, second and third values respectively */
 	public void setUniformf (String name, Vector3 values) {
-		setUniformf(name, values.x, values.y, values.z);
+		setUniformf(name, values.getX(), values.getY(), values.getZ());
 	}
 
 	public void setUniformf (int location, Vector3 values) {
-		setUniformf(location, values.x, values.y, values.z);
+		setUniformf(location, values.getX(), values.getY(), values.getZ());
 	}
 
 	/** Sets the uniform with the given name. The {@link ShaderProgram} must be bound for this to work.

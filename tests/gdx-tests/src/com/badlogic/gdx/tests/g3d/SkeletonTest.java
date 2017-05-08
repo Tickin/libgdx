@@ -74,7 +74,7 @@ public class SkeletonTest extends BaseG3dHudTest {
 		for (Node node : instance.nodes) {
 			shapeRenderer.setColor(node.isAnimated ? Color.RED : Color.YELLOW);
 			node.globalTransform.getTranslation(tmpV);
-			shapeRenderer.box(tmpV.x, tmpV.y, tmpV.z, 0.5f, 0.5f, 0.5f);
+			shapeRenderer.box(tmpV.getX(), tmpV.getY(), tmpV.getZ(), 0.5f, 0.5f, 0.5f);
 			for (Node child : node.getChildren())
 				renderSkeleton(tmpV, child);
 		}
@@ -85,9 +85,9 @@ public class SkeletonTest extends BaseG3dHudTest {
 		final Vector3 pos = vectorPool.obtain();
 		node.globalTransform.getTranslation(pos);
 		shapeRenderer.setColor(node.isAnimated ? Color.RED : Color.YELLOW);
-		shapeRenderer.box(pos.x, pos.y, pos.z, 0.5f, 0.5f, 0.5f);
+		shapeRenderer.box(pos.getX(), pos.getY(), pos.getZ(), 0.5f, 0.5f, 0.5f);
 		shapeRenderer.setColor(Color.WHITE);
-		shapeRenderer.line(from.x, from.y, from.z, pos.x, pos.y, pos.z);
+		shapeRenderer.line(from.getX(), from.getY(), from.getZ(), pos.getX(), pos.getY(), pos.getZ());
 		for (Node child : node.getChildren())
 			renderSkeleton(pos, child);
 		vectorPool.free(pos);

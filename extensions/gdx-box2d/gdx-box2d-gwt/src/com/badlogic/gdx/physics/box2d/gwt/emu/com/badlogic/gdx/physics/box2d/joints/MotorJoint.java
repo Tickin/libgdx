@@ -41,7 +41,7 @@ public class MotorJoint extends Joint {
 	}
 
 	public void setLinearOffset(Vector2 linearOffset) {
-		joint.setLinearOffset(tmp.set(linearOffset.x, linearOffset.y));
+		joint.setLinearOffset(tmp.set(linearOffset.getX(), linearOffset.getY()));
 	}
 
 	public float getAngularOffset () {

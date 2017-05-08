@@ -67,14 +67,14 @@ public class WheelJointDef extends JointDef {
 		fd.bodyA = bodyA.body;
 		fd.bodyB = bodyB.body;
 		fd.collideConnected = collideConnected;
-		fd.localAxisA.set(localAxisA.x, localAxisA.y);
+		fd.localAxisA.set(localAxisA.getX(), localAxisA.getY());
 		fd.enableMotor = enableMotor;
 		fd.maxMotorTorque = maxMotorTorque;
 		fd.motorSpeed = motorSpeed;
 		fd.frequencyHz = frequencyHz;
 		fd.dampingRatio = dampingRatio;
-		fd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		fd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
+		fd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		fd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
 		fd.type = org.jbox2d.dynamics.joints.JointType.WHEEL;
 		return fd;
 	}

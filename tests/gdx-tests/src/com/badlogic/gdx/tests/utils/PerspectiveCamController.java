@@ -78,18 +78,18 @@ public class PerspectiveCamController extends InputAdapter {
 
 			if (tmpV.set(point).nor().dot(yAxis) < 0.9999f) {
 				xAxis.set(cam.direction).crs(yAxis).nor();
-				rotMatrix.setToRotation(xAxis, delta.y / 5);
+				rotMatrix.setToRotation(xAxis, delta.getY() / 5);
 				point.mul(rotMatrix);
 			}
 
-			rotMatrix.setToRotation(yAxis, -delta.x / 5);
+			rotMatrix.setToRotation(yAxis, -delta.getX() / 5);
 			point.mul(rotMatrix);
 
 			cam.position.set(point.add(lookAt));
-			cam.lookAt(lookAt.x, lookAt.y, lookAt.z);
+			cam.lookAt(lookAt.getX(), lookAt.getY(), lookAt.getZ());
 		}
 		if (mode == TransformMode.Zoom) {
-			cam.fieldOfView -= -delta.y / 10;
+			cam.fieldOfView -= -delta.getY() / 10;
 		}
 		if (mode == TransformMode.Translate) {
 			tCurr.set(x, y);

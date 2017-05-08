@@ -116,11 +116,11 @@ public class AmbientCubemap {
 	}
 
 	public AmbientCubemap add (final Color color, final Vector3 direction) {
-		return add(color.r, color.g, color.b, direction.x, direction.y, direction.z);
+		return add(color.r, color.g, color.b, direction.getX(), direction.getY(), direction.getZ());
 	}
 
 	public AmbientCubemap add (final float r, final float g, final float b, final Vector3 direction) {
-		return add(r, g, b, direction.x, direction.y, direction.z);
+		return add(r, g, b, direction.getX(), direction.getY(), direction.getZ());
 	}
 
 	public AmbientCubemap add (final Color color, final float x, final float y, final float z) {
@@ -128,12 +128,12 @@ public class AmbientCubemap {
 	}
 
 	public AmbientCubemap add (final Color color, final Vector3 point, final Vector3 target) {
-		return add(color.r, color.g, color.b, target.x - point.x, target.y - point.y, target.z - point.z);
+		return add(color.r, color.g, color.b, target.getX() - point.getX(), target.getY() - point.getY(), target.getZ() - point.getZ());
 	}
 
 	public AmbientCubemap add (final Color color, final Vector3 point, final Vector3 target, final float intensity) {
 		final float t = intensity / (1f + target.dst(point));
-		return add(color.r * t, color.g * t, color.b * t, target.x - point.x, target.y - point.y, target.z - point.z);
+		return add(color.r * t, color.g * t, color.b * t, target.getX() - point.getX(), target.getY() - point.getY(), target.getZ() - point.getZ());
 	}
 
 	@Override

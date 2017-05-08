@@ -87,7 +87,7 @@ public class SplitPane extends WidgetGroup {
 				if (handleBounds.contains(x, y)) {
 					draggingPointer = pointer;
 					lastPoint.set(x, y);
-					handlePosition.set(handleBounds.x, handleBounds.y);
+					handlePosition.set(handleBounds.getX(), handleBounds.getY());
 					return true;
 				}
 				return false;
@@ -102,10 +102,10 @@ public class SplitPane extends WidgetGroup {
 
 				Drawable handle = style.handle;
 				if (!vertical) {
-					float delta = x - lastPoint.x;
+					float delta = x - lastPoint.getX();
 					float availWidth = getWidth() - handle.getMinWidth();
-					float dragX = handlePosition.x + delta;
-					handlePosition.x = dragX;
+					float dragX = handlePosition.getX() + delta;
+					handlePosition.setX(dragX);
 					dragX = Math.max(0, dragX);
 					dragX = Math.min(availWidth, dragX);
 					splitAmount = dragX / availWidth;
@@ -113,10 +113,10 @@ public class SplitPane extends WidgetGroup {
 					if (splitAmount > maxAmount) splitAmount = maxAmount;
 					lastPoint.set(x, y);
 				} else {
-					float delta = y - lastPoint.y;
+					float delta = y - lastPoint.getY();
 					float availHeight = getHeight() - handle.getMinHeight();
-					float dragY = handlePosition.y + delta;
-					handlePosition.y = dragY;
+					float dragY = handlePosition.getY() + delta;
+					handlePosition.setY(dragY);
 					dragY = Math.max(0, dragY);
 					dragY = Math.min(availHeight, dragY);
 					splitAmount = 1 - (dragY / availHeight);
@@ -150,13 +150,13 @@ public class SplitPane extends WidgetGroup {
 		Actor firstWidget = this.firstWidget;
 		if (firstWidget != null) {
 			Rectangle firstWidgetBounds = this.firstWidgetBounds;
-			firstWidget.setBounds(firstWidgetBounds.x, firstWidgetBounds.y, firstWidgetBounds.width, firstWidgetBounds.height);
+			firstWidget.setBounds(firstWidgetBounds.getX(), firstWidgetBounds.getY(), firstWidgetBounds.width, firstWidgetBounds.height);
 			if (firstWidget instanceof Layout) ((Layout)firstWidget).validate();
 		}
 		Actor secondWidget = this.secondWidget;
 		if (secondWidget != null) {
 			Rectangle secondWidgetBounds = this.secondWidgetBounds;
-			secondWidget.setBounds(secondWidgetBounds.x, secondWidgetBounds.y, secondWidgetBounds.width, secondWidgetBounds.height);
+			secondWidget.setBounds(secondWidgetBounds.getX(), secondWidgetBounds.getY(), secondWidgetBounds.width, secondWidgetBounds.height);
 			if (secondWidget instanceof Layout) ((Layout)secondWidget).validate();
 		}
 	}
@@ -252,7 +252,7 @@ public class SplitPane extends WidgetGroup {
 			}
 		}
 		batch.setColor(color.r, color.g, color.b, parentAlpha * color.a);
-		handle.draw(batch, handleBounds.x, handleBounds.y, handleBounds.width, handleBounds.height);
+		handle.draw(batch, handleBounds.getX(), handleBounds.getY(), handleBounds.width, handleBounds.height);
 		resetTransform(batch);
 	}
 

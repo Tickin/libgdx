@@ -45,7 +45,7 @@ public class Body {
 	 * @param position the world position of the body's local origin.
 	 * @param angle the world rotation in radians. */
 	public void setTransform (Vector2 position, float angle) {
-		tmp.set(position.x, position.y);
+		tmp.set(position.getX(), position.getY());
 		body.setTransform(tmp, angle);
 	}
 
@@ -106,7 +106,7 @@ public class Body {
 
 	/** Set the linear velocity of the center of mass. */
 	public void setLinearVelocity (Vector2 v) {
-		tmp.set(v.x, v.y);
+		tmp.set(v.getX(), v.getY());
 		body.setLinearVelocity(tmp);
 	}
 
@@ -140,8 +140,8 @@ public class Body {
 	 * @param force the world force vector, usually in Newtons (N).
 	 * @param point the world position of the point of application. */
 	public void applyForce (Vector2 force, Vector2 point, boolean wrap) {
-		tmp.set(force.x, force.y);
-		tmp2.set(point.x, point.y);
+		tmp.set(force.getX(), force.getY());
+		tmp2.set(point.getX(), point.getY());
 		body.applyForce(tmp, tmp2);
 	}
 
@@ -160,7 +160,7 @@ public class Body {
 	/** Apply a force to the center of mass. This wakes up the body.
 	 * @param force the world force vector, usually in Newtons (N). */
 	public void applyForceToCenter (Vector2 force, boolean wake) {
-		tmp.set(force.x, force.y);
+		tmp.set(force.getX(), force.getY());
 		body.applyForceToCenter(tmp);
 	}
 
@@ -184,8 +184,8 @@ public class Body {
 	 * @param impulse the world impulse vector, usually in N-seconds or kg-m/s.
 	 * @param point the world position of the point of application. */
 	public void applyLinearImpulse (Vector2 impulse, Vector2 point, boolean wake) {
-		tmp.set(impulse.x, impulse.y);
-		tmp2.set(point.x, point.y);
+		tmp.set(impulse.getX(), impulse.getY());
+		tmp2.set(point.getX(), point.getY());
 		body.applyLinearImpulse(tmp, tmp2, wake);
 	}
 
@@ -236,7 +236,7 @@ public class Body {
 	 * Note that creating or destroying fixtures can also alter the mass. This function has no effect if the body isn't dynamic.
 	 * @param data the mass properties. */
 	public void setMassData (MassData data) {
-		massData2.center.set(data.center.x, data.center.y);
+		massData2.center.set(data.center.getX(), data.center.getY());
 		massData2.I = data.I;
 		massData2.mass = data.mass;
 		body.setMassData(massData2);
@@ -254,7 +254,7 @@ public class Body {
 	 * @param localPoint a point on the body measured relative to the the body's origin.
 	 * @return the same point expressed in world coordinates. */
 	public Vector2 getWorldPoint (Vector2 localPoint) {
-		tmp.set(localPoint.x, localPoint.y);
+		tmp.set(localPoint.getX(), localPoint.getY());
 		Vec2 wp = body.getWorldPoint(tmp);
 		return worldPoint.set(wp.x, wp.y);
 	}
@@ -265,7 +265,7 @@ public class Body {
 	 * @param localVector a vector fixed in the body.
 	 * @return the same vector expressed in world coordinates. */
 	public Vector2 getWorldVector (Vector2 localVector) {
-		tmp.set(localVector.x, localVector.y);
+		tmp.set(localVector.getX(), localVector.getY());
 		Vec2 wv = body.getWorldVector(tmp);
 		return worldVector.set(wv.x, wv.y);
 	}
@@ -276,7 +276,7 @@ public class Body {
 	 * @param worldPoint a point in world coordinates.
 	 * @return the corresponding local point relative to the body's origin. */
 	public Vector2 getLocalPoint (Vector2 worldPoint) {
-		tmp.set(worldPoint.x, worldPoint.y);
+		tmp.set(worldPoint.getX(), worldPoint.getY());
 		Vec2 lp = body.getLocalPoint(tmp);
 		return localPoint2.set(lp.x, lp.y);
 	}
@@ -287,7 +287,7 @@ public class Body {
 	 * @param worldVector a vector in world coordinates.
 	 * @return the corresponding local vector. */
 	public Vector2 getLocalVector (Vector2 worldVector) {
-		tmp.set(worldVector.x, worldVector.y);
+		tmp.set(worldVector.getX(), worldVector.getY());
 		Vec2 lv = body.getLocalVector(tmp);
 		return localVector.set(lv.x, lv.y);
 	}
@@ -298,7 +298,7 @@ public class Body {
 	 * @param worldPoint a point in world coordinates.
 	 * @return the world velocity of a point. */
 	public Vector2 getLinearVelocityFromWorldPoint (Vector2 worldPoint) {
-		tmp.set(worldPoint.x, worldPoint.y);
+		tmp.set(worldPoint.getX(), worldPoint.getY());
 		Vec2 lv = body.getLinearVelocityFromWorldPoint(tmp);
 		return linVelWorld.set(lv.x, lv.y);
 	}
@@ -309,7 +309,7 @@ public class Body {
 	 * @param localPoint a point in local coordinates.
 	 * @return the world velocity of a point. */
 	public Vector2 getLinearVelocityFromLocalPoint (Vector2 localPoint) {
-		tmp.set(localPoint.x, localPoint.y);
+		tmp.set(localPoint.getX(), localPoint.getY());
 		Vec2 lv = body.getLinearVelocityFromLocalPoint(tmp);
 		return linVelLoc.set(lv.x, lv.y);
 	}

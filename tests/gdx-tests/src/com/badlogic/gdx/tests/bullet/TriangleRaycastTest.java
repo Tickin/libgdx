@@ -78,12 +78,12 @@ public class TriangleRaycastTest extends BaseBulletTest {
 		}
 
 		public void setFrom (Vector3 value) {
-			tmpSetFrom.setValue(value.x, value.y, value.z);
+			tmpSetFrom.setValue(value.getX(), value.getY(), value.getZ());
 			super.setFrom(tmpSetFrom);
 		}
 
 		public void setTo (Vector3 value) {
-			tmpSetTo.setValue(value.x, value.y, value.z);
+			tmpSetTo.setValue(value.getX(), value.getY(), value.getZ());
 			super.setTo(tmpSetTo);
 		}
 

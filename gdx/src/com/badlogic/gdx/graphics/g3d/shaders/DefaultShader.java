@@ -142,7 +142,7 @@ public class DefaultShader extends BaseShader {
 		public final static Setter cameraPosition = new GlobalSetter() {
 			@Override
 			public void set (BaseShader shader, int inputID, Renderable renderable, Attributes combinedAttributes) {
-				shader.set(inputID, shader.camera.position.x, shader.camera.position.y, shader.camera.position.z,
+				shader.set(inputID, shader.camera.position.getX(), shader.camera.position.getY(), shader.camera.position.getZ(),
 					1.1881f / (shader.camera.far * shader.camera.far));
 			}
 		};
@@ -828,8 +828,8 @@ public class DefaultShader extends BaseShader {
 				int idx = dirLightsLoc + i * dirLightsSize;
 				program.setUniformf(idx + dirLightsColorOffset, directionalLights[i].color.r, directionalLights[i].color.g,
 					directionalLights[i].color.b);
-				program.setUniformf(idx + dirLightsDirectionOffset, directionalLights[i].direction.x,
-					directionalLights[i].direction.y, directionalLights[i].direction.z);
+				program.setUniformf(idx + dirLightsDirectionOffset, directionalLights[i].direction.getX(),
+					directionalLights[i].direction.getY(), directionalLights[i].direction.getZ());
 				if (dirLightsSize <= 0) break;
 			}
 		}
@@ -847,8 +847,8 @@ public class DefaultShader extends BaseShader {
 				int idx = pointLightsLoc + i * pointLightsSize;
 				program.setUniformf(idx + pointLightsColorOffset, pointLights[i].color.r * pointLights[i].intensity,
 					pointLights[i].color.g * pointLights[i].intensity, pointLights[i].color.b * pointLights[i].intensity);
-				program.setUniformf(idx + pointLightsPositionOffset, pointLights[i].position.x, pointLights[i].position.y,
-					pointLights[i].position.z);
+				program.setUniformf(idx + pointLightsPositionOffset, pointLights[i].position.getX(), pointLights[i].position.getY(),
+					pointLights[i].position.getZ());
 				if (pointLightsIntensityOffset >= 0) program.setUniformf(idx + pointLightsIntensityOffset, pointLights[i].intensity);
 				if (pointLightsSize <= 0) break;
 			}

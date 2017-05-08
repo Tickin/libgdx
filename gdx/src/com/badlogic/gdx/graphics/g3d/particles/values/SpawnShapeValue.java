@@ -42,9 +42,9 @@ public abstract class SpawnShapeValue extends ParticleValue implements ResourceD
 
 	public final Vector3 spawn (Vector3 vector, float percent) {
 		spawnAux(vector, percent);
-		if (xOffsetValue.active) vector.x += xOffsetValue.newLowValue();
-		if (yOffsetValue.active) vector.y += yOffsetValue.newLowValue();
-		if (zOffsetValue.active) vector.z += zOffsetValue.newLowValue();
+		if (xOffsetValue.active) vector.setX(vector.getX() + xOffsetValue.newLowValue());
+		if (yOffsetValue.active) vector.setY(vector.getY() + yOffsetValue.newLowValue());
+		if (zOffsetValue.active) vector.setZ(vector.getZ() + zOffsetValue.newLowValue());
 		return vector;
 	}
 

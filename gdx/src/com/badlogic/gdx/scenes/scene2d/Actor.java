@@ -723,8 +723,8 @@ public class Actor {
 	public boolean clipBegin (float x, float y, float width, float height) {
 		if (width <= 0 || height <= 0) return false;
 		Rectangle tableBounds = Rectangle.tmp;
-		tableBounds.x = x;
-		tableBounds.y = y;
+		tableBounds.setX(x);
+		tableBounds.setY(y);
 		tableBounds.width = width;
 		tableBounds.height = height;
 		Stage stage = this.stage;
@@ -769,23 +769,23 @@ public class Actor {
 		final float y = this.y;
 		if (rotation == 0) {
 			if (scaleX == 1 && scaleY == 1) {
-				localCoords.x += x;
-				localCoords.y += y;
+				localCoords.setX(localCoords.getX() + x);
+				localCoords.setY(localCoords.getY() + y);
 			} else {
 				final float originX = this.originX;
 				final float originY = this.originY;
-				localCoords.x = (localCoords.x - originX) * scaleX + originX + x;
-				localCoords.y = (localCoords.y - originY) * scaleY + originY + y;
+				localCoords.setX((localCoords.getX() - originX) * scaleX + originX + x);
+				localCoords.setY((localCoords.getY() - originY) * scaleY + originY + y);
 			}
 		} else {
 			final float cos = (float)Math.cos(rotation * MathUtils.degreesToRadians);
 			final float sin = (float)Math.sin(rotation * MathUtils.degreesToRadians);
 			final float originX = this.originX;
 			final float originY = this.originY;
-			final float tox = (localCoords.x - originX) * scaleX;
-			final float toy = (localCoords.y - originY) * scaleY;
-			localCoords.x = (tox * cos + toy * sin) + originX + x;
-			localCoords.y = (tox * -sin + toy * cos) + originY + y;
+			final float tox = (localCoords.getX() - originX) * scaleX;
+			final float toy = (localCoords.getY() - originY) * scaleY;
+			localCoords.setX((tox * cos + toy * sin) + originX + x);
+			localCoords.setY((tox * -sin + toy * cos) + originY + y);
 		}
 		return localCoords;
 	}
@@ -810,23 +810,23 @@ public class Actor {
 		final float childY = y;
 		if (rotation == 0) {
 			if (scaleX == 1 && scaleY == 1) {
-				parentCoords.x -= childX;
-				parentCoords.y -= childY;
+				parentCoords.setX(parentCoords.getX() - childX);
+				parentCoords.setY(parentCoords.getY() - childY);
 			} else {
 				final float originX = this.originX;
 				final float originY = this.originY;
-				parentCoords.x = (parentCoords.x - childX - originX) / scaleX + originX;
-				parentCoords.y = (parentCoords.y - childY - originY) / scaleY + originY;
+				parentCoords.setX((parentCoords.getX() - childX - originX) / scaleX + originX);
+				parentCoords.setY((parentCoords.getY() - childY - originY) / scaleY + originY);
 			}
 		} else {
 			final float cos = (float)Math.cos(rotation * MathUtils.degreesToRadians);
 			final float sin = (float)Math.sin(rotation * MathUtils.degreesToRadians);
 			final float originX = this.originX;
 			final float originY = this.originY;
-			final float tox = parentCoords.x - childX - originX;
-			final float toy = parentCoords.y - childY - originY;
-			parentCoords.x = (tox * cos + toy * sin) / scaleX + originX;
-			parentCoords.y = (tox * -sin + toy * cos) / scaleY + originY;
+			final float tox = parentCoords.getX() - childX - originX;
+			final float toy = parentCoords.getY() - childY - originY;
+			parentCoords.setX((tox * cos + toy * sin) / scaleX + originX);
+			parentCoords.setY((tox * -sin + toy * cos) / scaleY + originY);
 		}
 		return parentCoords;
 	}

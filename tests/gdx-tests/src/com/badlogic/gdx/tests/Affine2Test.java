@@ -49,13 +49,13 @@ public class Affine2Test extends GdxTest {
 
 		// check setter - translation
 		mat1.setToTranslation(trn);
-		checkEqual(mat1, new float[] {1, 0, 0, 0, 1, 0, trn.x, trn.y, 1});
+		checkEqual(mat1, new float[] {1, 0, 0, 0, 1, 0, trn.getX(), trn.getY(), 1});
 		afn1.setToTranslation(trn);
 		checkEqual(mat1, afn1);
 
 		// check setter - scale
 		mat1.setToScaling(scl);
-		checkEqual(mat1, new float[] {scl.x, 0, 0, 0, scl.y, 0, 0, 0, 1});
+		checkEqual(mat1, new float[] {scl.getX(), 0, 0, 0, scl.getY(), 0, 0, 0, 1});
 		afn1.setToScaling(scl);
 		checkEqual(mat1, afn1);
 
@@ -71,7 +71,7 @@ public class Affine2Test extends GdxTest {
 
 		// check setter - shearing
 		afn1.setToShearing(shear);
-		checkEqual(mat1.set(afn1), new float[] {1, shear.y, 0, shear.x, 1, 0, 0, 0, 1});
+		checkEqual(mat1.set(afn1), new float[] {1, shear.getY(), 0, shear.getX(), 1, 0, 0, 0, 1});
 
 		// check setter - translation x rotation x scale
 		afn1.setToTrnRotScl(trn, rot, scl);

@@ -44,30 +44,30 @@ public final class GeometryUtils {
 		float d20 = v2.dot(v0);
 		float d21 = v2.dot(v1);
 		float denom = d00 * d11 - d01 * d01;
-		barycentricOut.x = (d11 * d20 - d01 * d21) / denom;
-		barycentricOut.y = (d00 * d21 - d01 * d20) / denom;
+		barycentricOut.setX((d11 * d20 - d01 * d21) / denom);
+		barycentricOut.setY((d00 * d21 - d01 * d20) / denom);
 		return barycentricOut;
 	}
 
 	/** Returns true if the barycentric coordinates are inside the triangle. */
 	static public boolean barycoordInsideTriangle (Vector2 barycentric) {
-		return barycentric.x >= 0 && barycentric.y >= 0 && barycentric.x + barycentric.y <= 1;
+		return barycentric.getX() >= 0 && barycentric.getY() >= 0 && barycentric.getX() + barycentric.getY() <= 1;
 	}
 
 	/** Returns interpolated values given the barycentric coordinates of a point in a triangle and the values at each vertex.
 	 * @return interpolatedOut */
 	static public Vector2 fromBarycoord (Vector2 barycentric, Vector2 a, Vector2 b, Vector2 c, Vector2 interpolatedOut) {
-		float u = 1 - barycentric.x - barycentric.y;
-		interpolatedOut.x = u * a.x + barycentric.x * b.x + barycentric.y * c.x;
-		interpolatedOut.y = u * a.y + barycentric.x * b.y + barycentric.y * c.y;
+		float u = 1 - barycentric.getX() - barycentric.getY();
+		interpolatedOut.setX(u * a.getX() + barycentric.getX() * b.getX() + barycentric.getY() * c.getX());
+		interpolatedOut.setY(u * a.getY() + barycentric.getX() * b.getY() + barycentric.getY() * c.getY());
 		return interpolatedOut;
 	}
 
 	/** Returns an interpolated value given the barycentric coordinates of a point in a triangle and the values at each vertex.
 	 * @return interpolatedOut */
 	static public float fromBarycoord (Vector2 barycentric, float a, float b, float c) {
-		float u = 1 - barycentric.x - barycentric.y;
-		return u * a + barycentric.x * b + barycentric.y * c;
+		float u = 1 - barycentric.getX() - barycentric.getY();
+		return u * a + barycentric.getX() * b + barycentric.getY() * c;
 	}
 
 	/** Returns the lowest positive root of the quadric equation given by a* x * x + b * x + c = 0. If no solution is given
@@ -104,8 +104,8 @@ public final class GeometryUtils {
 	}
 
 	static public Vector2 triangleCentroid (float x1, float y1, float x2, float y2, float x3, float y3, Vector2 centroid) {
-		centroid.x = (x1 + x2 + x3) / 3;
-		centroid.y = (y1 + y2 + y3) / 3;
+		centroid.setX((x1 + x2 + x3) / 3);
+		centroid.setY((y1 + y2 + y3) / 3);
 		return centroid;
 	}
 
@@ -172,8 +172,8 @@ public final class GeometryUtils {
 		float avgY1 = (y1 + y2 + y3) / 3;
 		float avgX2 = (x1 + x4 + x3) / 3;
 		float avgY2 = (y1 + y4 + y3) / 3;
-		centroid.x = avgX1 - (avgX1 - avgX2) / 2;
-		centroid.y = avgY1 - (avgY1 - avgY2) / 2;
+		centroid.setX(avgX1 - (avgX1 - avgX2) / 2);
+		centroid.setY(avgY1 - (avgY1 - avgY2) / 2);
 		return centroid;
 	}
 
@@ -205,12 +205,12 @@ public final class GeometryUtils {
 		y += (y0 + y1) * a;
 
 		if (signedArea == 0) {
-			centroid.x = 0;
-			centroid.y = 0;
+			centroid.setX(0);
+			centroid.setY(0);
 		} else {
 			signedArea *= 0.5f;
-			centroid.x = x / (6 * signedArea);
-			centroid.y = y / (6 * signedArea);
+			centroid.setX(x / (6 * signedArea));
+			centroid.setY(y / (6 * signedArea));
 		}
 		return centroid;
 	}

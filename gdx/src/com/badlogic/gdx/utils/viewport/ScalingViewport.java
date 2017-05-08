@@ -53,8 +53,8 @@ public class ScalingViewport extends Viewport {
 	@Override
 	public void update (int screenWidth, int screenHeight, boolean centerCamera) {
 		Vector2 scaled = scaling.apply(getWorldWidth(), getWorldHeight(), screenWidth, screenHeight);
-		int viewportWidth = Math.round(scaled.x);
-		int viewportHeight = Math.round(scaled.y);
+		int viewportWidth = Math.round(scaled.getX());
+		int viewportHeight = Math.round(scaled.getY());
 
 		// Center.
 		setScreenBounds((screenWidth - viewportWidth) / 2, (screenHeight - viewportHeight) / 2, viewportWidth, viewportHeight);

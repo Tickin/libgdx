@@ -105,7 +105,7 @@ public class GwtTest extends GdxTest {
 		batch.draw(atlas.findRegion("font"), 0, 100);
 		sprite.rotate(Gdx.graphics.getDeltaTime() * 45);
 		for (Vector2 position : positions) {
-			sprite.setPosition(position.x, position.y);
+			sprite.setPosition(position.getX(), position.getY());
 			sprite.draw(batch);
 		}
 		font.draw(batch, "fps:" + Gdx.graphics.getFramesPerSecond() + ", delta: " + Gdx.graphics.getDeltaTime() + ", #sprites: "

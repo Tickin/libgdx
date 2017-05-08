@@ -531,9 +531,9 @@ public class TextField extends Widget implements Disableable {
 				TextField textField = (TextField)actor;
 				if (textField.isDisabled() || !textField.focusTraversal) continue;
 				Vector2 actorCoords = actor.getParent().localToStageCoordinates(tmp3.set(actor.getX(), actor.getY()));
-				if ((actorCoords.y < currentCoords.y || (actorCoords.y == currentCoords.y && actorCoords.x > currentCoords.x)) ^ up) {
+				if ((actorCoords.getY() < currentCoords.getY() || (actorCoords.getY() == currentCoords.getY() && actorCoords.getX() > currentCoords.getX())) ^ up) {
 					if (best == null
-						|| (actorCoords.y > bestCoords.y || (actorCoords.y == bestCoords.y && actorCoords.x < bestCoords.x)) ^ up) {
+						|| (actorCoords.getY() > bestCoords.getY() || (actorCoords.getY() == bestCoords.getY() && actorCoords.getX() < bestCoords.getX())) ^ up) {
 						best = (TextField)actor;
 						bestCoords.set(actorCoords);
 					}

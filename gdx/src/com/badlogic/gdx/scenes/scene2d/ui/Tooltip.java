@@ -101,15 +101,15 @@ public class Tooltip<T extends Actor> extends InputListener {
 		container.pack();
 		float offsetX = manager.offsetX, offsetY = manager.offsetY, dist = manager.edgeDistance;
 		Vector2 point = actor.localToStageCoordinates(tmp.set(x + offsetX, y - offsetY - container.getHeight()));
-		if (point.y < dist) point = actor.localToStageCoordinates(tmp.set(x + offsetX, y + offsetY));
-		if (point.x < dist) point.x = dist;
-		if (point.x + container.getWidth() > stage.getWidth() - dist) point.x = stage.getWidth() - dist - container.getWidth();
-		if (point.y + container.getHeight() > stage.getHeight() - dist) point.y = stage.getHeight() - dist - container.getHeight();
-		container.setPosition(point.x, point.y);
+		if (point.getY() < dist) point = actor.localToStageCoordinates(tmp.set(x + offsetX, y + offsetY));
+		if (point.getX() < dist) point.setX(dist);
+		if (point.getX() + container.getWidth() > stage.getWidth() - dist) point.setX(stage.getWidth() - dist - container.getWidth());
+		if (point.getY() + container.getHeight() > stage.getHeight() - dist) point.setY(stage.getHeight() - dist - container.getHeight());
+		container.setPosition(point.getX(), point.getY());
 
 		point = actor.localToStageCoordinates(tmp.set(actor.getWidth() / 2, actor.getHeight() / 2));
 		point.sub(container.getX(), container.getY());
-		container.setOrigin(point.x, point.y);
+		container.setOrigin(point.getX(), point.getY());
 	}
 
 	public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {

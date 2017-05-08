@@ -55,7 +55,7 @@ public class MotorJointDef extends JointDef {
 		jd.bodyA = bodyA.body;
 		jd.bodyB = bodyB.body;
 		jd.collideConnected = collideConnected;
-		jd.linearOffset.set(linearOffset.x, linearOffset.y);
+		jd.linearOffset.set(linearOffset.getX(), linearOffset.getY());
 		jd.angularOffset = angularOffset;
 		jd.maxForce = maxForce;
 		jd.maxTorque = maxTorque;

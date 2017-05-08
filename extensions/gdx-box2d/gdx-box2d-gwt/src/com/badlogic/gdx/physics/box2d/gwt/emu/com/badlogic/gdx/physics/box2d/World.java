@@ -58,7 +58,7 @@ public final class World implements Disposable {
 	 * @param gravity the world gravity vector.
 	 * @param doSleep improve performance by not simulating inactive bodies. */
 	public World (Vector2 gravity, boolean doSleep) {
-		world = new org.jbox2d.dynamics.World(tmp.set(gravity.x, gravity.y));
+		world = new org.jbox2d.dynamics.World(tmp.set(gravity.getX(), gravity.getY()));
 		world.setAllowSleep(doSleep);
 	}
 
@@ -134,8 +134,8 @@ public final class World implements Disposable {
 		bd.fixedRotation = def.fixedRotation;
 		bd.gravityScale = def.gravityScale;
 		bd.linearDamping = def.linearDamping;
-		bd.linearVelocity.set(def.linearVelocity.x, def.linearVelocity.y);
-		bd.position.set(def.position.x, def.position.y);
+		bd.linearVelocity.set(def.linearVelocity.getX(), def.linearVelocity.getY());
+		bd.position.set(def.position.getX(), def.position.getY());
 		if (def.type == BodyType.DynamicBody) bd.type = org.jbox2d.dynamics.BodyType.DYNAMIC;
 		if (def.type == BodyType.StaticBody) bd.type = org.jbox2d.dynamics.BodyType.STATIC;
 		if (def.type == BodyType.KinematicBody) bd.type = org.jbox2d.dynamics.BodyType.KINEMATIC;
@@ -245,7 +245,7 @@ public final class World implements Disposable {
 
 	/** Change the global gravity vector. */
 	public void setGravity (Vector2 gravity) {
-		world.setGravity(tmp.set(gravity.x, gravity.y));
+		world.setGravity(tmp.set(gravity.getX(), gravity.getY()));
 	}
 
 	public Vector2 getGravity () {
@@ -349,7 +349,7 @@ public final class World implements Disposable {
 	Vector2 normal = new Vector2();
 
 	public void rayCast (final RayCastCallback callback, Vector2 point1, Vector2 point2) {
-		rayCast(callback, point1.x, point1.y, point2.x, point2.y);
+		rayCast(callback, point1.getX(), point1.getY(), point2.getX(), point2.getY());
 	}
 
 	public void rayCast (final RayCastCallback callback, float point1X, float point1Y, float point2X, float point2Y) {

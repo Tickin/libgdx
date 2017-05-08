@@ -54,8 +54,8 @@ public class ChainShape extends Shape {
 	public void createLoop (Vector2[] vertices) {
 		float[] verts = new float[vertices.length * 2];
 		for (int i = 0, j = 0; i < vertices.length * 2; i += 2, j++) {
-			verts[i] = vertices[j].x;
-			verts[i + 1] = vertices[j].y;
+			verts[i] = vertices[j].getX();
+			verts[i + 1] = vertices[j].getY();
 		}
 		jniCreateLoop(addr, verts, verts.length / 2);
 		isLooped = true;
@@ -82,8 +82,8 @@ public class ChainShape extends Shape {
 	public void createChain (Vector2[] vertices) {
 		float[] verts = new float[vertices.length * 2];
 		for (int i = 0, j = 0; i < vertices.length * 2; i += 2, j++) {
-			verts[i] = vertices[j].x;
-			verts[i + 1] = vertices[j].y;
+			verts[i] = vertices[j].getX();
+			verts[i + 1] = vertices[j].getY();
 		}
 		createChain(verts);
 	}
@@ -99,7 +99,7 @@ public class ChainShape extends Shape {
 
 	/** Establish connectivity to a vertex that precedes the first vertex. Don't call this for loops. */
 	public void setPrevVertex (Vector2 prevVertex) {
-		setPrevVertex(prevVertex.x, prevVertex.y);
+		setPrevVertex(prevVertex.getX(), prevVertex.getY());
 	}
 
 	/** Establish connectivity to a vertex that precedes the first vertex. Don't call this for loops. */
@@ -114,7 +114,7 @@ public class ChainShape extends Shape {
 
 	/** Establish connectivity to a vertex that follows the last vertex. Don't call this for loops. */
 	public void setNextVertex (Vector2 nextVertex) {
-		setNextVertex(nextVertex.x, nextVertex.y);
+		setNextVertex(nextVertex.getX(), nextVertex.getY());
 	}
 
 	/** Establish connectivity to a vertex that follows the last vertex. Don't call this for loops. */
@@ -144,8 +144,8 @@ public class ChainShape extends Shape {
 	 * @param vertex vertex */
 	public void getVertex (int index, Vector2 vertex) {
 		jniGetVertex(addr, index, verts);
-		vertex.x = verts[0];
-		vertex.y = verts[1];
+		vertex.setX(verts[0]);
+		vertex.setY(verts[1]);
 	}
 
 	private native void jniGetVertex (long addr, int index, float[] verts); /*

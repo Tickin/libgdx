@@ -35,7 +35,7 @@ public class MouseJoint extends Joint {
 
 	/** Use this to update the target point. */
 	public void setTarget (Vector2 target) {
-		jniSetTarget(addr, target.x, target.y);
+		jniSetTarget(addr, target.getX(), target.getY());
 	}
 
 	private native void jniSetTarget (long addr, float x, float y); /*
@@ -49,8 +49,8 @@ public class MouseJoint extends Joint {
 
 	public Vector2 getTarget () {
 		jniGetTarget(addr, tmp);
-		target.x = tmp[0];
-		target.y = tmp[1];
+		target.setX(tmp[0]);
+		target.setY(tmp[1]);
 		return target;
 	}
 

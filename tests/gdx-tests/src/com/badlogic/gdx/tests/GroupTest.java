@@ -164,14 +164,14 @@ public class GroupTest extends GdxTest {
 		renderer.begin(ShapeType.Filled);
 		if (MathUtils.randomBoolean()) { // So we see when they are drawn on top of each other (which should be always).
 			renderer.setColor(Color.GREEN);
-			renderer.circle(group1.toScreenCoordinates.x, Gdx.graphics.getHeight() - group1.toScreenCoordinates.y, 5);
+			renderer.circle(group1.toScreenCoordinates.getX(), Gdx.graphics.getHeight() - group1.toScreenCoordinates.getY(), 5);
 			renderer.setColor(Color.RED);
-			renderer.circle(group1.localToParentCoordinates.x, Gdx.graphics.getHeight() - group1.localToParentCoordinates.y, 5);
+			renderer.circle(group1.localToParentCoordinates.getX(), Gdx.graphics.getHeight() - group1.localToParentCoordinates.getY(), 5);
 		} else {
 			renderer.setColor(Color.RED);
-			renderer.circle(group1.localToParentCoordinates.x, Gdx.graphics.getHeight() - group1.localToParentCoordinates.y, 5);
+			renderer.circle(group1.localToParentCoordinates.getX(), Gdx.graphics.getHeight() - group1.localToParentCoordinates.getY(), 5);
 			renderer.setColor(Color.GREEN);
-			renderer.circle(group1.toScreenCoordinates.x, Gdx.graphics.getHeight() - group1.toScreenCoordinates.y, 5);
+			renderer.circle(group1.toScreenCoordinates.getX(), Gdx.graphics.getHeight() - group1.toScreenCoordinates.getY(), 5);
 		}
 		renderer.end();
 	}

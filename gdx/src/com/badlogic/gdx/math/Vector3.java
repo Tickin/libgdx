@@ -27,11 +27,11 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	private static final long serialVersionUID = 3840054589595372522L;
 
 	/** the x-component of this vector **/
-	public float x;
+	private float x;
 	/** the y-component of this vector **/
-	public float y;
+	private float y;
 	/** the z-component of this vector **/
-	public float z;
+	private float z;
 
 	public final static Vector3 X = new Vector3(1, 0, 0);
 	public final static Vector3 Y = new Vector3(0, 1, 0);
@@ -70,7 +70,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param vector The vector
 	 * @param z The z-component */
 	public Vector3 (final Vector2 vector, float z) {
-		this.set(vector.x, vector.y, z);
+		this.set(vector.getX(), vector.getY(), z);
 	}
 
 	/** Sets the vector to the given components
@@ -80,15 +80,15 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component
 	 * @return this vector for chaining */
 	public Vector3 set (float x, float y, float z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.setX(x);
+		this.setY(y);
+		this.setZ(z);
 		return this;
 	}
 
 	@Override
 	public Vector3 set (final Vector3 vector) {
-		return this.set(vector.x, vector.y, vector.z);
+		return this.set(vector.getX(), vector.getY(), vector.getZ());
 	}
 
 	/** Sets the components from the array. The array must have at least 3 elements
@@ -105,7 +105,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component
 	 * @return This vector for chaining */
 	public Vector3 set (final Vector2 vector, float z) {
-		return this.set(vector.x, vector.y, z);
+		return this.set(vector.getX(), vector.getY(), z);
 	}
 
 	/** Sets the components from the given spherical coordinate
@@ -140,7 +140,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public Vector3 add (final Vector3 vector) {
-		return this.add(vector.x, vector.y, vector.z);
+		return this.add(vector.getX(), vector.getY(), vector.getZ());
 	}
 
 	/** Adds the given vector to this component
@@ -149,7 +149,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component of the other vector
 	 * @return This vector for chaining. */
 	public Vector3 add (float x, float y, float z) {
-		return this.set(this.x + x, this.y + y, this.z + z);
+		return this.set(this.getX() + x, this.getY() + y, this.getZ() + z);
 	}
 
 	/** Adds the given value to all three components of the vector.
@@ -157,12 +157,12 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param values The value
 	 * @return This vector for chaining */
 	public Vector3 add (float values) {
-		return this.set(this.x + values, this.y + values, this.z + values);
+		return this.set(this.getX() + values, this.getY() + values, this.getZ() + values);
 	}
 
 	@Override
 	public Vector3 sub (final Vector3 a_vec) {
-		return this.sub(a_vec.x, a_vec.y, a_vec.z);
+		return this.sub(a_vec.getX(), a_vec.getY(), a_vec.getZ());
 	}
 
 	/** Subtracts the other vector from this vector.
@@ -172,7 +172,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component of the other vector
 	 * @return This vector for chaining */
 	public Vector3 sub (float x, float y, float z) {
-		return this.set(this.x - x, this.y - y, this.z - z);
+		return this.set(this.getX() - x, this.getY() - y, this.getZ() - z);
 	}
 
 	/** Subtracts the given value from all components of this vector
@@ -180,17 +180,17 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param value The value
 	 * @return This vector for chaining */
 	public Vector3 sub (float value) {
-		return this.set(this.x - value, this.y - value, this.z - value);
+		return this.set(this.getX() - value, this.getY() - value, this.getZ() - value);
 	}
 
 	@Override
 	public Vector3 scl (float scalar) {
-		return this.set(this.x * scalar, this.y * scalar, this.z * scalar);
+		return this.set(this.getX() * scalar, this.getY() * scalar, this.getZ() * scalar);
 	}
 
 	@Override
 	public Vector3 scl (final Vector3 other) {
-		return this.set(x * other.x, y * other.y, z * other.z);
+		return this.set(getX() * other.getX(), getY() * other.getY(), getZ() * other.getZ());
 	}
 
 	/** Scales this vector by the given values
@@ -199,7 +199,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param vz Z value
 	 * @return This vector for chaining */
 	public Vector3 scl (float vx, float vy, float vz) {
-		return this.set(this.x * vx, this.y * vy, this.z * vz);
+		return this.set(this.getX() * vx, this.getY() * vy, this.getZ() * vz);
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public float len () {
-		return (float)Math.sqrt(x * x + y * y + z * z);
+		return (float)Math.sqrt(getX() * getX() + getY() * getY() + getZ() * getZ());
 	}
 
 	/** @return The squared euclidean length */
@@ -229,13 +229,13 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public float len2 () {
-		return x * x + y * y + z * z;
+		return getX() * getX() + getY() * getY() + getZ() * getZ();
 	}
 
 	/** @param vector The other vector
 	 * @return Whether this and the other vector are equal */
 	public boolean idt (final Vector3 vector) {
-		return x == vector.x && y == vector.y && z == vector.z;
+		return getX() == vector.getX() && getY() == vector.getY() && getZ() == vector.getZ();
 	}
 
 	/** @return Squared sum of params */ 
@@ -253,17 +253,17 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public float dst (final Vector3 vector) {
-		final float a = vector.x - x;
-		final float b = vector.y - y;
-		final float c = vector.z - z;
+		final float a = vector.getX() - getX();
+		final float b = vector.getY() - getY();
+		final float c = vector.getZ() - getZ();
 		return (float)Math.sqrt(squareSum(a, b, c));
 	}
 
 	/** @return the distance between this point and the given point */
 	public float dst (float x, float y, float z) {
-		final float a = x - this.x;
-		final float b = y - this.y;
-		final float c = z - this.z;
+		final float a = x - this.getX();
+		final float b = y - this.getY();
+		final float c = z - this.getZ();
 		return (float)Math.sqrt(squareSum(a, b, c));
 	}
 
@@ -277,9 +277,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public float dst2 (Vector3 point) {
-		final float a = point.x - x;
-		final float b = point.y - y;
-		final float c = point.z - z;
+		final float a = point.getX() - getX();
+		final float b = point.getY() - getY();
+		final float c = point.getZ() - getZ();
 		return squareSum(a, b, c);
 	}
 
@@ -289,9 +289,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component of the other point
 	 * @return The squared distance */
 	public float dst2 (float x, float y, float z) {
-		final float a = x - this.x;
-		final float b = y - this.y;
-		final float c = z - this.z;
+		final float a = x - this.getX();
+		final float b = y - this.getY();
+		final float c = z - this.getZ();
 		return squareSum(a, b, c);
 	}
 
@@ -309,7 +309,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public float dot (final Vector3 vector) {
-		return x * vector.x + y * vector.y + z * vector.z;
+		return getX() * vector.getX() + getY() * vector.getY() + getZ() * vector.getZ();
 	}
 
 	/** Returns the dot product between this and the given vector.
@@ -318,14 +318,14 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component of the other vector
 	 * @return The dot product */
 	public float dot (float x, float y, float z) {
-		return this.x * x + this.y * y + this.z * z;
+		return this.getX() * x + this.getY() * y + this.getZ() * z;
 	}
 
 	/** Sets this vector to the cross product between it and the other vector.
 	 * @param vector The other vector
 	 * @return This vector for chaining */
 	public Vector3 crs (final Vector3 vector) {
-		return this.set(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x);
+		return this.set(getY() * vector.getZ() - getZ() * vector.getY(), getZ() * vector.getX() - getX() * vector.getZ(), getX() * vector.getY() - getY() * vector.getX());
 	}
 
 	/** Sets this vector to the cross product between it and the other vector.
@@ -334,7 +334,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param z The z-component of the other vector
 	 * @return This vector for chaining */
 	public Vector3 crs (float x, float y, float z) {
-		return this.set(this.y * z - this.z * y, this.z * x - this.x * z, this.x * y - this.y * x);
+		return this.set(this.getY() * z - this.getZ() * y, this.getZ() * x - this.getX() * z, this.getX() * y - this.getY() * x);
 	}
 
 	/** Left-multiplies the vector by the given 4x3 column major matrix. The matrix should be composed by a 3x3 matrix representing
@@ -342,8 +342,8 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @param matrix The matrix
 	 * @return This vector for chaining */
 	public Vector3 mul4x3 (float[] matrix) {
-		return set(x * matrix[0] + y * matrix[3] + z * matrix[6] + matrix[9], x * matrix[1] + y * matrix[4] + z * matrix[7]
-			+ matrix[10], x * matrix[2] + y * matrix[5] + z * matrix[8] + matrix[11]);
+		return set(getX() * matrix[0] + getY() * matrix[3] + getZ() * matrix[6] + matrix[9], getX() * matrix[1] + getY() * matrix[4] + getZ() * matrix[7]
+			+ matrix[10], getX() * matrix[2] + getY() * matrix[5] + getZ() * matrix[8] + matrix[11]);
 	}
 
 	/** Left-multiplies the vector by the given matrix, assuming the fourth (w) component of the vector is 1.
@@ -351,9 +351,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return This vector for chaining */
 	public Vector3 mul (final Matrix4 matrix) {
 		final float l_mat[] = matrix.val;
-		return this.set(x * l_mat[Matrix4.M00] + y * l_mat[Matrix4.M01] + z * l_mat[Matrix4.M02] + l_mat[Matrix4.M03], x
-			* l_mat[Matrix4.M10] + y * l_mat[Matrix4.M11] + z * l_mat[Matrix4.M12] + l_mat[Matrix4.M13], x * l_mat[Matrix4.M20] + y
-			* l_mat[Matrix4.M21] + z * l_mat[Matrix4.M22] + l_mat[Matrix4.M23]);
+		return this.set(getX() * l_mat[Matrix4.M00] + getY() * l_mat[Matrix4.M01] + getZ() * l_mat[Matrix4.M02] + l_mat[Matrix4.M03], getX()
+			* l_mat[Matrix4.M10] + getY() * l_mat[Matrix4.M11] + getZ() * l_mat[Matrix4.M12] + l_mat[Matrix4.M13], getX() * l_mat[Matrix4.M20] + getY()
+			* l_mat[Matrix4.M21] + getZ() * l_mat[Matrix4.M22] + l_mat[Matrix4.M23]);
 	}
 
 	/** Multiplies the vector by the transpose of the given matrix, assuming the fourth (w) component of the vector is 1.
@@ -361,9 +361,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return This vector for chaining */
 	public Vector3 traMul (final Matrix4 matrix) {
 		final float l_mat[] = matrix.val;
-		return this.set(x * l_mat[Matrix4.M00] + y * l_mat[Matrix4.M10] + z * l_mat[Matrix4.M20] + l_mat[Matrix4.M30], x
-			* l_mat[Matrix4.M01] + y * l_mat[Matrix4.M11] + z * l_mat[Matrix4.M21] + l_mat[Matrix4.M31], x * l_mat[Matrix4.M02] + y
-			* l_mat[Matrix4.M12] + z * l_mat[Matrix4.M22] + l_mat[Matrix4.M32]);
+		return this.set(getX() * l_mat[Matrix4.M00] + getY() * l_mat[Matrix4.M10] + getZ() * l_mat[Matrix4.M20] + l_mat[Matrix4.M30], getX()
+			* l_mat[Matrix4.M01] + getY() * l_mat[Matrix4.M11] + getZ() * l_mat[Matrix4.M21] + l_mat[Matrix4.M31], getX() * l_mat[Matrix4.M02] + getY()
+			* l_mat[Matrix4.M12] + getZ() * l_mat[Matrix4.M22] + l_mat[Matrix4.M32]);
 	}
 
 	/** Left-multiplies the vector by the given matrix.
@@ -371,8 +371,8 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return This vector for chaining */
 	public Vector3 mul (Matrix3 matrix) {
 		final float l_mat[] = matrix.val;
-		return set(x * l_mat[Matrix3.M00] + y * l_mat[Matrix3.M01] + z * l_mat[Matrix3.M02], x * l_mat[Matrix3.M10] + y
-			* l_mat[Matrix3.M11] + z * l_mat[Matrix3.M12], x * l_mat[Matrix3.M20] + y * l_mat[Matrix3.M21] + z * l_mat[Matrix3.M22]);
+		return set(getX() * l_mat[Matrix3.M00] + getY() * l_mat[Matrix3.M01] + getZ() * l_mat[Matrix3.M02], getX() * l_mat[Matrix3.M10] + getY()
+			* l_mat[Matrix3.M11] + getZ() * l_mat[Matrix3.M12], getX() * l_mat[Matrix3.M20] + getY() * l_mat[Matrix3.M21] + getZ() * l_mat[Matrix3.M22]);
 	}
 
 	/** Multiplies the vector by the transpose of the given matrix.
@@ -380,8 +380,8 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return This vector for chaining */
 	public Vector3 traMul (Matrix3 matrix) {
 		final float l_mat[] = matrix.val;
-		return set(x * l_mat[Matrix3.M00] + y * l_mat[Matrix3.M10] + z * l_mat[Matrix3.M20], x * l_mat[Matrix3.M01] + y
-			* l_mat[Matrix3.M11] + z * l_mat[Matrix3.M21], x * l_mat[Matrix3.M02] + y * l_mat[Matrix3.M12] + z * l_mat[Matrix3.M22]);
+		return set(getX() * l_mat[Matrix3.M00] + getY() * l_mat[Matrix3.M10] + getZ() * l_mat[Matrix3.M20], getX() * l_mat[Matrix3.M01] + getY()
+			* l_mat[Matrix3.M11] + getZ() * l_mat[Matrix3.M21], getX() * l_mat[Matrix3.M02] + getY() * l_mat[Matrix3.M12] + getZ() * l_mat[Matrix3.M22]);
 	}
 
 	/** Multiplies the vector by the given {@link Quaternion}.
@@ -397,10 +397,10 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return This vector for chaining */
 	public Vector3 prj (final Matrix4 matrix) {
 		final float l_mat[] = matrix.val;
-		final float l_w = 1f / (x * l_mat[Matrix4.M30] + y * l_mat[Matrix4.M31] + z * l_mat[Matrix4.M32] + l_mat[Matrix4.M33]);
-		return this.set((x * l_mat[Matrix4.M00] + y * l_mat[Matrix4.M01] + z * l_mat[Matrix4.M02] + l_mat[Matrix4.M03]) * l_w, (x
-			* l_mat[Matrix4.M10] + y * l_mat[Matrix4.M11] + z * l_mat[Matrix4.M12] + l_mat[Matrix4.M13])
-			* l_w, (x * l_mat[Matrix4.M20] + y * l_mat[Matrix4.M21] + z * l_mat[Matrix4.M22] + l_mat[Matrix4.M23]) * l_w);
+		final float l_w = 1f / (getX() * l_mat[Matrix4.M30] + getY() * l_mat[Matrix4.M31] + getZ() * l_mat[Matrix4.M32] + l_mat[Matrix4.M33]);
+		return this.set((getX() * l_mat[Matrix4.M00] + getY() * l_mat[Matrix4.M01] + getZ() * l_mat[Matrix4.M02] + l_mat[Matrix4.M03]) * l_w, (getX()
+			* l_mat[Matrix4.M10] + getY() * l_mat[Matrix4.M11] + getZ() * l_mat[Matrix4.M12] + l_mat[Matrix4.M13])
+			* l_w, (getX() * l_mat[Matrix4.M20] + getY() * l_mat[Matrix4.M21] + getZ() * l_mat[Matrix4.M22] + l_mat[Matrix4.M23]) * l_w);
 	}
 
 	/** Multiplies this vector by the first three columns of the matrix, essentially only applying rotation and scaling.
@@ -409,8 +409,8 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return This vector for chaining */
 	public Vector3 rot (final Matrix4 matrix) {
 		final float l_mat[] = matrix.val;
-		return this.set(x * l_mat[Matrix4.M00] + y * l_mat[Matrix4.M01] + z * l_mat[Matrix4.M02], x * l_mat[Matrix4.M10] + y
-			* l_mat[Matrix4.M11] + z * l_mat[Matrix4.M12], x * l_mat[Matrix4.M20] + y * l_mat[Matrix4.M21] + z * l_mat[Matrix4.M22]);
+		return this.set(getX() * l_mat[Matrix4.M00] + getY() * l_mat[Matrix4.M01] + getZ() * l_mat[Matrix4.M02], getX() * l_mat[Matrix4.M10] + getY()
+			* l_mat[Matrix4.M11] + getZ() * l_mat[Matrix4.M12], getX() * l_mat[Matrix4.M20] + getY() * l_mat[Matrix4.M21] + getZ() * l_mat[Matrix4.M22]);
 	}
 
 	/** Multiplies this vector by the transpose of the first three columns of the matrix. Note: only works for translation and
@@ -419,8 +419,8 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return The vector for chaining */
 	public Vector3 unrotate (final Matrix4 matrix) {
 		final float l_mat[] = matrix.val;
-		return this.set(x * l_mat[Matrix4.M00] + y * l_mat[Matrix4.M10] + z * l_mat[Matrix4.M20], x * l_mat[Matrix4.M01] + y
-			* l_mat[Matrix4.M11] + z * l_mat[Matrix4.M21], x * l_mat[Matrix4.M02] + y * l_mat[Matrix4.M12] + z * l_mat[Matrix4.M22]);
+		return this.set(getX() * l_mat[Matrix4.M00] + getY() * l_mat[Matrix4.M10] + getZ() * l_mat[Matrix4.M20], getX() * l_mat[Matrix4.M01] + getY()
+			* l_mat[Matrix4.M11] + getZ() * l_mat[Matrix4.M21], getX() * l_mat[Matrix4.M02] + getY() * l_mat[Matrix4.M12] + getZ() * l_mat[Matrix4.M22]);
 	}
 
 	/** Translates this vector in the direction opposite to the translation of the matrix and the multiplies this vector by the
@@ -430,11 +430,11 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return The vector for chaining */
 	public Vector3 untransform (final Matrix4 matrix) {
 		final float l_mat[] = matrix.val;
-		x -= l_mat[Matrix4.M03];
-		y -= l_mat[Matrix4.M03];
-		z -= l_mat[Matrix4.M03];
-		return this.set(x * l_mat[Matrix4.M00] + y * l_mat[Matrix4.M10] + z * l_mat[Matrix4.M20], x * l_mat[Matrix4.M01] + y
-			* l_mat[Matrix4.M11] + z * l_mat[Matrix4.M21], x * l_mat[Matrix4.M02] + y * l_mat[Matrix4.M12] + z * l_mat[Matrix4.M22]);
+		setX(getX() - l_mat[Matrix4.M03]);
+		setY(getY() - l_mat[Matrix4.M03]);
+		setZ(getZ() - l_mat[Matrix4.M03]);
+		return this.set(getX() * l_mat[Matrix4.M00] + getY() * l_mat[Matrix4.M10] + getZ() * l_mat[Matrix4.M20], getX() * l_mat[Matrix4.M01] + getY()
+			* l_mat[Matrix4.M11] + getZ() * l_mat[Matrix4.M21], getX() * l_mat[Matrix4.M02] + getY() * l_mat[Matrix4.M12] + getZ() * l_mat[Matrix4.M22]);
 	}
 
 	/** Rotates this vector by the given angle in degrees around the given axis.
@@ -491,7 +491,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public boolean isZero () {
-		return x == 0 && y == 0 && z == 0;
+		return getX() == 0 && getY() == 0 && getZ() == 0;
 	}
 
 	@Override
@@ -501,12 +501,12 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public boolean isOnLine (Vector3 other, float epsilon) {
-		return len2(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x) <= epsilon;
+		return len2(getY() * other.getZ() - getZ() * other.getY(), getZ() * other.getX() - getX() * other.getZ(), getX() * other.getY() - getY() * other.getX()) <= epsilon;
 	}
 
 	@Override
 	public boolean isOnLine (Vector3 other) {
-		return len2(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x) <= MathUtils.FLOAT_ROUNDING_ERROR;
+		return len2(getY() * other.getZ() - getZ() * other.getY(), getZ() * other.getX() - getX() * other.getZ(), getX() * other.getY() - getY() * other.getX()) <= MathUtils.FLOAT_ROUNDING_ERROR;
 	}
 
 	@Override
@@ -551,9 +551,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 
 	@Override
 	public Vector3 lerp (final Vector3 target, float alpha) {
-		x += alpha * (target.x - x);
-		y += alpha * (target.y - y);
-		z += alpha * (target.z - z);
+		setX(getX() + alpha * (target.getX() - getX()));
+		setY(getY() + alpha * (target.getY() - getY()));
+		setZ(getZ() + alpha * (target.getZ() - getZ()));
 		return this;
 	}
 
@@ -579,9 +579,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		final float theta = theta0 * alpha;
 
 		final float st = (float)Math.sin(theta);
-		final float tx = target.x - x * dot;
-		final float ty = target.y - y * dot;
-		final float tz = target.z - z * dot;
+		final float tx = target.getX() - getX() * dot;
+		final float ty = target.getY() - getY() * dot;
+		final float tz = target.getZ() - getZ() * dot;
 		final float l2 = squareSum(tx, ty, tz);
 		final float dl = st * ((l2 < 0.0001f) ? 1f : 1f / (float)Math.sqrt(l2));
 
@@ -592,7 +592,7 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	 * @return a string representation of this object. */
 	@Override
 	public String toString () {
-		return "(" + x + "," + y + "," + z + ")";
+		return "(" + getX() + "," + getY() + "," + getZ() + ")";
 	}
 
 	/** Sets this {@code Vector3} to the value represented by the specified string according to the format of {@link #toString()}.
@@ -654,9 +654,9 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 	public int hashCode () {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + NumberUtils.floatToIntBits(x);
-		result = prime * result + NumberUtils.floatToIntBits(y);
-		result = prime * result + NumberUtils.floatToIntBits(z);
+		result = prime * result + NumberUtils.floatToIntBits(getX());
+		result = prime * result + NumberUtils.floatToIntBits(getY());
+		result = prime * result + NumberUtils.floatToIntBits(getZ());
 		return result;
 	}
 
@@ -666,35 +666,59 @@ public class Vector3 implements Serializable, Vector<Vector3> {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		Vector3 other = (Vector3)obj;
-		if (NumberUtils.floatToIntBits(x) != NumberUtils.floatToIntBits(other.x)) return false;
-		if (NumberUtils.floatToIntBits(y) != NumberUtils.floatToIntBits(other.y)) return false;
-		if (NumberUtils.floatToIntBits(z) != NumberUtils.floatToIntBits(other.z)) return false;
+		if (NumberUtils.floatToIntBits(getX()) != NumberUtils.floatToIntBits(other.getX())) return false;
+		if (NumberUtils.floatToIntBits(getY()) != NumberUtils.floatToIntBits(other.getY())) return false;
+		if (NumberUtils.floatToIntBits(getZ()) != NumberUtils.floatToIntBits(other.getZ())) return false;
 		return true;
 	}
 
 	@Override
 	public boolean epsilonEquals (final Vector3 other, float epsilon) {
 		if (other == null) return false;
-		if (Math.abs(other.x - x) > epsilon) return false;
-		if (Math.abs(other.y - y) > epsilon) return false;
-		if (Math.abs(other.z - z) > epsilon) return false;
+		if (Math.abs(other.getX() - getX()) > epsilon) return false;
+		if (Math.abs(other.getY() - getY()) > epsilon) return false;
+		if (Math.abs(other.getZ() - getZ()) > epsilon) return false;
 		return true;
 	}
 
 	/** Compares this vector with the other vector, using the supplied epsilon for fuzzy equality testing.
 	 * @return whether the vectors are the same. */
 	public boolean epsilonEquals (float x, float y, float z, float epsilon) {
-		if (Math.abs(x - this.x) > epsilon) return false;
-		if (Math.abs(y - this.y) > epsilon) return false;
-		if (Math.abs(z - this.z) > epsilon) return false;
+		if (Math.abs(x - this.getX()) > epsilon) return false;
+		if (Math.abs(y - this.getY()) > epsilon) return false;
+		if (Math.abs(z - this.getZ()) > epsilon) return false;
 		return true;
 	}
 
 	@Override
 	public Vector3 setZero () {
-		this.x = 0;
-		this.y = 0;
-		this.z = 0;
+		this.setX(0);
+		this.setY(0);
+		this.setZ(0);
 		return this;
+	}
+
+	public float getX () {
+		return x;
+	}
+
+	public void setX (float x) {
+		this.x = x;
+	}
+
+	public float getY () {
+		return y;
+	}
+
+	public void setY (float y) {
+		this.y = y;
+	}
+
+	public float getZ () {
+		return z;
+	}
+
+	public void setZ (float z) {
+		this.z = z;
 	}
 }

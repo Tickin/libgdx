@@ -113,7 +113,7 @@ public class Fixture {
 	/** Test a point for containment in this fixture.
 	 * @param p a point in world coordinates. */
 	public boolean testPoint (Vector2 p) {
-		tmp.set(p.x, p.y);
+		tmp.set(p.getX(), p.getY());
 		return fixture.testPoint(tmp);
 	}
 

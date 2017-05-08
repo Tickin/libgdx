@@ -178,7 +178,7 @@ public class StageTest extends GdxTest implements InputProcessor {
 
 		if (Gdx.input.isTouched()) {
 			stage.screenToStageCoordinates(stageCoords.set(Gdx.input.getX(), Gdx.input.getY()));
-			Actor actor = stage.hit(stageCoords.x, stageCoords.y, true);
+			Actor actor = stage.hit(stageCoords.getX(), stageCoords.getY(), true);
 			if (actor != null)
 				actor.setColor((float)Math.random(), (float)Math.random(), (float)Math.random(), 0.5f + 0.5f * (float)Math.random());
 		}

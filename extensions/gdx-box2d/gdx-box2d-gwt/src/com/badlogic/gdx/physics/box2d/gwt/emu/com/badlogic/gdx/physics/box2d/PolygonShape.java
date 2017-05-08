@@ -45,7 +45,7 @@ public class PolygonShape extends Shape {
 	public void set (Vector2[] vertices) {
 		Vec2[] v = new org.jbox2d.common.Vec2[vertices.length];
 		for (int i = 0; i < v.length; i++) {
-			v[i] = new Vec2(vertices[i].x, vertices[i].y);
+			v[i] = new Vec2(vertices[i].getX(), vertices[i].getY());
 		}
 		shape.set(v, v.length);
 	}
@@ -81,7 +81,7 @@ public class PolygonShape extends Shape {
 	 * @param center the center of the box in local coordinates.
 	 * @param angle the rotation in radians of the box in local coordinates. */
 	public void setAsBox (float hx, float hy, Vector2 center, float angle) {
-		tmp.set(center.x, center.y);
+		tmp.set(center.getX(), center.getY());
 		shape.setAsBox(hx, hy, tmp, angle);
 	}
 

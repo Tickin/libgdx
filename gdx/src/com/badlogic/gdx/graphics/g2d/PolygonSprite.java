@@ -250,8 +250,8 @@ public class PolygonSprite {
 			maxy = maxy < y ? y : maxy;
 		}
 
-		bounds.x = minx;
-		bounds.y = miny;
+		bounds.setX(minx);
+		bounds.setY(miny);
 		bounds.width = maxx - minx;
 		bounds.height = maxy - miny;
 		return bounds;

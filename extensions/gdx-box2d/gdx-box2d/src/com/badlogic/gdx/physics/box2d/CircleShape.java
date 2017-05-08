@@ -50,8 +50,8 @@ public class CircleShape extends Shape {
 
 	public Vector2 getPosition () {
 		jniGetPosition(addr, tmp);
-		position.x = tmp[0];
-		position.y = tmp[1];
+		position.setX(tmp[0]);
+		position.setY(tmp[1]);
 		return position;
 	}
 
@@ -63,7 +63,7 @@ public class CircleShape extends Shape {
 
 	/** Sets the position of the shape */
 	public void setPosition (Vector2 position) {
-		jniSetPosition(addr, position.x, position.y);
+		jniSetPosition(addr, position.getX(), position.getY());
 	}
 
 	private native void jniSetPosition (long addr, float positionX, float positionY); /*

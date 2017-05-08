@@ -130,7 +130,7 @@ public class ParticleController implements Json.Serializable, ResourceData.Confi
 
 	/** Postmultiplies the current transformation with a scale matrix represented by the given scale vector. */
 	public void scale (Vector3 scale) {
-		scale(scale.x, scale.y, scale.z);
+		scale(scale.getX(), scale.getY(), scale.getZ());
 	}
 
 	/** Postmultiplies the current transformation with the given matrix. */

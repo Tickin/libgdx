@@ -158,7 +158,7 @@ public abstract class BaseShadowSystem implements ShadowSystem, Disposable {
 		camera.direction.set(spot.direction);
 		camera.near = 1;
 		camera.far = 100;
-		camera.up.set(camera.direction.y, camera.direction.z, camera.direction.x);
+		camera.up.set(camera.direction.getY(), camera.direction.getZ(), camera.direction.getX());
 
 		spotCameras.put(spot, new LightProperties(camera));
 	}

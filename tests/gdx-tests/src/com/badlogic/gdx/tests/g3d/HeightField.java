@@ -300,18 +300,18 @@ public class HeightField implements Disposable {
 	protected void setVertex (int index, VertexInfo info) {
 		index *= stride;
 		if (posPos >= 0) {
-			vertices[index + posPos + 0] = info.position.x;
-			vertices[index + posPos + 1] = info.position.y;
-			vertices[index + posPos + 2] = info.position.z;
+			vertices[index + posPos + 0] = info.position.getX();
+			vertices[index + posPos + 1] = info.position.getY();
+			vertices[index + posPos + 2] = info.position.getZ();
 		}
 		if (norPos >= 0) {
-			vertices[index + norPos + 0] = info.normal.x;
-			vertices[index + norPos + 1] = info.normal.y;
-			vertices[index + norPos + 2] = info.normal.z;
+			vertices[index + norPos + 0] = info.normal.getX();
+			vertices[index + norPos + 1] = info.normal.getY();
+			vertices[index + norPos + 2] = info.normal.getZ();
 		}
 		if (uvPos >= 0) {
-			vertices[index + uvPos + 0] = info.uv.x;
-			vertices[index + uvPos + 1] = info.uv.y;
+			vertices[index + uvPos + 0] = info.uv.getX();
+			vertices[index + uvPos + 1] = info.uv.getY();
 		}
 		if (colPos >= 0) {
 			vertices[index + colPos + 0] = info.color.r;

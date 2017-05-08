@@ -64,17 +64,17 @@ public class Ellipse implements Serializable, Shape2D {
 	 * @param width Width in pixels
 	 * @param height Height in pixels */
 	public Ellipse (Vector2 position, float width, float height) {
-		this.x = position.x;
-		this.y = position.y;
+		this.x = position.getX();
+		this.y = position.getY();
 		this.width = width;
 		this.height = height;
 	}
 
 	public Ellipse (Vector2 position, Vector2 size) {
-		this.x = position.x;
-		this.y = position.y;
-		this.width = size.x;
-		this.height = size.y;
+		this.x = position.getX();
+		this.y = position.getY();
+		this.width = size.getX();
+		this.height = size.getY();
 	}
 
 	/** Constructs a new {@link Ellipse} from the position and radius of a {@link Circle} (since circles are special cases of
@@ -106,7 +106,7 @@ public class Ellipse implements Serializable, Shape2D {
 	 * 
 	 * @return true if this ellipse contains the given point; false otherwise. */
 	public boolean contains (Vector2 point) {
-		return contains(point.x, point.y);
+		return contains(point.getX(), point.getY());
 	}
 
 	/** Sets a new position and size for this ellipse.
@@ -140,18 +140,18 @@ public class Ellipse implements Serializable, Shape2D {
 	}
 
 	public void set (Vector2 position, Vector2 size) {
-		this.x = position.x;
-		this.y = position.y;
-		this.width = size.x;
-		this.height = size.y;
+		this.x = position.getX();
+		this.y = position.getY();
+		this.width = size.getX();
+		this.height = size.getY();
 	}
 
 	/** Sets the x and y-coordinates of ellipse center from a {@link Vector2}.
 	 * @param position The position vector
 	 * @return this ellipse for chaining */
 	public Ellipse setPosition (Vector2 position) {
-		this.x = position.x;
-		this.y = position.y;
+		this.x = position.getX();
+		this.y = position.getY();
 
 		return this;
 	}
