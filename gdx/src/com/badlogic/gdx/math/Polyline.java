@@ -21,6 +21,7 @@ public class Polyline implements Shape2D {
 	private Vector2[] localVertices;
 	private Vector2[] worldVertices;
 	private Vector2 point;
+
 	private Vector2 origin;
 	private float rotation;
 	private float scaleX = 1, scaleY = 1;
@@ -29,6 +30,15 @@ public class Polyline implements Shape2D {
 	private boolean calculateScaledLength = true;
 	private boolean calculateLength = true;
 	private boolean dirty = true;
+	
+	
+	public Vector2 getPoint () {
+		return point;
+	}
+
+	public void setPoint (Vector2 point) {
+		this.point = point;
+	}
 
 	public Polyline () {
 		localVertices = new Vector2[0];
