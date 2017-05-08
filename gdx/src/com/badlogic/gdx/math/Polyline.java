@@ -129,13 +129,6 @@ public class Polyline implements Shape2D {
 		return scaledLength;
 	}
 
-	public float getX () {
-		return point.x;
-	}
-
-	public float getY () {
-		return point.y;
-	}
 
 	public float getOriginX () {
 		return origin.getX();
