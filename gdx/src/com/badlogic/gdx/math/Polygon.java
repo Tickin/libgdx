@@ -185,8 +185,8 @@ public class Polygon implements Shape2D {
 		}
 
 		if (bounds == null) bounds = new Rectangle();
-		bounds.x = minX;
-		bounds.y = minY;
+		bounds.setX(minX);
+		bounds.setY(minY);
 		bounds.width = maxX - minX;
 		bounds.height = maxY - minY;
 

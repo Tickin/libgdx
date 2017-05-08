@@ -98,13 +98,13 @@ public class IsometricTiledMapRenderer extends BatchTiledMapRenderer {
 
 		// setting up the screen points
 		// COL1
-		topRight.set(viewBounds.x + viewBounds.width - layerOffsetX, viewBounds.y - layerOffsetY);
+		topRight.set(viewBounds.getX() + viewBounds.width - layerOffsetX, viewBounds.getY() - layerOffsetY);
 		// COL2
-		bottomLeft.set(viewBounds.x - layerOffsetX, viewBounds.y + viewBounds.height - layerOffsetY);
+		bottomLeft.set(viewBounds.getX() - layerOffsetX, viewBounds.getY() + viewBounds.height - layerOffsetY);
 		// ROW1
-		topLeft.set(viewBounds.x - layerOffsetX, viewBounds.y - layerOffsetY);
+		topLeft.set(viewBounds.getX() - layerOffsetX, viewBounds.getY() - layerOffsetY);
 		// ROW2
-		bottomRight.set(viewBounds.x + viewBounds.width - layerOffsetX, viewBounds.y + viewBounds.height - layerOffsetY);
+		bottomRight.set(viewBounds.getX() + viewBounds.width - layerOffsetX, viewBounds.getY() + viewBounds.height - layerOffsetY);
 
 		// transforming screen coordinates to iso coordinates
 		int row1 = (int)(translateScreenToIso(topLeft).getY() / tileWidth) - 2;

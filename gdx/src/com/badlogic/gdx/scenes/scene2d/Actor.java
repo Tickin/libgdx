@@ -723,8 +723,8 @@ public class Actor {
 	public boolean clipBegin (float x, float y, float width, float height) {
 		if (width <= 0 || height <= 0) return false;
 		Rectangle tableBounds = Rectangle.tmp;
-		tableBounds.x = x;
-		tableBounds.y = y;
+		tableBounds.setX(x);
+		tableBounds.setY(y);
 		tableBounds.width = width;
 		tableBounds.height = height;
 		Stage stage = this.stage;

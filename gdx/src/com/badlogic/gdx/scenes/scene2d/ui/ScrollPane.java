@@ -122,12 +122,12 @@ public class ScrollPane extends WidgetGroup {
 					resetFade();
 					if (hKnobBounds.contains(x, y)) {
 						lastPoint.set(x, y);
-						handlePosition = hKnobBounds.x;
+						handlePosition = hKnobBounds.getX();
 						touchScrollH = true;
 						draggingPointer = pointer;
 						return true;
 					}
-					setScrollX(amountX + areaWidth * (x < hKnobBounds.x ? -1 : 1));
+					setScrollX(amountX + areaWidth * (x < hKnobBounds.getX() ? -1 : 1));
 					return true;
 				}
 				if (scrollY && vScrollBounds.contains(x, y)) {
@@ -135,12 +135,12 @@ public class ScrollPane extends WidgetGroup {
 					resetFade();
 					if (vKnobBounds.contains(x, y)) {
 						lastPoint.set(x, y);
-						handlePosition = vKnobBounds.y;
+						handlePosition = vKnobBounds.getY();
 						touchScrollV = true;
 						draggingPointer = pointer;
 						return true;
 					}
-					setScrollY(amountY + areaHeight * (y < vKnobBounds.y ? 1 : -1));
+					setScrollY(amountY + areaHeight * (y < vKnobBounds.getY() ? 1 : -1));
 					return true;
 				}
 				return false;
@@ -157,19 +157,19 @@ public class ScrollPane extends WidgetGroup {
 					float delta = x - lastPoint.getX();
 					float scrollH = handlePosition + delta;
 					handlePosition = scrollH;
-					scrollH = Math.max(hScrollBounds.x, scrollH);
-					scrollH = Math.min(hScrollBounds.x + hScrollBounds.width - hKnobBounds.width, scrollH);
+					scrollH = Math.max(hScrollBounds.getX(), scrollH);
+					scrollH = Math.min(hScrollBounds.getX() + hScrollBounds.width - hKnobBounds.width, scrollH);
 					float total = hScrollBounds.width - hKnobBounds.width;
-					if (total != 0) setScrollPercentX((scrollH - hScrollBounds.x) / total);
+					if (total != 0) setScrollPercentX((scrollH - hScrollBounds.getX()) / total);
 					lastPoint.set(x, y);
 				} else if (touchScrollV) {
 					float delta = y - lastPoint.getY();
 					float scrollV = handlePosition + delta;
 					handlePosition = scrollV;
-					scrollV = Math.max(vScrollBounds.y, scrollV);
-					scrollV = Math.min(vScrollBounds.y + vScrollBounds.height - vKnobBounds.height, scrollV);
+					scrollV = Math.max(vScrollBounds.getY(), scrollV);
+					scrollV = Math.min(vScrollBounds.getY() + vScrollBounds.height - vKnobBounds.height, scrollV);
 					float total = vScrollBounds.height - vKnobBounds.height;
-					if (total != 0) setScrollPercentY(1 - ((scrollV - vScrollBounds.y) / total));
+					if (total != 0) setScrollPercentY(1 - ((scrollV - vScrollBounds.getY()) / total));
 					lastPoint.set(x, y);
 				}
 			}
@@ -441,9 +441,9 @@ public class ScrollPane extends WidgetGroup {
 				if (scrollY) widgetAreaBounds.width += scrollbarWidth;
 			} else {
 				// Offset widget area y for horizontal scrollbar at bottom.
-				if (scrollX && hScrollOnBottom) widgetAreaBounds.y += scrollbarHeight;
+				if (scrollX && hScrollOnBottom) widgetAreaBounds.setY(widgetAreaBounds.getY() + scrollbarHeight);
 				// Offset widget area x for vertical scrollbar at left.
-				if (scrollY && !vScrollOnRight) widgetAreaBounds.x += scrollbarWidth;
+				if (scrollY && !vScrollOnRight) widgetAreaBounds.setX(widgetAreaBounds.getX() + scrollbarWidth);
 			}
 		}
 
@@ -479,8 +479,8 @@ public class ScrollPane extends WidgetGroup {
 
 				hKnobBounds.height = hScrollKnob.getMinHeight();
 
-				hKnobBounds.x = hScrollBounds.x + (int)((hScrollBounds.width - hKnobBounds.width) * getScrollPercentX());
-				hKnobBounds.y = hScrollBounds.y;
+				hKnobBounds.setX(hScrollBounds.getX() + (int)((hScrollBounds.width - hKnobBounds.width) * getScrollPercentX()));
+				hKnobBounds.setY(hScrollBounds.getY());
 			} else {
 				hScrollBounds.set(0, 0, 0, 0);
 				hKnobBounds.set(0, 0, 0, 0);
@@ -510,11 +510,11 @@ public class ScrollPane extends WidgetGroup {
 					vKnobBounds.height = vScrollKnob.getMinHeight();
 
 				if (vScrollOnRight) {
-					vKnobBounds.x = width - bgRightWidth - vScrollKnob.getMinWidth();
+					vKnobBounds.setX(width - bgRightWidth - vScrollKnob.getMinWidth());
 				} else {
-					vKnobBounds.x = bgLeftWidth;
+					vKnobBounds.setX(bgLeftWidth);
 				}
-				vKnobBounds.y = vScrollBounds.y + (int)((vScrollBounds.height - vKnobBounds.height) * (1 - getScrollPercentY()));
+				vKnobBounds.setY(vScrollBounds.getY() + (int)((vScrollBounds.height - vKnobBounds.height) * (1 - getScrollPercentY())));
 			} else {
 				vScrollBounds.set(0, 0, 0, 0);
 				vKnobBounds.set(0, 0, 0, 0);
@@ -534,18 +534,18 @@ public class ScrollPane extends WidgetGroup {
 		// Setup transform for this group.
 		applyTransform(batch, computeTransform());
 
-		if (scrollX) hKnobBounds.x = hScrollBounds.x + (int)((hScrollBounds.width - hKnobBounds.width) * getVisualScrollPercentX());
+		if (scrollX) hKnobBounds.setX(hScrollBounds.getX() + (int)((hScrollBounds.width - hKnobBounds.width) * getVisualScrollPercentX()));
 		if (scrollY)
-			vKnobBounds.y = vScrollBounds.y + (int)((vScrollBounds.height - vKnobBounds.height) * (1 - getVisualScrollPercentY()));
+			vKnobBounds.setY(vScrollBounds.getY() + (int)((vScrollBounds.height - vKnobBounds.height) * (1 - getVisualScrollPercentY())));
 
 		// Calculate the widget's position depending on the scroll state and available widget area.
-		float y = widgetAreaBounds.y;
+		float y = widgetAreaBounds.getY();
 		if (!scrollY)
 			y -= (int)maxY;
 		else
 			y -= (int)(maxY - visualAmountY);
 
-		float x = widgetAreaBounds.x;
+		float x = widgetAreaBounds.getX();
 		if (scrollX) x -= (int)visualAmountX;
 
 		if (!fadeScrollBars && scrollbarsOnTop) {
@@ -566,8 +566,8 @@ public class ScrollPane extends WidgetGroup {
 		widget.setPosition(x, y);
 
 		if (widget instanceof Cullable) {
-			widgetCullingArea.x = -widget.getX() + widgetAreaBounds.x;
-			widgetCullingArea.y = -widget.getY() + widgetAreaBounds.y;
+			widgetCullingArea.setX(-widget.getX() + widgetAreaBounds.getX());
+			widgetCullingArea.setY(-widget.getY() + widgetAreaBounds.getY());
 			widgetCullingArea.width = widgetAreaBounds.width;
 			widgetCullingArea.height = widgetAreaBounds.height;
 			((Cullable)widget).setCullingArea(widgetCullingArea);
@@ -594,21 +594,21 @@ public class ScrollPane extends WidgetGroup {
 		batch.setColor(color.r, color.g, color.b, color.a * parentAlpha * Interpolation.fade.apply(fadeAlpha / fadeAlphaSeconds));
 		if (scrollX && scrollY) {
 			if (style.corner != null) {
-				style.corner.draw(batch, hScrollBounds.x + hScrollBounds.width, hScrollBounds.y, vScrollBounds.width,
-					vScrollBounds.y);
+				style.corner.draw(batch, hScrollBounds.getX() + hScrollBounds.width, hScrollBounds.getY(), vScrollBounds.width,
+					vScrollBounds.getY());
 			}
 		}
 		if (scrollX) {
 			if (style.hScroll != null)
-				style.hScroll.draw(batch, hScrollBounds.x, hScrollBounds.y, hScrollBounds.width, hScrollBounds.height);
+				style.hScroll.draw(batch, hScrollBounds.getX(), hScrollBounds.getY(), hScrollBounds.width, hScrollBounds.height);
 			if (style.hScrollKnob != null)
-				style.hScrollKnob.draw(batch, hKnobBounds.x, hKnobBounds.y, hKnobBounds.width, hKnobBounds.height);
+				style.hScrollKnob.draw(batch, hKnobBounds.getX(), hKnobBounds.getY(), hKnobBounds.width, hKnobBounds.height);
 		}
 		if (scrollY) {
 			if (style.vScroll != null)
-				style.vScroll.draw(batch, vScrollBounds.x, vScrollBounds.y, vScrollBounds.width, vScrollBounds.height);
+				style.vScroll.draw(batch, vScrollBounds.getX(), vScrollBounds.getY(), vScrollBounds.width, vScrollBounds.height);
 			if (style.vScrollKnob != null)
-				style.vScrollKnob.draw(batch, vKnobBounds.x, vKnobBounds.y, vKnobBounds.width, vKnobBounds.height);
+				style.vScrollKnob.draw(batch, vKnobBounds.getX(), vKnobBounds.getY(), vKnobBounds.width, vKnobBounds.height);
 		}
 
 		resetTransform(batch);

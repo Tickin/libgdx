@@ -207,14 +207,14 @@ public class SuperKoalio extends GdxTest {
 		startY = (int)(koala.position.getY());
 		endY = (int)(koala.position.getY() + Koala.HEIGHT);
 		getTiles(startX, startY, endX, endY, tiles);
-		koalaRect.x += koala.velocity.getX();
+		koalaRect.setX(koalaRect.getX() + koala.velocity.getX());
 		for (Rectangle tile : tiles) {
 			if (koalaRect.overlaps(tile)) {
 				koala.velocity.setX(0);
 				break;
 			}
 		}
-		koalaRect.x = koala.position.getX();
+		koalaRect.setX(koala.position.getX());
 
 		// if the koala is moving upwards, check the tiles to the top of its
 		// top bounding box edge, otherwise check the ones to the bottom
@@ -226,19 +226,19 @@ public class SuperKoalio extends GdxTest {
 		startX = (int)(koala.position.getX());
 		endX = (int)(koala.position.getX() + Koala.WIDTH);
 		getTiles(startX, startY, endX, endY, tiles);
-		koalaRect.y += koala.velocity.getY();
+		koalaRect.setY(koalaRect.getY() + koala.velocity.getY());
 		for (Rectangle tile : tiles) {
 			if (koalaRect.overlaps(tile)) {
 				// we actually reset the koala y-position here
 				// so it is just below/above the tile we collided with
 				// this removes bouncing :)
 				if (koala.velocity.getY() > 0) {
-					koala.position.setY(tile.y - Koala.HEIGHT);
+					koala.position.setY(tile.getY() - Koala.HEIGHT);
 					// we hit a block jumping upwards, let's destroy it!
 					TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("walls");
-					layer.setCell((int)tile.x, (int)tile.y, null);
+					layer.setCell((int)tile.getX(), (int)tile.getY(), null);
 				} else {
-					koala.position.setY(tile.y + tile.height);
+					koala.position.setY(tile.getY() + tile.height);
 					// if we hit the ground, mark us as grounded so we can jump
 					koala.grounded = true;
 				}

@@ -99,7 +99,7 @@ public class PolygonSpriteTest extends GdxTest {
 		PolygonSprite sprite = sprites.get(49);
 
 		bounds = sprite.getBoundingRectangle();
-		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+		renderer.rect(bounds.getX(), bounds.getY(), bounds.width, bounds.height);
 
 		renderer.end();
 

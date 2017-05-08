@@ -108,7 +108,7 @@ public class TiledMapObjectLoadingTest extends GdxTest {
 			} else if (mapObject instanceof RectangleMapObject) {
 				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 				Rectangle rectangle = ((RectangleMapObject)mapObject).getRectangle();
-				shapeRenderer.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+				shapeRenderer.rect(rectangle.getX(), rectangle.getY(), rectangle.width, rectangle.height);
 				shapeRenderer.end();
 			} else if (mapObject instanceof PolygonMapObject) {
 				shapeRenderer.begin(ShapeRenderer.ShapeType.Line);

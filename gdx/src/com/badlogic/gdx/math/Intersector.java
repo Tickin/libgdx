@@ -789,10 +789,10 @@ public final class Intersector {
 	 * @return Whether the rectangles intersect */
 	static public boolean intersectRectangles (Rectangle rectangle1, Rectangle rectangle2, Rectangle intersection) {
 		if (rectangle1.overlaps(rectangle2)) {
-			intersection.x = Math.max(rectangle1.x, rectangle2.x);
-			intersection.width = Math.min(rectangle1.x + rectangle1.width, rectangle2.x + rectangle2.width) - intersection.x;
-			intersection.y = Math.max(rectangle1.y, rectangle2.y);
-			intersection.height = Math.min(rectangle1.y + rectangle1.height, rectangle2.y + rectangle2.height) - intersection.y;
+			intersection.setX(Math.max(rectangle1.getX(), rectangle2.getX()));
+			intersection.width = Math.min(rectangle1.getX() + rectangle1.width, rectangle2.getX() + rectangle2.width) - intersection.getX();
+			intersection.setY(Math.max(rectangle1.getY(), rectangle2.getY()));
+			intersection.height = Math.min(rectangle1.getY() + rectangle1.height, rectangle2.getY() + rectangle2.height) - intersection.getY();
 			return true;
 		}
 		return false;
@@ -891,16 +891,16 @@ public final class Intersector {
 		float closestX = c.x;
 		float closestY = c.y;
 
-		if (c.x < r.x) {
-			closestX = r.x;
-		} else if (c.x > r.x + r.width) {
-			closestX = r.x + r.width;
+		if (c.x < r.getX()) {
+			closestX = r.getX();
+		} else if (c.x > r.getX() + r.width) {
+			closestX = r.getX() + r.width;
 		}
 
-		if (c.y < r.y) {
-			closestY = r.y;
-		} else if (c.y > r.y + r.height) {
-			closestY = r.y + r.height;
+		if (c.y < r.getY()) {
+			closestY = r.getY();
+		} else if (c.y > r.getY() + r.height) {
+			closestY = r.getY() + r.height;
 		}
 
 		closestX = closestX - c.x;

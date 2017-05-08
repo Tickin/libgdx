@@ -89,10 +89,10 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		float height = camera.viewportHeight * camera.zoom + maxTileHeight * 2 * unitScale;
 		viewBounds.set(camera.position.getX() - width / 2, camera.position.getY() - height / 2, width, height);
 
-		if ((canCacheMoreW && viewBounds.x < cacheBounds.x - tolerance) || //
-			(canCacheMoreS && viewBounds.y < cacheBounds.y - tolerance) || //
-			(canCacheMoreE && viewBounds.x + viewBounds.width > cacheBounds.x + cacheBounds.width + tolerance) || //
-			(canCacheMoreN && viewBounds.y + viewBounds.height > cacheBounds.y + cacheBounds.height + tolerance) //
+		if ((canCacheMoreW && viewBounds.getX() < cacheBounds.getX() - tolerance) || //
+			(canCacheMoreS && viewBounds.getY() < cacheBounds.getY() - tolerance) || //
+			(canCacheMoreE && viewBounds.getX() + viewBounds.width > cacheBounds.getX() + cacheBounds.width + tolerance) || //
+			(canCacheMoreN && viewBounds.getY() + viewBounds.height > cacheBounds.getY() + cacheBounds.height + tolerance) //
 		) cached = false;
 	}
 
@@ -105,10 +105,10 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		height += maxTileHeight * 2 * unitScale;
 		viewBounds.set(x, y, width, height);
 
-		if ((canCacheMoreW && viewBounds.x < cacheBounds.x - tolerance) || //
-			(canCacheMoreS && viewBounds.y < cacheBounds.y - tolerance) || //
-			(canCacheMoreE && viewBounds.x + viewBounds.width > cacheBounds.x + cacheBounds.width + tolerance) || //
-			(canCacheMoreN && viewBounds.y + viewBounds.height > cacheBounds.y + cacheBounds.height + tolerance) //
+		if ((canCacheMoreW && viewBounds.getX() < cacheBounds.getX() - tolerance) || //
+			(canCacheMoreS && viewBounds.getY() < cacheBounds.getY() - tolerance) || //
+			(canCacheMoreE && viewBounds.getX() + viewBounds.width > cacheBounds.getX() + cacheBounds.width + tolerance) || //
+			(canCacheMoreN && viewBounds.getY() + viewBounds.height > cacheBounds.getY() + cacheBounds.height + tolerance) //
 		) cached = false;
 	}
 
@@ -121,8 +121,8 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 
 			final float extraWidth = viewBounds.width * overCache;
 			final float extraHeight = viewBounds.height * overCache;
-			cacheBounds.x = viewBounds.x - extraWidth;
-			cacheBounds.y = viewBounds.y - extraHeight;
+			cacheBounds.setX(viewBounds.getX() - extraWidth);
+			cacheBounds.setY(viewBounds.getY() - extraHeight);
 			cacheBounds.width = viewBounds.width + extraWidth * 2;
 			cacheBounds.height = viewBounds.height + extraHeight * 2;
 
@@ -163,8 +163,8 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 
 			final float extraWidth = viewBounds.width * overCache;
 			final float extraHeight = viewBounds.height * overCache;
-			cacheBounds.x = viewBounds.x - extraWidth;
-			cacheBounds.y = viewBounds.y - extraHeight;
+			cacheBounds.setX(viewBounds.getX() - extraWidth);
+			cacheBounds.setY(viewBounds.getY() - extraHeight);
 			cacheBounds.width = viewBounds.width + extraWidth * 2;
 			cacheBounds.height = viewBounds.height + extraHeight * 2;
 
@@ -221,13 +221,13 @@ public class OrthoCachedTiledMapRenderer implements TiledMapRenderer, Disposable
 		// offset in tiled is y down, so we flip it
 		final float layerOffsetY = -layer.getOffsetY() * unitScale;
 
-		final int col1 = Math.max(0, (int)((cacheBounds.x - layerOffsetX) / layerTileWidth));
+		final int col1 = Math.max(0, (int)((cacheBounds.getX() - layerOffsetX) / layerTileWidth));
 		final int col2 = Math.min(layerWidth,
-			(int)((cacheBounds.x + cacheBounds.width + layerTileWidth - layerOffsetX) / layerTileWidth));
+			(int)((cacheBounds.getX() + cacheBounds.width + layerTileWidth - layerOffsetX) / layerTileWidth));
 
-		final int row1 = Math.max(0, (int)((cacheBounds.y - layerOffsetY) / layerTileHeight));
+		final int row1 = Math.max(0, (int)((cacheBounds.getY() - layerOffsetY) / layerTileHeight));
 		final int row2 = Math.min(layerHeight,
-			(int)((cacheBounds.y + cacheBounds.height + layerTileHeight - layerOffsetY) / layerTileHeight));
+			(int)((cacheBounds.getY() + cacheBounds.height + layerTileHeight - layerOffsetY) / layerTileHeight));
 
 		canCacheMoreN = row2 < layerHeight;
 		canCacheMoreE = col2 < layerWidth;

@@ -78,13 +78,13 @@ public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
 		// offset in tiled is y down, so we flip it
 		final float layerOffsetY = -layer.getOffsetY() * unitScale;
 
-		final int col1 = Math.max(0, (int)((viewBounds.x - layerOffsetX) / layerTileWidth));
+		final int col1 = Math.max(0, (int)((viewBounds.getX() - layerOffsetX) / layerTileWidth));
 		final int col2 = Math.min(layerWidth,
-			(int)((viewBounds.x + viewBounds.width + layerTileWidth - layerOffsetX) / layerTileWidth));
+			(int)((viewBounds.getX() + viewBounds.width + layerTileWidth - layerOffsetX) / layerTileWidth));
 
-		final int row1 = Math.max(0, (int)((viewBounds.y - layerOffsetY) / layerTileHeight));
+		final int row1 = Math.max(0, (int)((viewBounds.getY() - layerOffsetY) / layerTileHeight));
 		final int row2 = Math.min(layerHeight,
-			(int)((viewBounds.y + viewBounds.height + layerTileHeight - layerOffsetY) / layerTileHeight));
+			(int)((viewBounds.getY() + viewBounds.height + layerTileHeight - layerOffsetY) / layerTileHeight));
 
 		float y = row2 * layerTileHeight + layerOffsetY;
 		float xStart = col1 * layerTileWidth + layerOffsetX;

@@ -51,21 +51,21 @@ public class ScissorStack {
 		} else {
 			// merge scissors
 			Rectangle parent = scissors.get(scissors.size - 1);
-			float minX = Math.max(parent.x, scissor.x);
-			float maxX = Math.min(parent.x + parent.width, scissor.x + scissor.width);
+			float minX = Math.max(parent.getX(), scissor.getX());
+			float maxX = Math.min(parent.getX() + parent.width, scissor.getX() + scissor.width);
 			if (maxX - minX < 1) return false;
 
-			float minY = Math.max(parent.y, scissor.y);
-			float maxY = Math.min(parent.y + parent.height, scissor.y + scissor.height);
+			float minY = Math.max(parent.getY(), scissor.getY());
+			float maxY = Math.min(parent.getY() + parent.height, scissor.getY() + scissor.height);
 			if (maxY - minY < 1) return false;
 
-			scissor.x = minX;
-			scissor.y = minY;
+			scissor.setX(minX);
+			scissor.setY(minY);
 			scissor.width = maxX - minX;
 			scissor.height = Math.max(1, maxY - minY);
 		}
 		scissors.add(scissor);
-		HdpiUtils.glScissor((int)scissor.x, (int)scissor.y, (int)scissor.width, (int)scissor.height);
+		HdpiUtils.glScissor((int)scissor.getX(), (int)scissor.getY(), (int)scissor.width, (int)scissor.height);
 		return true;
 	}
 
@@ -79,7 +79,7 @@ public class ScissorStack {
 			Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
 		else {
 			Rectangle scissor = scissors.peek();
-			HdpiUtils.glScissor((int)scissor.x, (int)scissor.y, (int)scissor.width, (int)scissor.height);
+			HdpiUtils.glScissor((int)scissor.getX(), (int)scissor.getY(), (int)scissor.width, (int)scissor.height);
 		}
 		return old;
 	}
@@ -89,17 +89,17 @@ public class ScissorStack {
 	}
 
 	private static void fix (Rectangle rect) {
-		rect.x = Math.round(rect.x);
-		rect.y = Math.round(rect.y);
+		rect.setX(Math.round(rect.getX()));
+		rect.setY(Math.round(rect.getY()));
 		rect.width = Math.round(rect.width);
 		rect.height = Math.round(rect.height);
 		if (rect.width < 0) {
 			rect.width = -rect.width;
-			rect.x -= rect.width;
+			rect.setX(rect.getX() - rect.width);
 		}
 		if (rect.height < 0) {
 			rect.height = -rect.height;
-			rect.y -= rect.height;
+			rect.setY(rect.getY() - rect.height);
 		}
 	}
 
@@ -120,17 +120,17 @@ public class ScissorStack {
 	 * @param scissor the Rectangle to store the result in */
 	public static void calculateScissors (Camera camera, float viewportX, float viewportY, float viewportWidth,
 		float viewportHeight, Matrix4 batchTransform, Rectangle area, Rectangle scissor) {
-		tmp.set(area.x, area.y, 0);
+		tmp.set(area.getX(), area.getY(), 0);
 		tmp.mul(batchTransform);
 		camera.project(tmp, viewportX, viewportY, viewportWidth, viewportHeight);
-		scissor.x = tmp.getX();
-		scissor.y = tmp.getY();
+		scissor.setX(tmp.getX());
+		scissor.setY(tmp.getY());
 
-		tmp.set(area.x + area.width, area.y + area.height, 0);
+		tmp.set(area.getX() + area.width, area.getY() + area.height, 0);
 		tmp.mul(batchTransform);
 		camera.project(tmp, viewportX, viewportY, viewportWidth, viewportHeight);
-		scissor.width = tmp.getX() - scissor.x;
-		scissor.height = tmp.getY() - scissor.y;
+		scissor.width = tmp.getX() - scissor.getX();
+		scissor.height = tmp.getY() - scissor.getY();
 	}
 
 	/** @return the current viewport in OpenGL ES window coordinates based on the currently applied scissor */

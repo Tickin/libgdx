@@ -87,7 +87,7 @@ public class SplitPane extends WidgetGroup {
 				if (handleBounds.contains(x, y)) {
 					draggingPointer = pointer;
 					lastPoint.set(x, y);
-					handlePosition.set(handleBounds.x, handleBounds.y);
+					handlePosition.set(handleBounds.getX(), handleBounds.getY());
 					return true;
 				}
 				return false;
@@ -150,13 +150,13 @@ public class SplitPane extends WidgetGroup {
 		Actor firstWidget = this.firstWidget;
 		if (firstWidget != null) {
 			Rectangle firstWidgetBounds = this.firstWidgetBounds;
-			firstWidget.setBounds(firstWidgetBounds.x, firstWidgetBounds.y, firstWidgetBounds.width, firstWidgetBounds.height);
+			firstWidget.setBounds(firstWidgetBounds.getX(), firstWidgetBounds.getY(), firstWidgetBounds.width, firstWidgetBounds.height);
 			if (firstWidget instanceof Layout) ((Layout)firstWidget).validate();
 		}
 		Actor secondWidget = this.secondWidget;
 		if (secondWidget != null) {
 			Rectangle secondWidgetBounds = this.secondWidgetBounds;
-			secondWidget.setBounds(secondWidgetBounds.x, secondWidgetBounds.y, secondWidgetBounds.width, secondWidgetBounds.height);
+			secondWidget.setBounds(secondWidgetBounds.getX(), secondWidgetBounds.getY(), secondWidgetBounds.width, secondWidgetBounds.height);
 			if (secondWidget instanceof Layout) ((Layout)secondWidget).validate();
 		}
 	}
@@ -252,7 +252,7 @@ public class SplitPane extends WidgetGroup {
 			}
 		}
 		batch.setColor(color.r, color.g, color.b, parentAlpha * color.a);
-		handle.draw(batch, handleBounds.x, handleBounds.y, handleBounds.width, handleBounds.height);
+		handle.draw(batch, handleBounds.getX(), handleBounds.getY(), handleBounds.width, handleBounds.height);
 		resetTransform(batch);
 	}
 

@@ -62,13 +62,13 @@ public class IsometricStaggeredTiledMapRenderer extends BatchTiledMapRenderer {
 		final float layerTileWidth50 = layerTileWidth * 0.50f;
 		final float layerTileHeight50 = layerTileHeight * 0.50f;
 
-		final int minX = Math.max(0, (int)(((viewBounds.x - layerTileWidth50 - layerOffsetX) / layerTileWidth)));
+		final int minX = Math.max(0, (int)(((viewBounds.getX() - layerTileWidth50 - layerOffsetX) / layerTileWidth)));
 		final int maxX = Math.min(layerWidth,
-			(int)((viewBounds.x + viewBounds.width + layerTileWidth + layerTileWidth50 - layerOffsetX) / layerTileWidth));
+			(int)((viewBounds.getX() + viewBounds.width + layerTileWidth + layerTileWidth50 - layerOffsetX) / layerTileWidth));
 
-		final int minY = Math.max(0, (int)(((viewBounds.y - layerTileHeight - layerOffsetY) / layerTileHeight)));
+		final int minY = Math.max(0, (int)(((viewBounds.getY() - layerTileHeight - layerOffsetY) / layerTileHeight)));
 		final int maxY = Math.min(layerHeight,
-			(int)((viewBounds.y + viewBounds.height + layerTileHeight - layerOffsetY) / layerTileHeight50));
+			(int)((viewBounds.getY() + viewBounds.height + layerTileHeight - layerOffsetY) / layerTileHeight50));
 
 		for (int y = maxY - 1; y >= minY; y--) {
 			float offsetX = (y % 2 == 1) ? layerTileWidth50 : 0;

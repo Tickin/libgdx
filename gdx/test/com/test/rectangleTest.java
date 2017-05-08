@@ -87,14 +87,14 @@ public class rectangleTest {
 	
 	@Test
 	public void testContainsforRectangleFalse(){
-		rec2.x=6f; rec2.y=5f; rec2.width=3f; rec2.height=2f;
+		rec2.setX(6f); rec2.setY(5f); rec2.width=3f; rec2.height=2f;
 		assertFalse(rec1.contains(rec2));
 	}
 	
 	
 	@Test
 	public void testContainsforRectangleTrue(){
-		rec2.x=4f; rec2.y=4f; rec2.width=1.2f; rec2.height=0.8f;
+		rec2.setX(4f); rec2.setY(4f); rec2.width=1.2f; rec2.height=0.8f;
 		assertTrue(rec1.contains(rec2));
 	}	
 	
@@ -174,14 +174,14 @@ public class rectangleTest {
 	
 	@Test
 	public void testOverlap(){
-		rec2.x=4f; rec2.y=4f; rec2.width=1.4f; rec2.height=2f;
+		rec2.setX(4f); rec2.setY(4f); rec2.width=1.4f; rec2.height=2f;
 		assertTrue(rec1.overlaps(rec2));
 	}	
 	
 
 	@Test
 	public void testMergeForRectangle(){
-		rec2.x=5f; rec2.y=1f; rec2.width=3f; rec2.height=2f;
+		rec2.setX(5f); rec2.setY(1f); rec2.width=3f; rec2.height=2f;
 		rec1.merge(rec2);
 		Rectangle rec3=new Rectangle(3f,1f,5f,5f);
 		
