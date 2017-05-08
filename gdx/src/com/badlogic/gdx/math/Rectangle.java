@@ -212,8 +212,7 @@ public class Rectangle implements Serializable, Shape2D {
 		float ymin = rectangle.y;
 		float ymax = ymin + rectangle.height;
 
-		return ((xmin > x && xmin < x + width) && (xmax > x && xmax < x + width))
-			&& ((ymin > y && ymin < y + height) && (ymax > y && ymax < y + height));
+		return contains(xmin,ymin) && contains(xmax,ymax);
 	}
 
 	/** @param r the other {@link Rectangle}
