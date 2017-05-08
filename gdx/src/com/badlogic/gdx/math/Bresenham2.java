@@ -66,42 +66,100 @@ public class Bresenham2 {
 
 		int w = endX - startX;
 		int h = endY - startY;
-		int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
-		if (w < 0) {
-			dx1 = -1;
-			dx2 = -1;
-		} else if (w > 0) {
-			dx1 = 1;
-			dx2 = 1;
-		}
-		if (h < 0)
-			dy1 = -1;
-		else if (h > 0) dy1 = 1;
-		int longest = Math.abs(w);
-		int shortest = Math.abs(h);
-		if (longest <= shortest) {
-			longest = Math.abs(h);
-			shortest = Math.abs(w);
-			if (h < 0)
-				dy2 = -1;
-			else if (h > 0) dy2 = 1;
-			dx2 = 0;
-		}
-		int numerator = longest >> 1;
-		for (int i = 0; i <= longest; i++) {
-			GridPoint2 point = pool.obtain();
-			point.set(startX, startY);
+		LineDiffer diff = new  LineDiffer(w, h);
+
+		int numerator = diff.getLongest() >> 1;
+		GridPoint2 point = pool.obtain();
+		
+		point.set(startX, startY);
+		
+		for (int i = 0; i <= diff.getLongest(); i++) {
 			output.add(point);
-			numerator += shortest;
-			if (numerator > longest) {
-				numerator -= longest;
-				startX += dx1;
-				startY += dy1;
-			} else {
-				startX += dx2;
-				startY += dy2;
+			numerator += diff.getShortest();
+			point.add(diff.getDiff(numerator));
+			if (numerator > diff.getLongest()) {
+				numerator -= diff.getLongest();
 			}
 		}
 		return output;
+	}
+
+	enum DIRECTION{FORWARD, OPPOSITE, NONE};
+	enum LINEWIDE{XWIDE, YWIDE};
+	
+	private class LineDiffer{
+		final int longest, shortest;
+		final DIRECTION directionX, directionY;
+		final LINEWIDE wide; 
+		
+		LineDiffer(int w, int h){
+			final int abs_w = Math.abs(w);
+			final int abs_h = Math.abs(h);
+			
+			if(abs_w < abs_h){
+				wide = LINEWIDE.YWIDE;
+				longest = abs_h;
+				shortest = abs_w;
+			}else{
+				wide = LINEWIDE.XWIDE;
+				longest = abs_w;
+				shortest = abs_h;
+			}
+
+			directionX = checkDirection(w);
+			directionY = checkDirection(h);
+		}
+
+		private DIRECTION checkDirection (int value) {
+			DIRECTION result;
+			
+			if(value < 0){
+				result = DIRECTION.OPPOSITE;
+			}else if(value == 0){
+				result = DIRECTION.NONE;
+			}else{
+				result = DIRECTION.FORWARD;
+			}
+			
+			return result;
+		}
+		
+		int getDirectionValue(DIRECTION dir){
+			int result = 0;
+			switch(dir){
+			case FORWARD:
+				result = 1;
+			case OPPOSITE:
+				result = -1;
+			case NONE:
+				result = 0;
+			}
+			
+			return result;
+		}
+		
+		GridPoint2 getDiff(int numerator){
+			GridPoint2 result = new GridPoint2();
+			int xDiff = 0, yDiff = 0;
+			
+			if(numerator > getLongest()){
+				xDiff = getDirectionValue(directionX);
+				yDiff = getDirectionValue(directionY);
+			}else if(wide == LINEWIDE.XWIDE){
+				xDiff = getDirectionValue(directionX);
+			}else if(wide == LINEWIDE.YWIDE){
+				yDiff = getDirectionValue(directionY);
+			}
+			
+			return result;
+		}
+		
+		int getLongest(){
+			return longest;
+		}
+		
+		int getShortest(){
+			return shortest;
+		}
 	}
 }
