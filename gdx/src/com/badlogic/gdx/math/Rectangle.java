@@ -29,7 +29,7 @@ public class Rectangle implements Serializable, Shape2D {
 	static public final Rectangle tmp2 = new Rectangle();
 
 	private static final long serialVersionUID = 5733252015138115702L;
-	public float x, y;
+	private float x, y;
 	public float width, height;
 
 	/** Constructs a new rectangle with all values set to zero */
