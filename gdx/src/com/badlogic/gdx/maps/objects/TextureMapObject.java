@@ -103,12 +103,12 @@ public class TextureMapObject extends MapObject {
 
 	/** @return region */
 	public TextureRegion getTextureRegion () {
-		return textureRegion;
+		return (TextureRegion)getObject();
 	}
 
 	/** @param region new texture region */
 	public void setTextureRegion (TextureRegion region) {
-		textureRegion = region;
+		obj = region;
 	}
 
 	/** Creates an empty texture map object */
@@ -121,6 +121,6 @@ public class TextureMapObject extends MapObject {
 	 * @param textureRegion the {@link TextureRegion} to use. */
 	public TextureMapObject (TextureRegion textureRegion) {
 		super();
-		this.textureRegion = textureRegion;
+		obj = textureRegion;
 	}
 }

@@ -22,16 +22,14 @@ import com.badlogic.gdx.math.Polyline;
 /** @brief Represents {@link Polyline} map objects */
 public class PolylineMapObject extends MapObject {
 
-	private Polyline polyline;
-
 	/** @return polyline shape */
 	public Polyline getPolyline () {
-		return polyline;
+		return (Polyline)getObject();
 	}
 
 	/** @param polyline new object's polyline shape */
 	public void setPolyline (Polyline polyline) {
-		this.polyline = polyline;
+		this.obj = polyline;
 	}
 
 	/** Creates empty polyline */
@@ -41,12 +39,12 @@ public class PolylineMapObject extends MapObject {
 
 	/** @param vertices polyline defining vertices */
 	public PolylineMapObject (float[] vertices) {
-		polyline = new Polyline(vertices);
+		obj = new Polyline(vertices);
 	}
 
 	/** @param polyline the polyline */
 	public PolylineMapObject (Polyline polyline) {
-		this.polyline = polyline;
+		this.obj = polyline;
 	}
 
 }
