@@ -19,13 +19,13 @@ package com.badlogic.gdx.maps;
 import com.badlogic.gdx.graphics.Color;
 
 /** Generic Map entity with basic attributes like name, opacity, color */
-public class MapObject {
+abstract public class MapObject {
 	private String name = "";
 	private float opacity = 1.0f;
 	private boolean visible = true;
 	private MapProperties properties = new MapProperties();
 	private Color color = Color.WHITE.cpy();
-
+	protected Object obj;
 	/** @return object's name */
 	public String getName () {
 		return name;
@@ -69,5 +69,9 @@ public class MapObject {
 	/** @return object's properties set */
 	public MapProperties getProperties () {
 		return properties;
+	}
+	
+	public Object getObject(){
+		return obj;
 	}
 }

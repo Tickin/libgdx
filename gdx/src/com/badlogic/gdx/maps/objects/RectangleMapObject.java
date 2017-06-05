@@ -22,11 +22,9 @@ import com.badlogic.gdx.math.Rectangle;
 /** @brief Represents a rectangle shaped map object */
 public class RectangleMapObject extends MapObject {
 
-	private Rectangle rectangle;
-
 	/** @return rectangle shape */
 	public Rectangle getRectangle () {
-		return rectangle;
+		return (Rectangle)getObject();
 	}
 
 	/** Creates a rectangle object which lower left corner is at (0, 0) with width=1 and height=1 */
@@ -42,7 +40,7 @@ public class RectangleMapObject extends MapObject {
 	 * @param height Height of the {@link Rectangle} to be created. */
 	public RectangleMapObject (float x, float y, float width, float height) {
 		super();
-		rectangle = new Rectangle(x, y, width, height);
+		obj = new Rectangle(x, y, width, height);
 	}
 
 }
