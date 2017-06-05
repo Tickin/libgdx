@@ -10,16 +10,14 @@ import com.badlogic.gdx.math.Polygon;
 /** @brief Represents {@link Polygon} map objects */
 public class PolygonMapObject extends MapObject {
 
-	private Polygon polygon;
-
 	/** @return polygon shape */
 	public Polygon getPolygon () {
-		return polygon;
+		return (Polygon)getObject();
 	}
 
 	/** @param polygon new object's polygon shape */
 	public void setPolygon (Polygon polygon) {
-		this.polygon = polygon;
+		this.obj = polygon;
 	}
 
 	/** Creates empty polygon map object */
@@ -29,12 +27,12 @@ public class PolygonMapObject extends MapObject {
 
 	/** @param vertices polygon defining vertices (at least 3) */
 	public PolygonMapObject (float[] vertices) {
-		polygon = new Polygon(vertices);
+		obj = new Polygon(vertices);
 	}
 
 	/** @param polygon the polygon */
 	public PolygonMapObject (Polygon polygon) {
-		this.polygon = polygon;
+		this.obj = polygon;
 	}
 
 }

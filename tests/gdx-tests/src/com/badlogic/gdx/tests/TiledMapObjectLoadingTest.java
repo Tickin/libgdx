@@ -102,17 +102,17 @@ public class TiledMapObjectLoadingTest extends GdxTest {
 				batch.end();
 			} else if (mapObject instanceof EllipseMapObject) {
 				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-				Ellipse ellipse = ((EllipseMapObject)mapObject).getEllipse();
+				Ellipse ellipse = (Ellipse)mapObject.getObject();
 				shapeRenderer.ellipse(ellipse.x, ellipse.y, ellipse.width, ellipse.height);
 				shapeRenderer.end();
 			} else if (mapObject instanceof RectangleMapObject) {
 				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-				Rectangle rectangle = ((RectangleMapObject)mapObject).getRectangle();
+				Rectangle rectangle = (Rectangle)mapObject.getObject();
 				shapeRenderer.rect(rectangle.getX(), rectangle.getY(), rectangle.width, rectangle.height);
 				shapeRenderer.end();
 			} else if (mapObject instanceof PolygonMapObject) {
 				shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-				Polygon polygon = ((PolygonMapObject)mapObject).getPolygon();
+				Polygon polygon = (Polygon)mapObject.getObject();
 				shapeRenderer.polygon(polygon.getTransformedVertices());
 				shapeRenderer.end();
 			}

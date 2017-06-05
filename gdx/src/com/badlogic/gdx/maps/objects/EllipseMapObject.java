@@ -23,11 +23,10 @@ import com.badlogic.gdx.math.Rectangle;
 /** @brief Represents {@link Ellipse} map objects. */
 public class EllipseMapObject extends MapObject {
 
-	private Ellipse ellipse;
 
 	/** @return ellipse shape */
 	public Ellipse getEllipse () {
-		return ellipse;
+		return (Ellipse)getObject();
 	}
 
 	/** Creates an {@link Ellipse} object whose lower left corner is at (0, 0) with width=1 and height=1 */
@@ -43,6 +42,7 @@ public class EllipseMapObject extends MapObject {
 	 * @param height Height in pixels */
 	public EllipseMapObject (float x, float y, float width, float height) {
 		super();
-		ellipse = new Ellipse(x, y, width, height);
+		obj = new Ellipse(x, y, width, height);
 	}
+
 }
