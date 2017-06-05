@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * transforms.
  * 
  * @author mzechner */
-public class Matrix3 implements Serializable {
+public class Matrix3 implements Serializable, Matrix<Matrix3> {
 	private static final long serialVersionUID = 7907569533774959788L;
 	public static final int M00 = 0;
 	public static final int M01 = 3;
@@ -572,18 +572,14 @@ public class Matrix3 implements Serializable {
 	public Matrix3 transpose () {
 		// Where MXY you do not have to change MXX
 		float[] val = this.val;
-		float v01 = val[M10];
-		float v02 = val[M20];
-		float v10 = val[M01];
-		float v12 = val[M21];
-		float v20 = val[M02];
-		float v21 = val[M12];
-		val[M01] = v01;
-		val[M02] = v02;
-		val[M10] = v10;
-		val[M12] = v12;
-		val[M20] = v20;
-		val[M21] = v21;
+		
+		val[M01] = val[M10];
+		val[M02] = val[M20];
+		val[M10] = val[M01];
+		val[M12] = val[M21];
+		val[M20] = val[M02];
+		val[M21] = val[M12];
+		
 		return this;
 	}
 
