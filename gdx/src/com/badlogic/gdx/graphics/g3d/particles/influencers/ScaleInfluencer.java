@@ -33,8 +33,8 @@ public class ScaleInfluencer extends SimpleInfluencer {
 		if (value.isRelative()) {
 			for (int i = startIndex * valueChannel.strideSize, a = startIndex * interpolationChannel.strideSize, c = i + count
 				* valueChannel.strideSize; i < c; i += valueChannel.strideSize, a += interpolationChannel.strideSize) {
-				float start = value.newLowValue() * controller.scale.x;
-				float diff = value.newHighValue() * controller.scale.x;
+				float start = value.newLowValue() * controller.scale.getX();
+				float diff = value.newHighValue() * controller.scale.getX();
 				interpolationChannel.data[a + ParticleChannels.InterpolationStartOffset] = start;
 				interpolationChannel.data[a + ParticleChannels.InterpolationDiffOffset] = diff;
 				valueChannel.data[i] = start + diff * value.getScale(0);
@@ -42,8 +42,8 @@ public class ScaleInfluencer extends SimpleInfluencer {
 		} else {
 			for (int i = startIndex * valueChannel.strideSize, a = startIndex * interpolationChannel.strideSize, c = i + count
 				* valueChannel.strideSize; i < c; i += valueChannel.strideSize, a += interpolationChannel.strideSize) {
-				float start = value.newLowValue() * controller.scale.x;
-				float diff = value.newHighValue() * controller.scale.x - start;
+				float start = value.newLowValue() * controller.scale.getX();
+				float diff = value.newHighValue() * controller.scale.getX() - start;
 				interpolationChannel.data[a + ParticleChannels.InterpolationStartOffset] = start;
 				interpolationChannel.data[a + ParticleChannels.InterpolationDiffOffset] = diff;
 				valueChannel.data[i] = start + diff * value.getScale(0);

@@ -53,22 +53,22 @@ public class InputListener implements EventListener {
 
 		switch (event.getType()) {
 		case touchDown:
-			return touchDown(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
+			return touchDown(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer(), event.getButton());
 		case touchUp:
-			touchUp(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
+			touchUp(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer(), event.getButton());
 			return true;
 		case touchDragged:
-			touchDragged(event, tmpCoords.x, tmpCoords.y, event.getPointer());
+			touchDragged(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer());
 			return true;
 		case mouseMoved:
-			return mouseMoved(event, tmpCoords.x, tmpCoords.y);
+			return mouseMoved(event, tmpCoords.getX(), tmpCoords.getY());
 		case scrolled:
-			return scrolled(event, tmpCoords.x, tmpCoords.y, event.getScrollAmount());
+			return scrolled(event, tmpCoords.getX(), tmpCoords.getY(), event.getScrollAmount());
 		case enter:
-			enter(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getRelatedActor());
+			enter(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer(), event.getRelatedActor());
 			return false;
 		case exit:
-			exit(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getRelatedActor());
+			exit(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer(), event.getRelatedActor());
 			return false;
 		}
 		return false;

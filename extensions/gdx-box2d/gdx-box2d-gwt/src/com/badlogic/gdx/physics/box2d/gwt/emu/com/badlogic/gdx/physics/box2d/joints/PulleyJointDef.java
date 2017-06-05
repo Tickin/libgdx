@@ -72,12 +72,12 @@ public class PulleyJointDef extends JointDef {
 		jd.bodyA = bodyA.body;
 		jd.bodyB = bodyB.body;
 		jd.collideConnected = collideConnected;
-		jd.groundAnchorA.set(groundAnchorA.x, groundAnchorB.y);
-		jd.groundAnchorB.set(groundAnchorB.x, groundAnchorB.y);
+		jd.groundAnchorA.set(groundAnchorA.getX(), groundAnchorB.getY());
+		jd.groundAnchorB.set(groundAnchorB.getX(), groundAnchorB.getY());
 		jd.lengthA = lengthA;
 		jd.lengthB = lengthB;
-		jd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		jd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
+		jd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		jd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
 		jd.ratio = ratio;
 		jd.type = org.jbox2d.dynamics.joints.JointType.PULLEY;
 		return jd;

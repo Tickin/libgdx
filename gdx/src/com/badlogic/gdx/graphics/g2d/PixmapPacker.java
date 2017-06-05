@@ -161,7 +161,7 @@ public class PixmapPacker implements Disposable {
 			page.addedRects.add(name);
 		}
 
-		int rectX = (int)rect.x, rectY = (int)rect.y, rectWidth = (int)rect.width, rectHeight = (int)rect.height;
+		int rectX = (int)rect.getX(), rectY = (int)rect.getY(), rectWidth = (int)rect.width, rectHeight = (int)rect.height;
 
 		if (packToTexture && !duplicateBorder && page.texture != null && !page.dirty) {
 			page.texture.bind();
@@ -258,7 +258,7 @@ public class PixmapPacker implements Disposable {
 			if (page.addedRects.size > 0) {
 				for (String name : page.addedRects) {
 					Rectangle rect = page.rects.get(name);
-					TextureRegion region = new TextureRegion(page.texture, (int)rect.x, (int)rect.y, (int)rect.width,
+					TextureRegion region = new TextureRegion(page.texture, (int)rect.getX(), (int)rect.getY(), (int)rect.width,
 						(int)rect.height);
 					atlas.addRegion(name, region);
 				}
@@ -438,7 +438,7 @@ public class PixmapPacker implements Disposable {
 				node = insert(page.root, rect);
 			}
 			node.full = true;
-			rect.set(node.rect.x, node.rect.y, node.rect.width - padding, node.rect.height - padding);
+			rect.set(node.rect.getX(), node.rect.getY(), node.rect.width - padding, node.rect.height - padding);
 			return page;
 		}
 
@@ -458,23 +458,23 @@ public class PixmapPacker implements Disposable {
 				int deltaWidth = (int)node.rect.width - (int)rect.width;
 				int deltaHeight = (int)node.rect.height - (int)rect.height;
 				if (deltaWidth > deltaHeight) {
-					node.leftChild.rect.x = node.rect.x;
-					node.leftChild.rect.y = node.rect.y;
+					node.leftChild.rect.setX(node.rect.getX());
+					node.leftChild.rect.setY(node.rect.getY());
 					node.leftChild.rect.width = rect.width;
 					node.leftChild.rect.height = node.rect.height;
 
-					node.rightChild.rect.x = node.rect.x + rect.width;
-					node.rightChild.rect.y = node.rect.y;
+					node.rightChild.rect.setX(node.rect.getX() + rect.width);
+					node.rightChild.rect.setY(node.rect.getY());
 					node.rightChild.rect.width = node.rect.width - rect.width;
 					node.rightChild.rect.height = node.rect.height;
 				} else {
-					node.leftChild.rect.x = node.rect.x;
-					node.leftChild.rect.y = node.rect.y;
+					node.leftChild.rect.setX(node.rect.getX());
+					node.leftChild.rect.setY(node.rect.getY());
 					node.leftChild.rect.width = node.rect.width;
 					node.leftChild.rect.height = rect.height;
 
-					node.rightChild.rect.x = node.rect.x;
-					node.rightChild.rect.y = node.rect.y + rect.height;
+					node.rightChild.rect.setX(node.rect.getX());
+					node.rightChild.rect.setY(node.rect.getY() + rect.height);
 					node.rightChild.rect.width = node.rect.width;
 					node.rightChild.rect.height = node.rect.height - rect.height;
 				}
@@ -496,8 +496,8 @@ public class PixmapPacker implements Disposable {
 			public GuillotinePage (PixmapPacker packer) {
 				super(packer);
 				root = new Node();
-				root.rect.x = packer.padding;
-				root.rect.y = packer.padding;
+				root.rect.setX(packer.padding);
+				root.rect.setY(packer.padding);
 				root.rect.width = packer.pageWidth - packer.padding * 2;
 				root.rect.height = packer.pageHeight - packer.padding * 2;
 			}
@@ -551,8 +551,8 @@ public class PixmapPacker implements Disposable {
 					}
 				}
 				if (bestRow != null) {
-					rect.x = bestRow.x;
-					rect.y = bestRow.y;
+					rect.setX(bestRow.x);
+					rect.setY(bestRow.y);
 					bestRow.x += rectWidth;
 					return page;
 				}
@@ -565,8 +565,8 @@ public class PixmapPacker implements Disposable {
 			row.y = padding;
 			row.height = rectHeight;
 			page.rows.add(row);
-			rect.x = padding;
-			rect.y = padding;
+			rect.setX(padding);
+			rect.setY(padding);
 			return page;
 		}
 

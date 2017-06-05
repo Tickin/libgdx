@@ -180,7 +180,7 @@ public class ProjectiveTextureTest extends GdxTest {
 
 		shader.setUniformMatrix("u_camera", cam);
 		shader.setUniformMatrix("u_projector", projector);
-		shader.setUniformf("u_projectorPos", position.x, position.y, position.z);
+		shader.setUniformf("u_projectorPos", position.getX(), position.getY(), position.getZ());
 		shader.setUniformMatrix("u_model", model);
 		shader.setUniformMatrix("u_modelNormal", modelNormal);
 		shader.setUniformf("u_color", color.r, color.g, color.b);

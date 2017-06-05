@@ -199,7 +199,7 @@ public class Animation3DTest extends BaseG3dHudTest {
 			character = new ModelInstance(assets.get("data/g3d/knight.g3db", Model.class));
 			BoundingBox bbox = new BoundingBox();
 			character.calculateBoundingBox(bbox);
-			character.transform.setToRotation(Vector3.Y, 180).trn(0, -bbox.min.y, 0);
+			character.transform.setToRotation(Vector3.Y, 180).trn(0, -bbox.min.getY(), 0);
 			instances.add(character);
 			animation = new AnimationController(character);
 			animation.animate("Idle", -1, 1f, null, 0.2f);
@@ -209,7 +209,7 @@ public class Animation3DTest extends BaseG3dHudTest {
 			// Now attach the node of another model at the tip of this knights sword:
 			ship = assets.get("data/g3d/ship.obj", Model.class).nodes.get(0).copy();
 			ship.detach();
-			ship.translation.x = 10f; // offset from the sword node to the tip of the sword, in rest pose
+			ship.translation.setX(10f); // offset from the sword node to the tip of the sword, in rest pose
 			ship.rotation.set(Vector3.Z, 90f);
 			ship.scale.scl(5f);
 			ship.parts.get(0).enabled = false;

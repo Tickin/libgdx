@@ -139,7 +139,7 @@ public class Stage extends InputAdapter implements Disposable {
 
 		if (debugUnderMouse || debugParentUnderMouse || debugTableUnderMouse != Debug.none) {
 			screenToStageCoordinates(tempCoords.set(Gdx.input.getX(), Gdx.input.getY()));
-			Actor actor = hit(tempCoords.x, tempCoords.y, true);
+			Actor actor = hit(tempCoords.getX(), tempCoords.getY(), true);
 			if (actor == null) return;
 
 			if (debugParentUnderMouse && actor.parent != null) actor = actor.parent;
@@ -201,8 +201,8 @@ public class Stage extends InputAdapter implements Disposable {
 					InputEvent event = Pools.obtain(InputEvent.class);
 					event.setType(InputEvent.Type.exit);
 					event.setStage(this);
-					event.setStageX(tempCoords.x);
-					event.setStageY(tempCoords.y);
+					event.setStageX(tempCoords.getX());
+					event.setStageY(tempCoords.getY());
 					event.setRelatedActor(overLast);
 					event.setPointer(pointer);
 					overLast.fire(event);
@@ -224,15 +224,15 @@ public class Stage extends InputAdapter implements Disposable {
 	private Actor fireEnterAndExit (Actor overLast, int screenX, int screenY, int pointer) {
 		// Find the actor under the point.
 		screenToStageCoordinates(tempCoords.set(screenX, screenY));
-		Actor over = hit(tempCoords.x, tempCoords.y, true);
+		Actor over = hit(tempCoords.getX(), tempCoords.getY(), true);
 		if (over == overLast) return overLast;
 
 		// Exit overLast.
 		if (overLast != null) {
 			InputEvent event = Pools.obtain(InputEvent.class);
 			event.setStage(this);
-			event.setStageX(tempCoords.x);
-			event.setStageY(tempCoords.y);
+			event.setStageX(tempCoords.getX());
+			event.setStageY(tempCoords.getY());
 			event.setPointer(pointer);
 			event.setType(InputEvent.Type.exit);
 			event.setRelatedActor(over);
@@ -243,8 +243,8 @@ public class Stage extends InputAdapter implements Disposable {
 		if (over != null) {
 			InputEvent event = Pools.obtain(InputEvent.class);
 			event.setStage(this);
-			event.setStageX(tempCoords.x);
-			event.setStageY(tempCoords.y);
+			event.setStageX(tempCoords.getX());
+			event.setStageY(tempCoords.getY());
 			event.setPointer(pointer);
 			event.setType(InputEvent.Type.enter);
 			event.setRelatedActor(overLast);
@@ -270,12 +270,12 @@ public class Stage extends InputAdapter implements Disposable {
 		InputEvent event = Pools.obtain(InputEvent.class);
 		event.setType(Type.touchDown);
 		event.setStage(this);
-		event.setStageX(tempCoords.x);
-		event.setStageY(tempCoords.y);
+		event.setStageX(tempCoords.getX());
+		event.setStageY(tempCoords.getY());
 		event.setPointer(pointer);
 		event.setButton(button);
 
-		Actor target = hit(tempCoords.x, tempCoords.y, true);
+		Actor target = hit(tempCoords.getX(), tempCoords.getY(), true);
 		if (target == null) {
 			if (root.getTouchable() == Touchable.enabled) root.fire(event);
 		} else {
@@ -302,8 +302,8 @@ public class Stage extends InputAdapter implements Disposable {
 		InputEvent event = Pools.obtain(InputEvent.class);
 		event.setType(Type.touchDragged);
 		event.setStage(this);
-		event.setStageX(tempCoords.x);
-		event.setStageY(tempCoords.y);
+		event.setStageX(tempCoords.getX());
+		event.setStageY(tempCoords.getY());
 		event.setPointer(pointer);
 
 		SnapshotArray<TouchFocus> touchFocuses = this.touchFocuses;
@@ -337,8 +337,8 @@ public class Stage extends InputAdapter implements Disposable {
 		InputEvent event = Pools.obtain(InputEvent.class);
 		event.setType(Type.touchUp);
 		event.setStage(this);
-		event.setStageX(tempCoords.x);
-		event.setStageY(tempCoords.y);
+		event.setStageX(tempCoords.getX());
+		event.setStageY(tempCoords.getY());
 		event.setPointer(pointer);
 		event.setButton(button);
 
@@ -375,10 +375,10 @@ public class Stage extends InputAdapter implements Disposable {
 		InputEvent event = Pools.obtain(InputEvent.class);
 		event.setStage(this);
 		event.setType(Type.mouseMoved);
-		event.setStageX(tempCoords.x);
-		event.setStageY(tempCoords.y);
+		event.setStageX(tempCoords.getX());
+		event.setStageY(tempCoords.getY());
 
-		Actor target = hit(tempCoords.x, tempCoords.y, true);
+		Actor target = hit(tempCoords.getX(), tempCoords.getY(), true);
 		if (target == null) target = root;
 
 		target.fire(event);
@@ -398,8 +398,8 @@ public class Stage extends InputAdapter implements Disposable {
 		event.setStage(this);
 		event.setType(InputEvent.Type.scrolled);
 		event.setScrollAmount(amount);
-		event.setStageX(tempCoords.x);
-		event.setStageY(tempCoords.y);
+		event.setStageX(tempCoords.getX());
+		event.setStageY(tempCoords.getY());
 		target.fire(event);
 		boolean handled = event.isHandled();
 		Pools.free(event);
@@ -717,7 +717,7 @@ public class Stage extends InputAdapter implements Disposable {
 	 * @return May be null if no actor was hit. */
 	public Actor hit (float stageX, float stageY, boolean touchable) {
 		root.parentToLocalCoordinates(tempCoords.set(stageX, stageY));
-		return root.hit(tempCoords.x, tempCoords.y, touchable);
+		return root.hit(tempCoords.getX(), tempCoords.getY(), touchable);
 	}
 
 	/** Transforms the screen coordinates to stage coordinates.
@@ -731,7 +731,7 @@ public class Stage extends InputAdapter implements Disposable {
 	 * @param stageCoords Input stage coordinates and output for resulting screen coordinates. */
 	public Vector2 stageToScreenCoordinates (Vector2 stageCoords) {
 		viewport.project(stageCoords);
-		stageCoords.y = viewport.getScreenHeight() - stageCoords.y;
+		stageCoords.setY(viewport.getScreenHeight() - stageCoords.getY());
 		return stageCoords;
 	}
 

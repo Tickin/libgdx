@@ -117,30 +117,30 @@ public class VoxelChunk {
 	}
 
 	public static int createTop (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
@@ -148,30 +148,30 @@ public class VoxelChunk {
 	}
 
 	public static int createBottom (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
@@ -179,30 +179,30 @@ public class VoxelChunk {
 	}
 
 	public static int createLeft (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = -1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
@@ -210,30 +210,30 @@ public class VoxelChunk {
 	}
 
 	public static int createRight (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
@@ -241,30 +241,30 @@ public class VoxelChunk {
 	}
 
 	public static int createFront (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 1;
@@ -272,30 +272,30 @@ public class VoxelChunk {
 	}
 
 	public static int createBack (Vector3 offset, int x, int y, int z, float[] vertices, int vertexOffset) {
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 
-		vertices[vertexOffset++] = offset.x + x;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y + 1;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y + 1;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;
 
-		vertices[vertexOffset++] = offset.x + x + 1;
-		vertices[vertexOffset++] = offset.y + y;
-		vertices[vertexOffset++] = offset.z + z + 1;
+		vertices[vertexOffset++] = offset.getX() + x + 1;
+		vertices[vertexOffset++] = offset.getY() + y;
+		vertices[vertexOffset++] = offset.getZ() + z + 1;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = 0;
 		vertices[vertexOffset++] = -1;

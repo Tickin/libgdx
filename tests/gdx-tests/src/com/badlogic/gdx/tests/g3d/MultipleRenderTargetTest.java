@@ -167,7 +167,7 @@ public class MultipleRenderTargetTest extends GdxTest {
 			light.vz = MathUtils.random(-10f, 10f);
 
 			MeshPartBuilder meshPartBuilder = modelBuilder.part("light", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, new Material());
-			meshPartBuilder.setColor(light.color.x, light.color.y, light.color.z, 1f);
+			meshPartBuilder.setColor(light.color.getX(), light.color.getY(), light.color.getZ(), 1f);
 			meshPartBuilder.sphere(0.2f, 0.2f, 0.2f, 10, 10);
 
 			light.lightInstance = new ModelInstance(modelBuilder.end());
@@ -338,29 +338,29 @@ public class MultipleRenderTargetTest extends GdxTest {
 		public void update (float deltaTime) {
 			vy += -30f * deltaTime;
 
-			position.y += vy * deltaTime;
-			position.x += vx * deltaTime;
-			position.z += vz * deltaTime;
+			position.setY(position.getY() + vy * deltaTime);
+			position.setX(position.getX() + vx * deltaTime);
+			position.setZ(position.getZ() + vz * deltaTime);
 
-			if (position.y < 0.1f) {
+			if (position.getY() < 0.1f) {
 				vy *= -0.70f;
-				position.y = 0.1f;
+				position.setY(0.1f);
 			}
-			if (position.x < -5) {
+			if (position.getX() < -5) {
 				vx = -vx;
-				position.x = -5;
+				position.setX(-5);
 			}
-			if (position.x > 5) {
+			if (position.getX() > 5) {
 				vx = -vx;
-				position.x = 5;
+				position.setX(5);
 			}
-			if (position.z < -5) {
+			if (position.getZ() < -5) {
 				vz = -vz;
-				position.z = -5;
+				position.setZ(-5);
 			}
-			if (position.z > 5) {
+			if (position.getZ() > 5) {
 				vz = -vz;
-				position.z = 5;
+				position.setZ(5);
 			}
 
 			lightInstance.transform.setToTranslation(position);

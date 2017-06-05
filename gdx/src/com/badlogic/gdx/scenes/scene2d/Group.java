@@ -69,9 +69,9 @@ public class Group extends Actor implements Cullable {
 		Rectangle cullingArea = this.cullingArea;
 		if (cullingArea != null) {
 			// Draw children only if inside culling area.
-			float cullLeft = cullingArea.x;
+			float cullLeft = cullingArea.getX();
 			float cullRight = cullLeft + cullingArea.width;
-			float cullBottom = cullingArea.y;
+			float cullBottom = cullingArea.getY();
 			float cullTop = cullBottom + cullingArea.height;
 			if (transform) {
 				for (int i = 0, n = children.size; i < n; i++) {
@@ -245,7 +245,7 @@ public class Group extends Actor implements Cullable {
 			Actor child = childrenArray[i];
 			if (!child.isVisible()) continue;
 			child.parentToLocalCoordinates(point.set(x, y));
-			Actor hit = child.hit(point.x, point.y, touchable);
+			Actor hit = child.hit(point.getX(), point.getY(), touchable);
 			if (hit != null) return hit;
 		}
 		return super.hit(x, y, touchable);

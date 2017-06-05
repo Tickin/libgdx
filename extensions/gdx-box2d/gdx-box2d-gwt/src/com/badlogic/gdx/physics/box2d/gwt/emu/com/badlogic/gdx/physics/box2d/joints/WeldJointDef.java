@@ -58,8 +58,8 @@ public class WeldJointDef extends JointDef {
 		jd.collideConnected = collideConnected;
 		jd.dampingRatio = dampingRatio;
 		jd.frequencyHz = frequencyHz;
-		jd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		jd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
+		jd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		jd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
 		jd.referenceAngle = referenceAngle;
 		jd.type = org.jbox2d.dynamics.joints.JointType.WELD;
 		return jd;

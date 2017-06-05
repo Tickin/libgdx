@@ -136,7 +136,7 @@ public class Body {
 	 * @param position the world position of the body's local origin.
 	 * @param angle the world rotation in radians. */
 	public void setTransform (Vector2 position, float angle) {
-		jniSetTransform(addr, position.x, position.y, angle);
+		jniSetTransform(addr, position.getX(), position.getY(), angle);
 	}
 
 	/** Set the position of the body's origin and rotation. This breaks any contacts and wakes the other bodies. Manipulating a
@@ -177,8 +177,8 @@ public class Body {
 	 * @return the world position of the body's origin. */
 	public Vector2 getPosition () {
 		jniGetPosition(addr, tmp);
-		position.x = tmp[0];
-		position.y = tmp[1];
+		position.setX(tmp[0]);
+		position.setY(tmp[1]);
 		return position;
 	}
 
@@ -206,8 +206,8 @@ public class Body {
 	 * Note that the same Vector2 instance is returned each time this method is called. */
 	public Vector2 getWorldCenter () {
 		jniGetWorldCenter(addr, tmp);
-		worldCenter.x = tmp[0];
-		worldCenter.y = tmp[1];
+		worldCenter.setX(tmp[0]);
+		worldCenter.setY(tmp[1]);
 		return worldCenter;
 	}
 
@@ -224,8 +224,8 @@ public class Body {
 	 * Note that the same Vector2 instance is returned each time this method is called. */
 	public Vector2 getLocalCenter () {
 		jniGetLocalCenter(addr, tmp);
-		localCenter.x = tmp[0];
-		localCenter.y = tmp[1];
+		localCenter.setX(tmp[0]);
+		localCenter.setY(tmp[1]);
 		return localCenter;
 	}
 
@@ -238,7 +238,7 @@ public class Body {
 
 	/** Set the linear velocity of the center of mass. */
 	public void setLinearVelocity (Vector2 v) {
-		jniSetLinearVelocity(addr, v.x, v.y);
+		jniSetLinearVelocity(addr, v.getX(), v.getY());
 	}
 
 	/** Set the linear velocity of the center of mass. */
@@ -257,8 +257,8 @@ public class Body {
 	 * Note that the same Vector2 instance is returned each time this method is called. */
 	public Vector2 getLinearVelocity () {
 		jniGetLinearVelocity(addr, tmp);
-		linearVelocity.x = tmp[0];
-		linearVelocity.y = tmp[1];
+		linearVelocity.setX(tmp[0]);
+		linearVelocity.setY(tmp[1]);
 		return linearVelocity;
 	}
 
@@ -295,7 +295,7 @@ public class Body {
 	 * @param point the world position of the point of application.
 	 * @param wake up the body */
 	public void applyForce (Vector2 force, Vector2 point, boolean wake) {
-		jniApplyForce(addr, force.x, force.y, point.x, point.y, wake);
+		jniApplyForce(addr, force.getX(), force.getY(), point.getX(), point.getY(), wake);
 	}
 
 	/** Apply a force at a world point. If the force is not applied at the center of mass, it will generate a torque and affect the
@@ -317,7 +317,7 @@ public class Body {
 	/** Apply a force to the center of mass. This wakes up the body.
 	 * @param force the world force vector, usually in Newtons (N). */
 	public void applyForceToCenter (Vector2 force, boolean wake) {
-		jniApplyForceToCenter(addr, force.x, force.y, wake);
+		jniApplyForceToCenter(addr, force.getX(), force.getY(), wake);
 	}
 
 	/** Apply a force to the center of mass. This wakes up the body.
@@ -351,7 +351,7 @@ public class Body {
 	 * @param point the world position of the point of application. 
 	 * @param wake up the body*/
 	public void applyLinearImpulse (Vector2 impulse, Vector2 point, boolean wake) {
-		jniApplyLinearImpulse(addr, impulse.x, impulse.y, point.x, point.y, wake);
+		jniApplyLinearImpulse(addr, impulse.getX(), impulse.getY(), point.getX(), point.getY(), wake);
 	}
 
 	/** Apply an impulse at a point. This immediately modifies the velocity. It also modifies the angular velocity if the point of
@@ -410,8 +410,8 @@ public class Body {
 	public MassData getMassData () {
 		jniGetMassData(addr, tmp);
 		massData.mass = tmp[0];
-		massData.center.x = tmp[1];
-		massData.center.y = tmp[2];
+		massData.center.setX(tmp[1]);
+		massData.center.setY(tmp[2]);
 		massData.I = tmp[3];
 		return massData;
 	}
@@ -430,7 +430,7 @@ public class Body {
 	 * Note that creating or destroying fixtures can also alter the mass. This function has no effect if the body isn't dynamic.
 	 * @param data the mass properties. */
 	public void setMassData (MassData data) {
-		jniSetMassData(addr, data.mass, data.center.x, data.center.y, data.I);
+		jniSetMassData(addr, data.mass, data.center.getX(), data.center.getY(), data.I);
 	}
 
 	private native void jniSetMassData (long addr, float mass, float centerX, float centerY, float I); /*
@@ -461,9 +461,9 @@ public class Body {
 	 * @param localPoint a point on the body measured relative the the body's origin.
 	 * @return the same point expressed in world coordinates. */
 	public Vector2 getWorldPoint (Vector2 localPoint) {
-		jniGetWorldPoint(addr, localPoint.x, localPoint.y, tmp);
-		this.localPoint.x = tmp[0];
-		this.localPoint.y = tmp[1];
+		jniGetWorldPoint(addr, localPoint.getX(), localPoint.getY(), tmp);
+		this.localPoint.setX(tmp[0]);
+		this.localPoint.setY(tmp[1]);
 		return this.localPoint;
 	}
 
@@ -481,9 +481,9 @@ public class Body {
 	 * @param localVector a vector fixed in the body.
 	 * @return the same vector expressed in world coordinates. */
 	public Vector2 getWorldVector (Vector2 localVector) {
-		jniGetWorldVector(addr, localVector.x, localVector.y, tmp);
-		worldVector.x = tmp[0];
-		worldVector.y = tmp[1];
+		jniGetWorldVector(addr, localVector.getX(), localVector.getY(), tmp);
+		worldVector.setX(tmp[0]);
+		worldVector.setY(tmp[1]);
 		return worldVector;
 	}
 
@@ -501,9 +501,9 @@ public class Body {
 	 * @param worldPoint a point in world coordinates.
 	 * @return the corresponding local point relative to the body's origin. */
 	public Vector2 getLocalPoint (Vector2 worldPoint) {
-		jniGetLocalPoint(addr, worldPoint.x, worldPoint.y, tmp);
-		localPoint2.x = tmp[0];
-		localPoint2.y = tmp[1];
+		jniGetLocalPoint(addr, worldPoint.getX(), worldPoint.getY(), tmp);
+		localPoint2.setX(tmp[0]);
+		localPoint2.setY(tmp[1]);
 		return localPoint2;
 	}
 
@@ -521,9 +521,9 @@ public class Body {
 	 * @param worldVector a vector in world coordinates.
 	 * @return the corresponding local vector. */
 	public Vector2 getLocalVector (Vector2 worldVector) {
-		jniGetLocalVector(addr, worldVector.x, worldVector.y, tmp);
-		localVector.x = tmp[0];
-		localVector.y = tmp[1];
+		jniGetLocalVector(addr, worldVector.getX(), worldVector.getY(), tmp);
+		localVector.setX(tmp[0]);
+		localVector.setY(tmp[1]);
 		return localVector;
 	}
 
@@ -541,9 +541,9 @@ public class Body {
 	 * @param worldPoint a point in world coordinates.
 	 * @return the world velocity of a point. */
 	public Vector2 getLinearVelocityFromWorldPoint (Vector2 worldPoint) {
-		jniGetLinearVelocityFromWorldPoint(addr, worldPoint.x, worldPoint.y, tmp);
-		linVelWorld.x = tmp[0];
-		linVelWorld.y = tmp[1];
+		jniGetLinearVelocityFromWorldPoint(addr, worldPoint.getX(), worldPoint.getY(), tmp);
+		linVelWorld.setX(tmp[0]);
+		linVelWorld.setY(tmp[1]);
 		return linVelWorld;
 	}
 
@@ -561,9 +561,9 @@ public class Body {
 	 * @param localPoint a point in local coordinates.
 	 * @return the world velocity of a point. */
 	public Vector2 getLinearVelocityFromLocalPoint (Vector2 localPoint) {
-		jniGetLinearVelocityFromLocalPoint(addr, localPoint.x, localPoint.y, tmp);
-		linVelLoc.x = tmp[0];
-		linVelLoc.y = tmp[1];
+		jniGetLinearVelocityFromLocalPoint(addr, localPoint.getX(), localPoint.getY(), tmp);
+		linVelLoc.setX(tmp[0]);
+		linVelLoc.setY(tmp[1]);
 		return linVelLoc;
 	}
 

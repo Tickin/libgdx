@@ -150,7 +150,7 @@ public class Matrix4 implements Serializable {
 	 * @param quaternion The quaternion that is to be used to set this matrix.
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 set (Quaternion quaternion) {
-		return set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+		return set(quaternion.getX(), quaternion.getY(), quaternion.getZ(), quaternion.getW());
 	}
 
 	/** Sets the matrix to a rotation matrix representing the quaternion.
@@ -169,7 +169,7 @@ public class Matrix4 implements Serializable {
 	 * @param orientation The rotation, must be normalized
 	 * @return This matrix for chaining */
 	public Matrix4 set (Vector3 position, Quaternion orientation) {
-		return set(position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w);
+		return set(position.getX(), position.getY(), position.getZ(), orientation.getX(), orientation.getY(), orientation.getZ(), orientation.getW());
 	}
 
 	/** Sets the matrix to a rotation matrix representing the translation and quaternion.
@@ -217,8 +217,8 @@ public class Matrix4 implements Serializable {
 	 * @param scale The scale
 	 * @return This matrix for chaining */
 	public Matrix4 set (Vector3 position, Quaternion orientation, Vector3 scale) {
-		return set(position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w, scale.x,
-			scale.y, scale.z);
+		return set(position.getX(), position.getY(), position.getZ(), orientation.getX(), orientation.getY(), orientation.getZ(), orientation.getW(), scale.getX(),
+			scale.getY(), scale.getZ());
 	}
 
 	/** Sets the matrix to a rotation matrix representing the translation and quaternion.
@@ -271,18 +271,18 @@ public class Matrix4 implements Serializable {
 	 * @param zAxis The z-axis.
 	 * @param pos The translation vector. */
 	public Matrix4 set (Vector3 xAxis, Vector3 yAxis, Vector3 zAxis, Vector3 pos) {
-		val[M00] = xAxis.x;
-		val[M01] = xAxis.y;
-		val[M02] = xAxis.z;
-		val[M10] = yAxis.x;
-		val[M11] = yAxis.y;
-		val[M12] = yAxis.z;
-		val[M20] = zAxis.x;
-		val[M21] = zAxis.y;
-		val[M22] = zAxis.z;
-		val[M03] = pos.x;
-		val[M13] = pos.y;
-		val[M23] = pos.z;
+		val[M00] = xAxis.getX();
+		val[M01] = xAxis.getY();
+		val[M02] = xAxis.getZ();
+		val[M10] = yAxis.getX();
+		val[M11] = yAxis.getY();
+		val[M12] = yAxis.getZ();
+		val[M20] = zAxis.getX();
+		val[M21] = zAxis.getY();
+		val[M22] = zAxis.getZ();
+		val[M03] = pos.getX();
+		val[M13] = pos.getY();
+		val[M23] = pos.getZ();
 		val[M30] = 0;
 		val[M31] = 0;
 		val[M32] = 0;
@@ -300,9 +300,9 @@ public class Matrix4 implements Serializable {
 	 * @param vector The translation vector to add to the current matrix. (This vector is not modified)
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 trn (Vector3 vector) {
-		val[M03] += vector.x;
-		val[M13] += vector.y;
-		val[M23] += vector.z;
+		val[M03] += vector.getX();
+		val[M13] += vector.getY();
+		val[M23] += vector.getZ();
 		return this;
 	}
 
@@ -690,9 +690,9 @@ public class Matrix4 implements Serializable {
 	 * @param vector The translation vector
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 setTranslation (Vector3 vector) {
-		val[M03] = vector.x;
-		val[M13] = vector.y;
-		val[M23] = vector.z;
+		val[M03] = vector.getX();
+		val[M13] = vector.getY();
+		val[M23] = vector.getZ();
 		return this;
 	}
 
@@ -716,9 +716,9 @@ public class Matrix4 implements Serializable {
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 setToTranslation (Vector3 vector) {
 		idt();
-		val[M03] = vector.x;
-		val[M13] = vector.y;
-		val[M23] = vector.z;
+		val[M03] = vector.getX();
+		val[M13] = vector.getY();
+		val[M23] = vector.getZ();
 		return this;
 	}
 
@@ -745,12 +745,12 @@ public class Matrix4 implements Serializable {
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 setToTranslationAndScaling (Vector3 translation, Vector3 scaling) {
 		idt();
-		val[M03] = translation.x;
-		val[M13] = translation.y;
-		val[M23] = translation.z;
-		val[M00] = scaling.x;
-		val[M11] = scaling.y;
-		val[M22] = scaling.z;
+		val[M03] = translation.getX();
+		val[M13] = translation.getY();
+		val[M23] = translation.getZ();
+		val[M00] = scaling.getX();
+		val[M11] = scaling.getY();
+		val[M22] = scaling.getZ();
 		return this;
 	}
 
@@ -881,9 +881,9 @@ public class Matrix4 implements Serializable {
 	 * @return This matrix for chaining. */
 	public Matrix4 setToScaling (Vector3 vector) {
 		idt();
-		val[M00] = vector.x;
-		val[M11] = vector.y;
-		val[M22] = vector.z;
+		val[M00] = vector.getX();
+		val[M11] = vector.getY();
+		val[M22] = vector.getZ();
 		return this;
 	}
 
@@ -917,15 +917,15 @@ public class Matrix4 implements Serializable {
 		l_vex.crs(up).nor();
 		l_vey.set(l_vex).crs(l_vez).nor();
 		idt();
-		val[M00] = l_vex.x;
-		val[M01] = l_vex.y;
-		val[M02] = l_vex.z;
-		val[M10] = l_vey.x;
-		val[M11] = l_vey.y;
-		val[M12] = l_vey.z;
-		val[M20] = -l_vez.x;
-		val[M21] = -l_vez.y;
-		val[M22] = -l_vez.z;
+		val[M00] = l_vex.getX();
+		val[M01] = l_vex.getY();
+		val[M02] = l_vex.getZ();
+		val[M10] = l_vey.getX();
+		val[M11] = l_vey.getY();
+		val[M12] = l_vey.getZ();
+		val[M20] = -l_vez.getX();
+		val[M21] = -l_vez.getY();
+		val[M22] = -l_vez.getZ();
 
 		return this;
 	}
@@ -942,7 +942,7 @@ public class Matrix4 implements Serializable {
 	public Matrix4 setToLookAt (Vector3 position, Vector3 target, Vector3 up) {
 		tmpVec.set(target).sub(position);
 		setToLookAt(tmpVec, up);
-		this.mul(tmpMat.setToTranslation(-position.x, -position.y, -position.z));
+		this.mul(tmpMat.setToTranslation(-position.getX(), -position.getY(), -position.getZ()));
 
 		return this;
 	}
@@ -1147,9 +1147,9 @@ public class Matrix4 implements Serializable {
 	}
 
 	public Matrix4 scl (Vector3 scale) {
-		val[M00] *= scale.x;
-		val[M11] *= scale.y;
-		val[M22] *= scale.z;
+		val[M00] *= scale.getX();
+		val[M11] *= scale.getY();
+		val[M22] *= scale.getZ();
 		return this;
 	}
 
@@ -1168,9 +1168,9 @@ public class Matrix4 implements Serializable {
 	}
 
 	public Vector3 getTranslation (Vector3 position) {
-		position.x = val[M03];
-		position.y = val[M13];
-		position.z = val[M23];
+		position.setX(val[M03]);
+		position.setY(val[M13]);
+		position.setZ(val[M23]);
 		return position;
 	}
 
@@ -1468,7 +1468,7 @@ public class Matrix4 implements Serializable {
 	 * @param translation
 	 * @return This matrix for the purpose of chaining methods together. */
 	public Matrix4 translate (Vector3 translation) {
-		return translate(translation.x, translation.y, translation.z);
+		return translate(translation.getX(), translation.getY(), translation.getZ());
 	}
 
 	/** Postmultiplies this matrix by a translation matrix. Postmultiplication is also used by OpenGL ES' 1.x

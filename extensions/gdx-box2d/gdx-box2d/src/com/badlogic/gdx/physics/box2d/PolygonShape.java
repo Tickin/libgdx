@@ -49,8 +49,8 @@ public class PolygonShape extends Shape {
 	public void set (Vector2[] vertices) {
 		float[] verts = new float[vertices.length * 2];
 		for (int i = 0, j = 0; i < vertices.length * 2; i += 2, j++) {
-			verts[i] = vertices[j].x;
-			verts[i + 1] = vertices[j].y;
+			verts[i] = vertices[j].getX();
+			verts[i + 1] = vertices[j].getY();
 		}
 		jniSet(addr, verts, 0, verts.length);
 	}
@@ -96,7 +96,7 @@ public class PolygonShape extends Shape {
 	 * @param center the center of the box in local coordinates.
 	 * @param angle the rotation in radians of the box in local coordinates. */
 	public void setAsBox (float hx, float hy, Vector2 center, float angle) {
-		jniSetAsBox(addr, hx, hy, center.x, center.y, angle);
+		jniSetAsBox(addr, hx, hy, center.getX(), center.getY(), angle);
 	}
 
 	private native void jniSetAsBox (long addr, float hx, float hy, float centerX, float centerY, float angle); /*
@@ -121,8 +121,8 @@ public class PolygonShape extends Shape {
 	 * @param vertex vertex */
 	public void getVertex (int index, Vector2 vertex) {
 		jniGetVertex(addr, index, verts);
-		vertex.x = verts[0];
-		vertex.y = verts[1];
+		vertex.setX(verts[0]);
+		vertex.setY(verts[1]);
 	}
 
 	private native void jniGetVertex (long addr, int index, float[] verts); /*

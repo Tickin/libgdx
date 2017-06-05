@@ -164,9 +164,9 @@ public abstract class OcclusionCuller implements Disposable {
 			Plane plane = frustum.planes[i];
 			// Since the plane normals map to an array of btVector3, all four vector components (x, y, z, w)
 			// required by the C++ struct must be provided. The plane offset from origin (d) must also be set.
-			frustumNormals.put(plane.normal.x);
-			frustumNormals.put(plane.normal.y);
-			frustumNormals.put(plane.normal.z);
+			frustumNormals.put(plane.normal.getX());
+			frustumNormals.put(plane.normal.getY());
+			frustumNormals.put(plane.normal.getZ());
 			frustumNormals.put(0);
 			frustumOffsets.put(plane.d);
 		}

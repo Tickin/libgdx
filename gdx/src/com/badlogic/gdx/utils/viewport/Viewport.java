@@ -70,9 +70,9 @@ public abstract class Viewport {
 	 * @return The vector that was passed in, transformed to world coordinates.
 	 * @see Camera#unproject(Vector3) */
 	public Vector2 unproject (Vector2 screenCoords) {
-		tmp.set(screenCoords.x, screenCoords.y, 1);
+		tmp.set(screenCoords.getX(), screenCoords.getY(), 1);
 		camera.unproject(tmp, screenX, screenY, screenWidth, screenHeight);
-		screenCoords.set(tmp.x, tmp.y);
+		screenCoords.set(tmp.getX(), tmp.getY());
 		return screenCoords;
 	}
 
@@ -80,9 +80,9 @@ public abstract class Viewport {
 	 * @return The vector that was passed in, transformed to screen coordinates.
 	 * @see Camera#project(Vector3) */
 	public Vector2 project (Vector2 worldCoords) {
-		tmp.set(worldCoords.x, worldCoords.y, 1);
+		tmp.set(worldCoords.getX(), worldCoords.getY(), 1);
 		camera.project(tmp, screenX, screenY, screenWidth, screenHeight);
-		worldCoords.set(tmp.x, tmp.y);
+		worldCoords.set(tmp.getX(), tmp.getY());
 		return worldCoords;
 	}
 
@@ -115,12 +115,12 @@ public abstract class Viewport {
 	/** Transforms a point to real screen coordinates (as opposed to OpenGL ES window coordinates), where the origin is in the top
 	 * left and the the y-axis is pointing downwards. */
 	public Vector2 toScreenCoordinates (Vector2 worldCoords, Matrix4 transformMatrix) {
-		tmp.set(worldCoords.x, worldCoords.y, 0);
+		tmp.set(worldCoords.getX(), worldCoords.getY(), 0);
 		tmp.mul(transformMatrix);
 		camera.project(tmp);
-		tmp.y = Gdx.graphics.getHeight() - tmp.y;
-		worldCoords.x = tmp.x;
-		worldCoords.y = tmp.y;
+		tmp.setY(Gdx.graphics.getHeight() - tmp.getY());
+		worldCoords.setX(tmp.getX());
+		worldCoords.setY(tmp.getY());
 		return worldCoords;
 	}
 

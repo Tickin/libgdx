@@ -59,11 +59,11 @@ public abstract class DynamicsModifier extends Influencer {
 					accellerationChannel.data[accelOffset + ParticleChannels.YOffset],
 					accellerationChannel.data[accelOffset + ParticleChannels.ZOffset]).nor(), axisY = TMP_V2.set(TMP_V1)
 					.crs(Vector3.Y).nor().crs(TMP_V1).nor(), axisX = TMP_V3.set(axisY).crs(axisZ).nor();
-				TMP_Q.setFromAxes(false, axisX.x, axisY.x, axisZ.x, axisX.y, axisY.y, axisZ.y, axisX.z, axisY.z, axisZ.z);
-				rotationChannel.data[i + ParticleChannels.XOffset] = TMP_Q.x;
-				rotationChannel.data[i + ParticleChannels.YOffset] = TMP_Q.y;
-				rotationChannel.data[i + ParticleChannels.ZOffset] = TMP_Q.z;
-				rotationChannel.data[i + ParticleChannels.WOffset] = TMP_Q.w;
+				TMP_Q.setFromAxes(false, axisX.getX(), axisY.getX(), axisZ.getX(), axisX.getY(), axisY.getY(), axisZ.getY(), axisX.getZ(), axisY.getZ(), axisZ.getZ());
+				rotationChannel.data[i + ParticleChannels.XOffset] = TMP_Q.getX();
+				rotationChannel.data[i + ParticleChannels.YOffset] = TMP_Q.getY();
+				rotationChannel.data[i + ParticleChannels.ZOffset] = TMP_Q.getZ();
+				rotationChannel.data[i + ParticleChannels.WOffset] = TMP_Q.getW();
 			}
 		}
 
@@ -277,9 +277,9 @@ public abstract class DynamicsModifier extends Influencer {
 				TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi);
 				TMP_V3.scl(strength * MathUtils.degreesToRadians);
 
-				rotationalForceChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
-				rotationalForceChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
-				rotationalForceChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+				rotationalForceChannel.data[i + ParticleChannels.XOffset] += TMP_V3.getX();
+				rotationalForceChannel.data[i + ParticleChannels.YOffset] += TMP_V3.getY();
+				rotationalForceChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.getZ();
 			}
 		}
 
@@ -327,9 +327,9 @@ public abstract class DynamicsModifier extends Influencer {
 					.set(positionChannel.data[positionOffset + ParticleChannels.XOffset] - cx,
 						positionChannel.data[positionOffset + ParticleChannels.YOffset] - cy,
 						positionChannel.data[positionOffset + ParticleChannels.ZOffset] - cz).nor().scl(strength);
-				accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
-				accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
-				accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
+				accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.getX();
+				accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.getY();
+				accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.getZ();
 			}
 		}
 
@@ -371,9 +371,9 @@ public abstract class DynamicsModifier extends Influencer {
 				float cosTheta = MathUtils.cosDeg(theta), sinTheta = MathUtils.sinDeg(theta), cosPhi = MathUtils.cosDeg(phi), sinPhi = MathUtils
 					.sinDeg(phi);
 				TMP_V3.set(cosTheta * sinPhi, cosPhi, sinTheta * sinPhi).nor().scl(strength);
-				directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
-				directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
-				directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+				directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.getX();
+				directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.getY();
+				directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.getZ();
 			}
 		}
 
@@ -420,9 +420,9 @@ public abstract class DynamicsModifier extends Influencer {
 					.crs(positionChannel.data[positionOffset + ParticleChannels.XOffset],
 						positionChannel.data[positionOffset + ParticleChannels.YOffset],
 						positionChannel.data[positionOffset + ParticleChannels.ZOffset]).nor().scl(strength);
-				directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.x;
-				directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.y;
-				directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.z;
+				directionalVelocityChannel.data[i + ParticleChannels.XOffset] += TMP_V3.getX();
+				directionalVelocityChannel.data[i + ParticleChannels.YOffset] += TMP_V3.getY();
+				directionalVelocityChannel.data[i + ParticleChannels.ZOffset] += TMP_V3.getZ();
 			}
 		}
 
@@ -457,9 +457,9 @@ public abstract class DynamicsModifier extends Influencer {
 					+ strengthChannel.data[strengthOffset + ParticleChannels.VelocityStrengthDiffOffset]
 					* strengthValue.getScale(lifeChannel.data[lifeOffset]);
 				TMP_V3.set(MathUtils.random(-1, 1f), MathUtils.random(-1, 1f), MathUtils.random(-1, 1f)).nor().scl(strength);
-				accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.x;
-				accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.y;
-				accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.z;
+				accelerationChannel.data[forceOffset + ParticleChannels.XOffset] += TMP_V3.getX();
+				accelerationChannel.data[forceOffset + ParticleChannels.YOffset] += TMP_V3.getY();
+				accelerationChannel.data[forceOffset + ParticleChannels.ZOffset] += TMP_V3.getZ();
 			}
 		}
 

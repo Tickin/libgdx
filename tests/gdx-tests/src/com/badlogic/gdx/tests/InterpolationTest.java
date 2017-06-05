@@ -53,7 +53,7 @@ public class InterpolationTest extends GdxTest {
 	/** resets {@link #startPosition} and {@link #targetPosition} */
 	void resetPositions () {
 		startPosition.set(stage.getWidth() - stage.getWidth() / 5f, stage.getHeight() - stage.getHeight() / 5f);
-		targetPosition.set(startPosition.x, stage.getHeight() / 5f);
+		targetPosition.set(startPosition.getX(), stage.getHeight() / 5f);
 	}
 
 	/** @return the {@link #position} with the {@link #selectedInterpolation interpolation} applied */
@@ -181,7 +181,7 @@ public class InterpolationTest extends GdxTest {
 		renderer.begin(ShapeType.Filled);
 		if (!Float.isNaN(time)) // don't mess up position if time is NaN
 			getPosition(time);
-		renderer.circle(position.x, position.y, 7);
+		renderer.circle(position.getX(), position.getY(), 7);
 		renderer.end();
 
 		stage.act();

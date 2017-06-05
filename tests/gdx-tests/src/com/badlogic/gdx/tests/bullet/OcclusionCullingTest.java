@@ -151,10 +151,10 @@ public class OcclusionCullingTest extends BaseBulletTest {
 		float rotationY = rng.nextFloat() * 360f;
 		// Random ground position
 		Vector3 position = tmpV1;
-		int maxDstX = (int)(GROUND_DIM.x * 0.49f);
-		position.x = rng.nextInt(maxDstX) * ((rng.nextBoolean()) ? 1 : -1);
-		position.z = rng.nextInt(maxDstX) * ((rng.nextBoolean()) ? 1 : -1);
-		position.y = entity.boundingBox.getDimensions(tmpV2).y * 0.5f;
+		int maxDstX = (int)(GROUND_DIM.getX() * 0.49f);
+		position.setX(rng.nextInt(maxDstX) * ((rng.nextBoolean()) ? 1 : -1));
+		position.setZ(rng.nextInt(maxDstX) * ((rng.nextBoolean()) ? 1 : -1));
+		position.setY(entity.boundingBox.getDimensions(tmpV2).getY() * 0.5f);
 		entity.modelInstance.transform.setToRotation(Vector3.Y, rotationY).setTranslation(position);
 		entity.body.setWorldTransform(entity.modelInstance.transform);
 		return entity;
@@ -231,12 +231,12 @@ public class OcclusionCullingTest extends BaseBulletTest {
 		disposables.add(occlusionCuller);
 
 		// Add occluder walls
-		final Model occluderModel = modelBuilder.createBox(OCCLUDER_DIM.x, OCCLUDER_DIM.y, OCCLUDER_DIM.z,
+		final Model occluderModel = modelBuilder.createBox(OCCLUDER_DIM.getX(), OCCLUDER_DIM.getY(), OCCLUDER_DIM.getZ(),
 				new Material(ColorAttribute.createDiffuse(Color.WHITE)),
 				VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
 		disposables.add(occluderModel);
 		world.addConstructor("wall", new BulletConstructor(occluderModel, 0, new btBoxShape(tmpV1.set(OCCLUDER_DIM).scl(0.5f))));
-		float y = OCCLUDER_DIM.y * 0.5f;
+		float y = OCCLUDER_DIM.getY() * 0.5f;
 		addOccluder("wall", 0, tmpV1.set(20, y, 0));
 		addOccluder("wall", -60, tmpV1.set(10, y, 20));
 		addOccluder("wall", 60, tmpV1.set(10, y, -20));
@@ -245,12 +245,12 @@ public class OcclusionCullingTest extends BaseBulletTest {
 		addOccluder("wall", -60, tmpV1.set(-10, y, -20));
 
 		// Add ground
-		final Model groundModel = modelBuilder.createBox(GROUND_DIM.x, GROUND_DIM.y, GROUND_DIM.z,
+		final Model groundModel = modelBuilder.createBox(GROUND_DIM.getX(), GROUND_DIM.getY(), GROUND_DIM.getZ(),
 				new Material(ColorAttribute.createDiffuse(Color.WHITE)),
 				VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
 		btCollisionShape groundShape = new btBoxShape(tmpV1.set(GROUND_DIM).scl(0.5f));
 		world.addConstructor("big_ground", new BulletConstructor(groundModel, 0, groundShape));
-		BulletEntity e = world.add("big_ground", 0, -GROUND_DIM.y * 0.5f, 0f);
+		BulletEntity e = world.add("big_ground", 0, -GROUND_DIM.getY() * 0.5f, 0f);
 		e.body.setFriction(1f);
 		e.setColor(Color.FOREST);
 
@@ -266,7 +266,7 @@ public class OcclusionCullingTest extends BaseBulletTest {
 			Model model = assets.get(modelPath, Model.class);
 			if (!model.materials.first().has(TextureAttribute.Diffuse)) model.materials.first().set(defaultTexture);
 			Vector3 dim = model.calculateBoundingBox(bb).getDimensions(tmpV1);
-			float scaleFactor = OCCLUDEE_MAX_EXTENT / Math.max(dim.x, Math.max(dim.y, dim.z));
+			float scaleFactor = OCCLUDEE_MAX_EXTENT / Math.max(dim.getX(), Math.max(dim.getY(), dim.getZ()));
 			for (Node node : model.nodes)
 				node.scale.scl(scaleFactor);
 			btCollisionShape shape = new btBoxShape(dim.scl(scaleFactor * 0.5f));
@@ -428,10 +428,10 @@ public class OcclusionCullingTest extends BaseBulletTest {
 		frustumCam.up.set(Vector3.Y);
 		frustumCam.position.set(Vector3.Zero);
 		frustumCam.rotate(frustumInstance.transform);
-		float frustumCamPosY = frustumCamPos.y;
+		float frustumCamPosY = frustumCamPos.getY();
 		frustumCamPos.add(tmpV1.set(Vector3.Y).crs(tmpV2.set(frustumCamPos).nor()).scl(dt * FRUSTUM_LIN_SPEED)).nor()
 				.scl(FRUSTUM_MOVE_RADIUS);
-		frustumCamPos.y = frustumCamPosY;
+		frustumCamPos.setY(frustumCamPosY);
 		frustumCam.position.set(frustumCamPos);
 		frustumInstance.transform.setTranslation(frustumCamPos);
 		frustumCam.update();

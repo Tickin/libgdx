@@ -42,9 +42,9 @@ public class AnimationTest extends GdxTest {
 
 		public void update (float deltaTime) {
 			stateTime += deltaTime;
-			pos.x = pos.x + (headsLeft ? -VELOCITY * deltaTime : VELOCITY * deltaTime);
-			if (pos.x < -64) pos.x = Gdx.graphics.getWidth();
-			if (pos.x > Gdx.graphics.getWidth() + 64) pos.x = -64;
+			pos.setX(pos.getX() + (headsLeft ? -VELOCITY * deltaTime : VELOCITY * deltaTime));
+			if (pos.getX() < -64) pos.setX(Gdx.graphics.getWidth());
+			if (pos.getX() > Gdx.graphics.getWidth() + 64) pos.setX(-64);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class AnimationTest extends GdxTest {
 			Caveman caveman = cavemen[i];
 			TextureRegion frame = caveman.headsLeft ? leftWalk.getKeyFrame(caveman.stateTime, true) : rightWalk.getKeyFrame(
 				caveman.stateTime, true);
-			batch.draw(frame, caveman.pos.x, caveman.pos.y);
+			batch.draw(frame, caveman.pos.getX(), caveman.pos.getY());
 		}
 		batch.end();
 

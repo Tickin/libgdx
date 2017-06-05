@@ -123,13 +123,13 @@ public class HexagonalTiledMapRenderer extends BatchTiledMapRenderer {
 			final float tileWidthUpperCorner = (layerTileWidth + layerHexLength) / 2;
 			final float layerTileHeight50 = layerTileHeight * 0.50f;
 
-			final int row1 = Math.max(0, (int)((viewBounds.y - layerTileHeight50 - layerOffsetX) / layerTileHeight));
+			final int row1 = Math.max(0, (int)((viewBounds.getY() - layerTileHeight50 - layerOffsetX) / layerTileHeight));
 			final int row2 = Math.min(layerHeight,
-				(int)((viewBounds.y + viewBounds.height + layerTileHeight - layerOffsetX) / layerTileHeight));
+				(int)((viewBounds.getY() + viewBounds.height + layerTileHeight - layerOffsetX) / layerTileHeight));
 
-			final int col1 = Math.max(0, (int)(((viewBounds.x - tileWidthLowerCorner - layerOffsetY) / tileWidthUpperCorner)));
+			final int col1 = Math.max(0, (int)(((viewBounds.getX() - tileWidthLowerCorner - layerOffsetY) / tileWidthUpperCorner)));
 			final int col2 = Math.min(layerWidth,
-				(int)((viewBounds.x + viewBounds.width + tileWidthUpperCorner - layerOffsetY) / tileWidthUpperCorner));
+				(int)((viewBounds.getX() + viewBounds.width + tileWidthUpperCorner - layerOffsetY) / tileWidthUpperCorner));
 
 			// depending on the stagger index either draw all even before the odd or vice versa
 			final int colA = (staggerIndexEven == (col1 % 2 == 0)) ? col1 + 1 : col1;
@@ -150,13 +150,13 @@ public class HexagonalTiledMapRenderer extends BatchTiledMapRenderer {
 			final float tileHeightUpperCorner = (layerTileHeight + layerHexLength) / 2;
 			final float layerTileWidth50 = layerTileWidth * 0.50f;
 
-			final int row1 = Math.max(0, (int)(((viewBounds.y - tileHeightLowerCorner - layerOffsetX) / tileHeightUpperCorner)));
+			final int row1 = Math.max(0, (int)(((viewBounds.getY() - tileHeightLowerCorner - layerOffsetX) / tileHeightUpperCorner)));
 			final int row2 = Math.min(layerHeight,
-				(int)((viewBounds.y + viewBounds.height + tileHeightUpperCorner - layerOffsetX) / tileHeightUpperCorner));
+				(int)((viewBounds.getY() + viewBounds.height + tileHeightUpperCorner - layerOffsetX) / tileHeightUpperCorner));
 
-			final int col1 = Math.max(0, (int)(((viewBounds.x - layerTileWidth50 - layerOffsetY) / layerTileWidth)));
+			final int col1 = Math.max(0, (int)(((viewBounds.getX() - layerTileWidth50 - layerOffsetY) / layerTileWidth)));
 			final int col2 = Math.min(layerWidth,
-				(int)((viewBounds.x + viewBounds.width + layerTileWidth - layerOffsetY) / layerTileWidth));
+				(int)((viewBounds.getX() + viewBounds.width + layerTileWidth - layerOffsetY) / layerTileWidth));
 
 			float shiftX = 0;
 			for (int row = row2 - 1; row >= row1; row--) {

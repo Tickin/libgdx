@@ -470,7 +470,7 @@ public class ParticleEditor extends JFrame {
 		public boolean touchDown (int x, int y, int pointer, int newParam) {
 			Vector3 touchPoint = new Vector3(x, y, 0);
 			worldCamera.unproject(touchPoint);
-			effect.setPosition(touchPoint.x, touchPoint.y);
+			effect.setPosition(touchPoint.getX(), touchPoint.getY());
 			return false;
 		}
 
@@ -484,7 +484,7 @@ public class ParticleEditor extends JFrame {
 		public boolean touchDragged (int x, int y, int pointer) {
 			Vector3 touchPoint = new Vector3(x, y, 0);
 			worldCamera.unproject(touchPoint);
-			effect.setPosition(touchPoint.x, touchPoint.y);
+			effect.setPosition(touchPoint.getX(), touchPoint.getY());
 			return false;
 		}
 

@@ -300,10 +300,10 @@ public class Model implements Disposable {
 				descriptor.uWrap = texture.getUWrap();
 				descriptor.vWrap = texture.getVWrap();
 
-				float offsetU = tex.uvTranslation == null ? 0f : tex.uvTranslation.x;
-				float offsetV = tex.uvTranslation == null ? 0f : tex.uvTranslation.y;
-				float scaleU = tex.uvScaling == null ? 1f : tex.uvScaling.x;
-				float scaleV = tex.uvScaling == null ? 1f : tex.uvScaling.y;
+				float offsetU = tex.uvTranslation == null ? 0f : tex.uvTranslation.getX();
+				float offsetV = tex.uvTranslation == null ? 0f : tex.uvTranslation.getY();
+				float scaleU = tex.uvScaling == null ? 1f : tex.uvScaling.getX();
+				float scaleV = tex.uvScaling == null ? 1f : tex.uvScaling.getY();
 
 				switch (tex.usage) {
 				case ModelTexture.USAGE_DIFFUSE:

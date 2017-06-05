@@ -92,7 +92,7 @@ public abstract class Camera {
 	/** Recalculates the direction of the camera to look at the point (x, y, z).
 	 * @param target the point to look at */
 	public void lookAt (Vector3 target) {
-		lookAt(target.x, target.y, target.z);
+		lookAt(target.getX(), target.getY(), target.getZ());
 	}
 
 	/** Normalizes the up vector by first calculating the right vector via a cross product between direction and up, and then
@@ -154,7 +154,7 @@ public abstract class Camera {
 		translate(tmpVec);
 		rotate(axis, angle);
 		tmpVec.rotate(axis, angle);
-		translate(-tmpVec.x, -tmpVec.y, -tmpVec.z);
+		translate(-tmpVec.getX(), -tmpVec.getY(), -tmpVec.getZ());
 	}
 
 	/** Transform the position, direction and up vector by the given matrix
@@ -192,13 +192,13 @@ public abstract class Camera {
 	 * @param viewportHeight the height of the viewport in pixels
 	 * @return the mutated and unprojected screenCoords {@link Vector3} */
 	public Vector3 unproject (Vector3 screenCoords, float viewportX, float viewportY, float viewportWidth, float viewportHeight) {
-		float x = screenCoords.x, y = screenCoords.y;
+		float x = screenCoords.getX(), y = screenCoords.getY();
 		x = x - viewportX;
 		y = Gdx.graphics.getHeight() - y - 1;
 		y = y - viewportY;
-		screenCoords.x = (2 * x) / viewportWidth - 1;
-		screenCoords.y = (2 * y) / viewportHeight - 1;
-		screenCoords.z = 2 * screenCoords.z - 1;
+		screenCoords.setX((2 * x) / viewportWidth - 1);
+		screenCoords.setY((2 * y) / viewportHeight - 1);
+		screenCoords.setZ(2 * screenCoords.getZ() - 1);
 		screenCoords.prj(invProjectionView);
 		return screenCoords;
 	}
@@ -238,9 +238,9 @@ public abstract class Camera {
 	 * @return the mutated and projected worldCoords {@link Vector3} */
 	public Vector3 project (Vector3 worldCoords, float viewportX, float viewportY, float viewportWidth, float viewportHeight) {
 		worldCoords.prj(combined);
-		worldCoords.x = viewportWidth * (worldCoords.x + 1) / 2 + viewportX;
-		worldCoords.y = viewportHeight * (worldCoords.y + 1) / 2 + viewportY;
-		worldCoords.z = (worldCoords.z + 1) / 2;
+		worldCoords.setX(viewportWidth * (worldCoords.getX() + 1) / 2 + viewportX);
+		worldCoords.setY(viewportHeight * (worldCoords.getY() + 1) / 2 + viewportY);
+		worldCoords.setZ((worldCoords.getZ() + 1) / 2);
 		return worldCoords;
 	}
 

@@ -850,8 +850,8 @@ public class ParticleEmitter {
 		for (int i = 0, n = active.length; i < n; i++)
 			if (active[i]) {
 				Rectangle r = particles[i].getBoundingRectangle();
-				bounds.ext(r.x, r.y, 0);
-				bounds.ext(r.x + r.width, r.y + r.height, 0);
+				bounds.ext(r.getX(), r.getY(), 0);
+				bounds.ext(r.getY() + r.width, r.getY() + r.height, 0);
 			}
 
 		return bounds;

@@ -191,7 +191,7 @@ public class Fixture {
 	/** Test a point for containment in this fixture.
 	 * @param p a point in world coordinates. */
 	public boolean testPoint (Vector2 p) {
-		return jniTestPoint(addr, p.x, p.y);
+		return jniTestPoint(addr, p.getX(), p.getY());
 	}
 
 	/** Test a point for containment in this fixture.

@@ -48,7 +48,7 @@ public class CircleShape extends Shape {
 
 	/** Sets the position of the shape */
 	public void setPosition (Vector2 position) {
-		shape.m_p.set(position.x, position.y);
+		shape.m_p.set(position.getX(), position.getY());
 	}
 
 	@Override

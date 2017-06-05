@@ -48,27 +48,27 @@ public class ActorGestureListener implements EventListener {
 
 			public boolean tap (float stageX, float stageY, int count, int button) {
 				actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-				ActorGestureListener.this.tap(event, tmpCoords.x, tmpCoords.y, count, button);
+				ActorGestureListener.this.tap(event, tmpCoords.getX(), tmpCoords.getY(), count, button);
 				return true;
 			}
 
 			public boolean longPress (float stageX, float stageY) {
 				actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-				return ActorGestureListener.this.longPress(actor, tmpCoords.x, tmpCoords.y);
+				return ActorGestureListener.this.longPress(actor, tmpCoords.getX(), tmpCoords.getY());
 			}
 
 			public boolean fling (float velocityX, float velocityY, int button) {
 				stageToLocalAmount(tmpCoords.set(velocityX, velocityY));
-				ActorGestureListener.this.fling(event, tmpCoords.x, tmpCoords.y, button);
+				ActorGestureListener.this.fling(event, tmpCoords.getX(), tmpCoords.getY(), button);
 				return true;
 			}
 
 			public boolean pan (float stageX, float stageY, float deltaX, float deltaY) {
 				stageToLocalAmount(tmpCoords.set(deltaX, deltaY));
-				deltaX = tmpCoords.x;
-				deltaY = tmpCoords.y;
+				deltaX = tmpCoords.getX();
+				deltaY = tmpCoords.getY();
 				actor.stageToLocalCoordinates(tmpCoords.set(stageX, stageY));
-				ActorGestureListener.this.pan(event, tmpCoords.x, tmpCoords.y, deltaX, deltaY);
+				ActorGestureListener.this.pan(event, tmpCoords.getX(), tmpCoords.getY(), deltaX, deltaY);
 				return true;
 			}
 
@@ -104,7 +104,7 @@ public class ActorGestureListener implements EventListener {
 			touchDownTarget = event.getTarget();
 			detector.touchDown(event.getStageX(), event.getStageY(), event.getPointer(), event.getButton());
 			actor.stageToLocalCoordinates(tmpCoords.set(event.getStageX(), event.getStageY()));
-			touchDown(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
+			touchDown(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer(), event.getButton());
 			return true;
 		case touchUp:
 			if (event.isTouchFocusCancel()) return false;
@@ -112,7 +112,7 @@ public class ActorGestureListener implements EventListener {
 			actor = event.getListenerActor();
 			detector.touchUp(event.getStageX(), event.getStageY(), event.getPointer(), event.getButton());
 			actor.stageToLocalCoordinates(tmpCoords.set(event.getStageX(), event.getStageY()));
-			touchUp(event, tmpCoords.x, tmpCoords.y, event.getPointer(), event.getButton());
+			touchUp(event, tmpCoords.getX(), tmpCoords.getY(), event.getPointer(), event.getButton());
 			return true;
 		case touchDragged:
 			this.event = event;

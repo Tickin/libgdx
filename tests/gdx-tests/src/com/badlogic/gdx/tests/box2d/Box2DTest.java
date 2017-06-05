@@ -162,7 +162,7 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
 		public boolean reportFixture (Fixture fixture) {
 			// if the hit point is inside the fixture of the body
 			// we report it
-			if (fixture.testPoint(testPoint.x, testPoint.y)) {
+			if (fixture.testPoint(testPoint.getX(), testPoint.getY())) {
 				hitBody = fixture.getBody();
 				return false;
 			} else
@@ -177,7 +177,7 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
 		// ask the world which bodies are within the given
 		// bounding box around the mouse pointer
 		hitBody = null;
-		world.QueryAABB(callback, testPoint.x - 0.0001f, testPoint.y - 0.0001f, testPoint.x + 0.0001f, testPoint.y + 0.0001f);
+		world.QueryAABB(callback, testPoint.getX() - 0.0001f, testPoint.getY() - 0.0001f, testPoint.getX() + 0.0001f, testPoint.getY() + 0.0001f);
 
 		if (hitBody == groundBody) hitBody = null;
 
@@ -191,7 +191,7 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
 			def.bodyA = groundBody;
 			def.bodyB = hitBody;
 			def.collideConnected = true;
-			def.target.set(testPoint.x, testPoint.y);
+			def.target.set(testPoint.getX(), testPoint.getY());
 			def.maxForce = 1000.0f * hitBody.getMass();
 
 			mouseJoint = (MouseJoint)world.createJoint(def);
@@ -211,7 +211,7 @@ public abstract class Box2DTest implements ApplicationListener, InputProcessor {
 		// mouse coordinates
 		if (mouseJoint != null) {
 			camera.unproject(testPoint.set(x, y, 0));
-			mouseJoint.setTarget(target.set(testPoint.x, testPoint.y));
+			mouseJoint.setTarget(target.set(testPoint.getX(), testPoint.getY()));
 		}
 		return false;
 	}

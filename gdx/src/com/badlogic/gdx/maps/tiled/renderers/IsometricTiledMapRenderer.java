@@ -75,7 +75,7 @@ public class IsometricTiledMapRenderer extends BatchTiledMapRenderer {
 	}
 
 	private Vector3 translateScreenToIso (Vector2 vec) {
-		screenPos.set(vec.x, vec.y, 0);
+		screenPos.set(vec.getX(), vec.getY(), 0);
 		screenPos.mul(invIsotransform);
 
 		return screenPos;
@@ -98,20 +98,20 @@ public class IsometricTiledMapRenderer extends BatchTiledMapRenderer {
 
 		// setting up the screen points
 		// COL1
-		topRight.set(viewBounds.x + viewBounds.width - layerOffsetX, viewBounds.y - layerOffsetY);
+		topRight.set(viewBounds.getX() + viewBounds.width - layerOffsetX, viewBounds.getY() - layerOffsetY);
 		// COL2
-		bottomLeft.set(viewBounds.x - layerOffsetX, viewBounds.y + viewBounds.height - layerOffsetY);
+		bottomLeft.set(viewBounds.getX() - layerOffsetX, viewBounds.getY() + viewBounds.height - layerOffsetY);
 		// ROW1
-		topLeft.set(viewBounds.x - layerOffsetX, viewBounds.y - layerOffsetY);
+		topLeft.set(viewBounds.getX() - layerOffsetX, viewBounds.getY() - layerOffsetY);
 		// ROW2
-		bottomRight.set(viewBounds.x + viewBounds.width - layerOffsetX, viewBounds.y + viewBounds.height - layerOffsetY);
+		bottomRight.set(viewBounds.getX() + viewBounds.width - layerOffsetX, viewBounds.getY() + viewBounds.height - layerOffsetY);
 
 		// transforming screen coordinates to iso coordinates
-		int row1 = (int)(translateScreenToIso(topLeft).y / tileWidth) - 2;
-		int row2 = (int)(translateScreenToIso(bottomRight).y / tileWidth) + 2;
+		int row1 = (int)(translateScreenToIso(topLeft).getY() / tileWidth) - 2;
+		int row2 = (int)(translateScreenToIso(bottomRight).getY() / tileWidth) + 2;
 
-		int col1 = (int)(translateScreenToIso(bottomLeft).x / tileWidth) - 2;
-		int col2 = (int)(translateScreenToIso(topRight).x / tileWidth) + 2;
+		int col1 = (int)(translateScreenToIso(bottomLeft).getX() / tileWidth) - 2;
+		int col2 = (int)(translateScreenToIso(topRight).getX() / tileWidth) + 2;
 
 		for (int row = row2; row >= row1; row--) {
 			for (int col = col1; col <= col2; col++) {

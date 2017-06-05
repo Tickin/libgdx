@@ -504,8 +504,8 @@ public class Sprite extends TextureRegion {
 		maxy = maxy < vertices[Y4] ? vertices[Y4] : maxy;
 
 		if (bounds == null) bounds = new Rectangle();
-		bounds.x = minx;
-		bounds.y = miny;
+		bounds.setX(minx);
+		bounds.setY(miny);
 		bounds.width = maxx - minx;
 		bounds.height = maxy - miny;
 		return bounds;

@@ -225,7 +225,7 @@ b2ContactFilter defaultFilter;
 	 * @param gravity the world gravity vector.
 	 * @param doSleep improve performance by not simulating inactive bodies. */
 	public World (Vector2 gravity, boolean doSleep) {
-		addr = newWorld(gravity.x, gravity.y, doSleep);
+		addr = newWorld(gravity.getX(), gravity.getY(), doSleep);
 
 		contacts.ensureCapacity(contactAddrs.length);
 		freeContacts.ensureCapacity(contactAddrs.length);
@@ -280,8 +280,8 @@ b2ContactFilter defaultFilter;
 	 * @see Pool
 	 * @warning This function is locked during callbacks. */
 	public Body createBody (BodyDef def) {
-		long bodyAddr = jniCreateBody(addr, def.type.getValue(), def.position.x, def.position.y, def.angle, def.linearVelocity.x,
-			def.linearVelocity.y, def.angularVelocity, def.linearDamping, def.angularDamping, def.allowSleep, def.awake,
+		long bodyAddr = jniCreateBody(addr, def.type.getValue(), def.position.getX(), def.position.getY(), def.angle, def.linearVelocity.getX(),
+			def.linearVelocity.getY(), def.angularVelocity, def.linearDamping, def.angularDamping, def.allowSleep, def.awake,
 			def.fixedRotation, def.bullet, def.active, def.gravityScale);
 		Body body = freeBodies.obtain();
 		body.reset(bodyAddr);
@@ -415,13 +415,13 @@ b2ContactFilter defaultFilter;
 	private long createProperJoint (JointDef def) {
 		if (def.type == JointType.DistanceJoint) {
 			DistanceJointDef d = (DistanceJointDef)def;
-			return jniCreateDistanceJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.length, d.frequencyHz, d.dampingRatio);
+			return jniCreateDistanceJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.length, d.frequencyHz, d.dampingRatio);
 		}
 		if (def.type == JointType.FrictionJoint) {
 			FrictionJointDef d = (FrictionJointDef)def;
-			return jniCreateFrictionJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.maxForce, d.maxTorque);
+			return jniCreateFrictionJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.maxForce, d.maxTorque);
 		}
 		if (def.type == JointType.GearJoint) {
 			GearJointDef d = (GearJointDef)def;
@@ -429,47 +429,47 @@ b2ContactFilter defaultFilter;
 		}
 		if (def.type == JointType.MotorJoint) {
 			MotorJointDef d = (MotorJointDef)def;
-			return jniCreateMotorJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.linearOffset.x, d.linearOffset.y,
+			return jniCreateMotorJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.linearOffset.getX(), d.linearOffset.getY(),
 				d.angularOffset, d.maxForce, d.maxTorque, d.correctionFactor);
 		}
 		if (def.type == JointType.MouseJoint) {
 			MouseJointDef d = (MouseJointDef)def;
-			return jniCreateMouseJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.target.x, d.target.y, d.maxForce,
+			return jniCreateMouseJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.target.getX(), d.target.getY(), d.maxForce,
 				d.frequencyHz, d.dampingRatio);
 		}
 		if (def.type == JointType.PrismaticJoint) {
 			PrismaticJointDef d = (PrismaticJointDef)def;
-			return jniCreatePrismaticJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.localAxisA.x, d.localAxisA.y, d.referenceAngle, d.enableLimit,
+			return jniCreatePrismaticJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.localAxisA.getX(), d.localAxisA.getY(), d.referenceAngle, d.enableLimit,
 				d.lowerTranslation, d.upperTranslation, d.enableMotor, d.maxMotorForce, d.motorSpeed);
 		}
 		if (def.type == JointType.PulleyJoint) {
 			PulleyJointDef d = (PulleyJointDef)def;
-			return jniCreatePulleyJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.groundAnchorA.x, d.groundAnchorA.y,
-				d.groundAnchorB.x, d.groundAnchorB.y, d.localAnchorA.x, d.localAnchorA.y, d.localAnchorB.x, d.localAnchorB.y,
+			return jniCreatePulleyJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.groundAnchorA.getX(), d.groundAnchorA.getY(),
+				d.groundAnchorB.getX(), d.groundAnchorB.getY(), d.localAnchorA.getX(), d.localAnchorA.getY(), d.localAnchorB.getX(), d.localAnchorB.getY(),
 				d.lengthA, d.lengthB, d.ratio);
 
 		}
 		if (def.type == JointType.RevoluteJoint) {
 			RevoluteJointDef d = (RevoluteJointDef)def;
-			return jniCreateRevoluteJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.referenceAngle, d.enableLimit, d.lowerAngle, d.upperAngle, d.enableMotor,
+			return jniCreateRevoluteJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.referenceAngle, d.enableLimit, d.lowerAngle, d.upperAngle, d.enableMotor,
 				d.motorSpeed, d.maxMotorTorque);
 		}
 		if (def.type == JointType.RopeJoint) {
 			RopeJointDef d = (RopeJointDef)def;
-			return jniCreateRopeJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.maxLength);
+			return jniCreateRopeJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.maxLength);
 		}
 		if (def.type == JointType.WeldJoint) {
 			WeldJointDef d = (WeldJointDef)def;
-			return jniCreateWeldJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.referenceAngle, d.frequencyHz, d.dampingRatio);
+			return jniCreateWeldJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.referenceAngle, d.frequencyHz, d.dampingRatio);
 		}
 		if (def.type == JointType.WheelJoint) {
 			WheelJointDef d = (WheelJointDef)def;
-			return jniCreateWheelJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.x, d.localAnchorA.y,
-				d.localAnchorB.x, d.localAnchorB.y, d.localAxisA.x, d.localAxisA.y, d.enableMotor, d.maxMotorTorque, d.motorSpeed,
+			return jniCreateWheelJoint(addr, d.bodyA.addr, d.bodyB.addr, d.collideConnected, d.localAnchorA.getX(), d.localAnchorA.getY(),
+				d.localAnchorB.getX(), d.localAnchorB.getY(), d.localAxisA.getX(), d.localAxisA.getY(), d.enableMotor, d.maxMotorTorque, d.motorSpeed,
 				d.frequencyHz, d.dampingRatio);
 		}
 
@@ -781,7 +781,7 @@ b2ContactFilter defaultFilter;
 
 	/** Change the global gravity vector. */
 	public void setGravity (Vector2 gravity) {
-		jniSetGravity(addr, gravity.x, gravity.y);
+		jniSetGravity(addr, gravity.getX(), gravity.getY());
 	}
 
 	private native void jniSetGravity (long addr, float gravityX, float gravityY); /*
@@ -795,8 +795,8 @@ b2ContactFilter defaultFilter;
 
 	public Vector2 getGravity () {
 		jniGetGravity(addr, tmpGravity);
-		gravity.x = tmpGravity[0];
-		gravity.y = tmpGravity[1];
+		gravity.setX(tmpGravity[0]);
+		gravity.setY(tmpGravity[1]);
 		return gravity;
 	}
 
@@ -1025,7 +1025,7 @@ b2ContactFilter defaultFilter;
 	 * @param point1 the ray starting point
 	 * @param point2 the ray ending point */
 	public void rayCast (RayCastCallback callback, Vector2 point1, Vector2 point2) {
-		rayCast(callback, point1.x, point1.y, point2.x, point2.y);
+		rayCast(callback, point1.getX(), point1.getY(), point2.getX(), point2.getY());
 	}
 
 	/** Ray-cast the world for all fixtures in the path of the ray. The ray-cast ignores shapes that contain the starting point.
@@ -1052,10 +1052,10 @@ b2ContactFilter defaultFilter;
 
 	private float reportRayFixture (long addr, float pX, float pY, float nX, float nY, float fraction) {
 		if (rayCastCallback != null) {
-			rayPoint.x = pX;
-			rayPoint.y = pY;
-			rayNormal.x = nX;
-			rayNormal.y = nY;
+			rayPoint.setX(pX);
+			rayPoint.setY(pY);
+			rayNormal.setX(nX);
+			rayNormal.setY(nY);
 			return rayCastCallback.reportRayFixture(fixtures.get(addr), rayPoint, rayNormal, fraction);
 		} else {
 			return 0.0f;

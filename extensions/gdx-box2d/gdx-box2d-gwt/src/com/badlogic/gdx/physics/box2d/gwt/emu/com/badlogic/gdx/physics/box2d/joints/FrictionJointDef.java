@@ -53,8 +53,8 @@ public class FrictionJointDef extends JointDef {
 		jd.bodyA = bodyA.body;
 		jd.bodyB = bodyB.body;
 		jd.collideConnected = collideConnected;
-		jd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		jd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
+		jd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		jd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
 		jd.maxForce = maxForce;
 		jd.maxTorque = maxTorque;
 		jd.type = org.jbox2d.dynamics.joints.JointType.FRICTION;

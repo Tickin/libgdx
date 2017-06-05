@@ -212,8 +212,8 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 			// ground and create a new body
 			BodyDef boxBodyDef = new BodyDef();
 			boxBodyDef.type = BodyType.DynamicBody;
-			boxBodyDef.position.x = -24 + (float)(Math.random() * 48);
-			boxBodyDef.position.y = 10 + (float)(Math.random() * 100);
+			boxBodyDef.position.setX(-24 + (float)(Math.random() * 48));
+			boxBodyDef.position.setY(10 + (float)(Math.random() * 100));
 			Body boxBody = world.createBody(boxBodyDef);
 
 			boxBody.createFixture(boxPoly, 1);
@@ -254,7 +254,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 			Body box = boxes.get(i);
 			Vector2 position = box.getPosition(); // that's the box's center position
 			float angle = MathUtils.radiansToDegrees * box.getAngle(); // the rotation angle around the center
-			batch.draw(textureRegion, position.x - 1, position.y - 1, // the bottom left corner of the box, unrotated
+			batch.draw(textureRegion, position.getX() - 1, position.getY() - 1, // the bottom left corner of the box, unrotated
 				1f, 1f, // the rotation center relative to the bottom left corner of the box
 				2, 2, // the width and height of the box
 				1, 1, // the scale on the x- and y-axis
@@ -284,7 +284,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 				int numContactPoints = manifold.getNumberOfContactPoints();
 				for (int j = 0; j < numContactPoints; j++) {
 					Vector2 point = manifold.getPoints()[j];
-					renderer.point(point.x, point.y, 0);
+					renderer.point(point.getX(), point.getY(), 0);
 				}
 			}
 		}
@@ -307,7 +307,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 		float angle = body.getAngle();
 
 		// set the translation and rotation matrix
-		transform.setToTranslation(pos.x, pos.y, 0);
+		transform.setToTranslation(pos.getX(), pos.getY(), 0);
 		transform.rotate(0, 0, 1, (float)Math.toDegrees(angle));
 
 		// render the box
@@ -329,7 +329,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 
 			// if the hit point is inside the fixture of the body
 			// we report it
-			if (fixture.testPoint(testPoint.x, testPoint.y)) {
+			if (fixture.testPoint(testPoint.getX(), testPoint.getY())) {
 				hitBody = fixture.getBody();
 				return false;
 			} else
@@ -346,7 +346,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 		// ask the world which bodies are within the given
 		// bounding box around the mouse pointer
 		hitBody = null;
-		world.QueryAABB(callback, testPoint.x - 0.1f, testPoint.y - 0.1f, testPoint.x + 0.1f, testPoint.y + 0.1f);
+		world.QueryAABB(callback, testPoint.getX() - 0.1f, testPoint.getY() - 0.1f, testPoint.getX() + 0.1f, testPoint.getY() + 0.1f);
 
 		// if we hit something we create a new mouse joint
 		// and attach it to the hit body.
@@ -355,7 +355,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 			def.bodyA = groundBody;
 			def.bodyB = hitBody;
 			def.collideConnected = true;
-			def.target.set(testPoint.x, testPoint.y);
+			def.target.set(testPoint.getX(), testPoint.getY());
 			def.maxForce = 1000.0f * hitBody.getMass();
 
 			mouseJoint = (MouseJoint)world.createJoint(def);
@@ -380,7 +380,7 @@ public class Box2DTest extends GdxTest implements InputProcessor {
 		// mouse coordinates
 		if (mouseJoint != null) {
 			camera.unproject(testPoint.set(x, y, 0));
-			mouseJoint.setTarget(target.set(testPoint.x, testPoint.y));
+			mouseJoint.setTarget(target.set(testPoint.getX(), testPoint.getY()));
 		}
 		return false;
 	}

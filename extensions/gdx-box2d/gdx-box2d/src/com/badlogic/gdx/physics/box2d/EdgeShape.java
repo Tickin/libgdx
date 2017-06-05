@@ -40,7 +40,7 @@ public class EdgeShape extends Shape {
 
 	/** Set this as an isolated edge. */
 	public void set (Vector2 v1, Vector2 v2) {
-		set(v1.x, v1.y, v2.x, v2.y);
+		set(v1.getX(), v1.getY(), v2.getX(), v2.getY());
 	}
 
 	/** Set this as an isolated edge. */
@@ -57,8 +57,8 @@ public class EdgeShape extends Shape {
 
 	public void getVertex1 (Vector2 vec) {
 		jniGetVertex1(addr, vertex);
-		vec.x = vertex[0];
-		vec.y = vertex[1];
+		vec.setX(vertex[0]);
+		vec.setY(vertex[1]);
 	}
 
 	private native void jniGetVertex1 (long addr, float[] vertex); /*
@@ -69,8 +69,8 @@ public class EdgeShape extends Shape {
 
 	public void getVertex2 (Vector2 vec) {
 		jniGetVertex2(addr, vertex);
-		vec.x = vertex[0];
-		vec.y = vertex[1];
+		vec.setX(vertex[0]);
+		vec.setY(vertex[1]);
 	}
 
 	private native void jniGetVertex2 (long addr, float[] vertex); /*
@@ -81,8 +81,8 @@ public class EdgeShape extends Shape {
 
 	public void getVertex0 (Vector2 vec) {
 		jniGetVertex0(addr, vertex);
-		vec.x = vertex[0];
-		vec.y = vertex[1];
+		vec.setX(vertex[0]);
+		vec.setY(vertex[1]);
 	}
 
 	private native void jniGetVertex0 (long addr, float[] vertex); /*
@@ -92,7 +92,7 @@ public class EdgeShape extends Shape {
 	*/
 
 	public void setVertex0 (Vector2 vec) {
-		jniSetVertex0(addr, vec.x, vec.y);
+		jniSetVertex0(addr, vec.getX(), vec.getY());
 	}
 
 	public void setVertex0 (float x, float y) {
@@ -107,8 +107,8 @@ public class EdgeShape extends Shape {
 
 	public void getVertex3 (Vector2 vec) {
 		jniGetVertex3(addr, vertex);
-		vec.x = vertex[0];
-		vec.y = vertex[1];
+		vec.setX(vertex[0]);
+		vec.setY(vertex[1]);
 	}
 
 	private native void jniGetVertex3 (long addr, float[] vertex); /*
@@ -118,7 +118,7 @@ public class EdgeShape extends Shape {
 	*/
 
 	public void setVertex3 (Vector2 vec) {
-		jniSetVertex3(addr, vec.x, vec.y);
+		jniSetVertex3(addr, vec.getX(), vec.getY());
 	}
 
 	public void setVertex3 (float x, float y) {

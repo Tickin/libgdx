@@ -1217,7 +1217,7 @@ public class Table extends WidgetGroup {
 		for (int i = 0, n = debugRects.size; i < n; i++) {
 			DebugRect debugRect = debugRects.get(i);
 			shapes.setColor(debugRect.color);
-			shapes.rect(x + debugRect.x, y + debugRect.y, debugRect.width, debugRect.height);
+			shapes.rect(x + debugRect.getX(), y + debugRect.getY(), debugRect.width, debugRect.height);
 		}
 	}
 

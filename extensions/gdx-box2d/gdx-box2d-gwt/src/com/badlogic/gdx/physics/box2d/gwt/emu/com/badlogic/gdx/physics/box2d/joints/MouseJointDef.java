@@ -47,7 +47,7 @@ public class MouseJointDef extends JointDef {
 		jd.dampingRatio = dampingRatio;
 		jd.frequencyHz = frequencyHz;
 		jd.maxForce = maxForce;
-		jd.target.set(target.x, target.y);
+		jd.target.set(target.getX(), target.getY());
 		jd.type = org.jbox2d.dynamics.joints.JointType.MOUSE;
 		return jd;
 	}

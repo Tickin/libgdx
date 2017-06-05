@@ -83,7 +83,7 @@ public class PixmapPackerIO {
 					writer.write(name + "\n");
 					Rectangle rect = page.rects.get(name);
 					writer.write("rotate: false" + "\n");
-					writer.write("xy: " + (int) rect.x + "," + (int) rect.y + "\n");
+					writer.write("xy: " + (int) rect.getX() + "," + (int) rect.getY() + "\n");
 					writer.write("size: " + (int) rect.width + "," + (int) rect.height + "\n");
 					writer.write("orig: " + (int) rect.width + "," + (int) rect.height + "\n");
 					writer.write("offset: 0, 0" + "\n");

@@ -156,8 +156,8 @@ public class FloatTextureTest extends GdxTest {
 		screenCamera.unproject(vec0);
 		Vector3 vec1 = new Vector3(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
 		screenCamera.unproject(vec1);
-		screenQuad.setVertices(new float[] {vec0.x, vec0.y, 0, 1, 1, 1, 1, 0, 1, vec1.x, vec0.y, 0, 1, 1, 1, 1, 1, 1, vec1.x,
-			vec1.y, 0, 1, 1, 1, 1, 1, 0, vec0.x, vec1.y, 0, 1, 1, 1, 1, 0, 0});
+		screenQuad.setVertices(new float[] {vec0.getX(), vec0.getY(), 0, 1, 1, 1, 1, 0, 1, vec1.getX(), vec0.getY(), 0, 1, 1, 1, 1, 1, 1, vec1.getX(),
+			vec1.getY(), 0, 1, 1, 1, 1, 1, 0, vec0.getX(), vec1.getY(), 0, 1, 1, 1, 1, 0, 0});
 		screenQuad.setIndices(new short[] {0, 1, 2, 2, 3, 0});
 	}
 }

@@ -146,7 +146,7 @@ public class ParticleShader extends BaseShader {
 			@Override
 			public void set (BaseShader shader, int inputID, Renderable renderable, Attributes combinedAttributes) {
 				shader.set(inputID,
-					TMP_VECTOR3.set(-shader.camera.direction.x, -shader.camera.direction.y, -shader.camera.direction.z).nor());
+					TMP_VECTOR3.set(-shader.camera.direction.getX(), -shader.camera.direction.getY(), -shader.camera.direction.getZ()).nor());
 			}
 		};
 		public final static Setter cameraPosition = new Setter() {

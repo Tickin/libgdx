@@ -74,8 +74,8 @@ public class RevoluteJointDef extends JointDef {
 		jd.collideConnected = collideConnected;
 		jd.enableLimit = enableLimit;
 		jd.enableMotor = enableMotor;
-		jd.localAnchorA.set(localAnchorA.x, localAnchorA.y);
-		jd.localAnchorB.set(localAnchorB.x, localAnchorB.y);
+		jd.localAnchorA.set(localAnchorA.getX(), localAnchorA.getY());
+		jd.localAnchorB.set(localAnchorB.getX(), localAnchorB.getY());
 		jd.lowerAngle = lowerAngle;
 		jd.maxMotorTorque = maxMotorTorque;
 		jd.motorSpeed = motorSpeed;

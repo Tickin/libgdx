@@ -37,7 +37,7 @@ public class EdgeShape extends Shape {
 
 	/** Set this as an isolated edge. */
 	public void set (Vector2 v1, Vector2 v2) {
-		set(v1.x, v1.y, v2.x, v2.y);
+		set(v1.getX(), v1.getY(), v2.getX(), v2.getY());
 	}
 
 	Vec2 tmp = new Vec2();

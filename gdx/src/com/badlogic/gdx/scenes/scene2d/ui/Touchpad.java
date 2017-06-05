@@ -89,10 +89,10 @@ public class Touchpad extends Widget {
 	}
 
 	void calculatePositionAndValue (float x, float y, boolean isTouchUp) {
-		float oldPositionX = knobPosition.x;
-		float oldPositionY = knobPosition.y;
-		float oldPercentX = knobPercent.x;
-		float oldPercentY = knobPercent.y;
+		float oldPositionX = knobPosition.getX();
+		float oldPositionY = knobPosition.getY();
+		float oldPercentX = knobPercent.getX();
+		float oldPercentY = knobPercent.getY();
 		float centerX = knobBounds.x;
 		float centerY = knobBounds.y;
 		knobPosition.set(centerX, centerY);
@@ -109,7 +109,7 @@ public class Touchpad extends Widget {
 				}
 			}
 		}
-		if (oldPercentX != knobPercent.x || oldPercentY != knobPercent.y) {
+		if (oldPercentX != knobPercent.getX() || oldPercentY != knobPercent.getY()) {
 			ChangeEvent changeEvent = Pools.obtain(ChangeEvent.class);
 			if (fire(changeEvent)) {
 				knobPercent.set(oldPercentX, oldPercentY);
@@ -168,8 +168,8 @@ public class Touchpad extends Widget {
 
 		final Drawable knob = style.knob;
 		if (knob != null) {
-			x += knobPosition.x - knob.getMinWidth() / 2f;
-			y += knobPosition.y - knob.getMinHeight() / 2f;
+			x += knobPosition.getX() - knob.getMinWidth() / 2f;
+			y += knobPosition.getY() - knob.getMinHeight() / 2f;
 			knob.draw(batch, x, y, knob.getMinWidth(), knob.getMinHeight());
 		}
 	}
@@ -206,24 +206,24 @@ public class Touchpad extends Widget {
 
 	/** Returns the x-position of the knob relative to the center of the widget. The positive direction is right. */
 	public float getKnobX () {
-		return knobPosition.x;
+		return knobPosition.getX();
 	}
 
 	/** Returns the y-position of the knob relative to the center of the widget. The positive direction is up. */
 	public float getKnobY () {
-		return knobPosition.y;
+		return knobPosition.getY();
 	}
 
 	/** Returns the x-position of the knob as a percentage from the center of the touchpad to the edge of the circular movement
 	 * area. The positive direction is right. */
 	public float getKnobPercentX () {
-		return knobPercent.x;
+		return knobPercent.getX();
 	}
 
 	/** Returns the y-position of the knob as a percentage from the center of the touchpad to the edge of the circular movement
 	 * area. The positive direction is up. */
 	public float getKnobPercentY () {
-		return knobPercent.y;
+		return knobPercent.getY();
 	}
 
 	/** The style for a {@link Touchpad}.

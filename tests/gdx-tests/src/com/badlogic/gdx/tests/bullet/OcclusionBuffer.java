@@ -58,7 +58,7 @@ public class OcclusionBuffer implements Disposable {
 					// This means a bounding box will not be considered occluded when any of its vertices
 					// are behind the camera frustum near plane.
 					for (Quaternion vertex : vertices) {
-						if (vertex.z + vertex.w <= 0) return true;
+						if (vertex.getZ() + vertex.getW() <= 0) return true;
 					}
 					return false;
 			}
@@ -91,19 +91,19 @@ public class OcclusionBuffer implements Disposable {
 		 * @return This vector for chaining */
 		public Quaternion mul (final Matrix4 matrix) {
 			final float[] val = matrix.val;
-			return this.set(x * val[Matrix4.M00] + y * val[Matrix4.M01] + z * val[Matrix4.M02] + w * val[Matrix4.M03],
-					x * val[Matrix4.M10] + y * val[Matrix4.M11] + z * val[Matrix4.M12] + w * val[Matrix4.M13],
-					x * val[Matrix4.M20] + y * val[Matrix4.M21] + z * val[Matrix4.M22] + w * val[Matrix4.M23],
-					x * val[Matrix4.M30] + y * val[Matrix4.M31] + z * val[Matrix4.M32] + w * val[Matrix4.M33]);
+			return this.set(getX() * val[Matrix4.M00] + getY() * val[Matrix4.M01] + getZ() * val[Matrix4.M02] + getW() * val[Matrix4.M03],
+					getX() * val[Matrix4.M10] + getY() * val[Matrix4.M11] + getZ() * val[Matrix4.M12] + getW() * val[Matrix4.M13],
+					getX() * val[Matrix4.M20] + getY() * val[Matrix4.M21] + getZ() * val[Matrix4.M22] + getW() * val[Matrix4.M23],
+					getX() * val[Matrix4.M30] + getY() * val[Matrix4.M31] + getZ() * val[Matrix4.M32] + getW() * val[Matrix4.M33]);
 		}
 
 		/** Multiply the x,y,z,w components of the passed in quaternion with the scalar and add them to the components of this
 		 * quaternion */
 		public Quaternion mulAdd (final Quaternion quaternion, float scalar) {
-			this.x += quaternion.x * scalar;
-			this.y += quaternion.y * scalar;
-			this.z += quaternion.z * scalar;
-			this.w += quaternion.w * scalar;
+			this.setX(this.getX() + quaternion.getX() * scalar);
+			this.setY(this.getY() + quaternion.getY() * scalar);
+			this.setZ(this.getZ() + quaternion.getZ() * scalar);
+			this.setW(this.getW() + quaternion.getW() * scalar);
 			return this;
 		}
 
@@ -118,19 +118,19 @@ public class OcclusionBuffer implements Disposable {
 
 		/** Subtract the x,y,z,w components of the passed in quaternion to the ones of this quaternion */
 		public Quaternion sub (float qx, float qy, float qz, float qw) {
-			this.x -= qx;
-			this.y -= qy;
-			this.z -= qz;
-			this.w -= qw;
+			this.setX(this.getX() - qx);
+			this.setY(this.getY() - qy);
+			this.setZ(this.getZ() - qz);
+			this.setW(this.getW() - qw);
 			return this;
 		}
 
 		/** Subtract the x,y,z,w components of the passed in quaternion to the ones of this quaternion */
 		public Quaternion sub (Quaternion quaternion) {
-			this.x -= quaternion.x;
-			this.y -= quaternion.y;
-			this.z -= quaternion.z;
-			this.w -= quaternion.w;
+			this.setX(this.getX() - quaternion.getX());
+			this.setY(this.getY() - quaternion.getY());
+			this.setZ(this.getZ() - quaternion.getZ());
+			this.setW(this.getW() - quaternion.getW());
 			return this;
 		}
 	}
@@ -177,7 +177,7 @@ public class OcclusionBuffer implements Disposable {
 		bufferWidth = width;
 		bufferHeight = height;
 		bufferHalfExt = new Vector2(width * 0.5f, height * 0.5f);
-		bufferOffset = new Vector2(bufferHalfExt.x + 0.5f, bufferHalfExt.y + 0.5f);
+		bufferOffset = new Vector2(bufferHalfExt.getX() + 0.5f, bufferHalfExt.getY() + 0.5f);
 		buffer = BufferUtils.newFloatBuffer(width * height);
 		for (int i = 0; i < 8; i++) {
 			box[i] = new Vector3();
@@ -205,7 +205,7 @@ public class OcclusionBuffer implements Disposable {
 		int numVertsBehind = 0;
 		float[] s = new float[4];
 		for (int i = 0; i < numVerts; i++) {
-			s[i] = verticesIn[i].z + verticesIn[i].w;
+			s[i] = verticesIn[i].getZ() + verticesIn[i].getW();
 			if (s[i] < 0) numVertsBehind++;
 		}
 		if (numVertsBehind == numVerts) {
@@ -218,7 +218,7 @@ public class OcclusionBuffer implements Disposable {
 			for (int i = numVerts - 1, j = 0; j < numVerts; i = j++) {
 				Quaternion a = tmpQ1.set(verticesIn[i]);
 				Quaternion b = tmpQ2.set(verticesIn[j]);
-				float t = s[i] / (a.w + a.z - b.w - b.z);
+				float t = s[i] / (a.getW() + a.getZ() - b.getW() - b.getZ());
 				if ((t > 0) && (t < 1)) verticesOut[newNumVerts++].set(a).mulAdd(b.sub(a), t);
 				if (s[j] > 0) verticesOut[newNumVerts++].set(verticesIn[j]);
 			}
@@ -276,7 +276,7 @@ public class OcclusionBuffer implements Disposable {
 		for (int i = 0; i < 8; i++) {
 			// Multiply the world coordinates by the camera combined matrix, but do not divide by w component yet.
 			Vector3 v = vertices[i];
-			tmpVertices[i].set(v.x, v.y, v.z, 1).mul(projectionMatrix);
+			tmpVertices[i].set(v.getX(), v.getY(), v.getZ(), 1).mul(projectionMatrix);
 		}
 		if (policy.evaluate(tmpVertices)) return true;
 
@@ -291,8 +291,8 @@ public class OcclusionBuffer implements Disposable {
 			// Divide by w to project vertices to camera space
 			for (int j = 0; j < numVertices; j++) {
 				Quaternion q = clippedQuad[j];
-				q.z = 1 / q.w;
-				vertices[j].set(q.x * q.z, q.y * q.z, q.z);
+				q.setZ(1 / q.getW());
+				vertices[j].set(q.getX() * q.getZ(), q.getY() * q.getZ(), q.getZ());
 			}
 			// Perform draw/query
 			for (int j = 2; j < numVertices; j++) {
@@ -353,14 +353,14 @@ public class OcclusionBuffer implements Disposable {
 	 * @return With query policy, true if any pixel in the triangle passes a depth test. False otherwise. */
 	private boolean drawTriangle (Vector3 a, Vector3 b, Vector3 c, Policy policy) {
 		// Check if triangle faces away from the camera (back-face culling).
-		if (((tmpV1.set(b).sub(a)).crs(tmpV2.set(c).sub(a))).z <= 0) return false;
+		if (((tmpV1.set(b).sub(a)).crs(tmpV2.set(c).sub(a))).getZ() <= 0) return false;
 		// Triangle coordinates and size.
 		// Note that x, y, z in e.g. triX corresponds to x components of vertices a, b, c,
 		// which means triX.x is the x coordinate of a.
-		triX.set((int)(a.x * bufferHalfExt.x + bufferOffset.x), (int)(b.x * bufferHalfExt.x + bufferOffset.x),
-				(int)(c.x * bufferHalfExt.x + bufferOffset.x));
-		triY.set((int)(a.y * bufferHalfExt.y + bufferOffset.y), (int)(b.y * bufferHalfExt.y + bufferOffset.y),
-				(int)(c.y * bufferHalfExt.y + bufferOffset.y));
+		triX.set((int)(a.getX() * bufferHalfExt.getX() + bufferOffset.getX()), (int)(b.getX() * bufferHalfExt.getX() + bufferOffset.getX()),
+				(int)(c.getX() * bufferHalfExt.getX() + bufferOffset.getX()));
+		triY.set((int)(a.getY() * bufferHalfExt.getY() + bufferOffset.getY()), (int)(b.getY() * bufferHalfExt.getY() + bufferOffset.getY()),
+				(int)(c.getY() * bufferHalfExt.getY() + bufferOffset.getY()));
 		// X/Y extents
 		int xMin = Math.max(0, Math.min(triX.x, Math.min(triX.y, triX.z)));
 		int xMax = Math.min(bufferWidth, 1 + Math.max(triX.x, Math.max(triX.y, triX.z)));
@@ -378,9 +378,9 @@ public class OcclusionBuffer implements Disposable {
 		// Depth interpolation
 		float ia = 1f
 				/ (float)(triX.x * triY.y - triX.y * triY.x + triX.z * triY.x - triX.x * triY.z + triX.y * triY.z - triX.z * triY.y);
-		float dzx = ia * (triY.x * (c.z - b.z) + triY.y * (a.z - c.z) + triY.z * (b.z - a.z));
-		float dzy = ia * (triX.x * (b.z - c.z) + triX.y * (c.z - a.z) + triX.z * (a.z - b.z)) - (dzx * width);
-		float drawDepth = ia * (a.z * cursor.y + b.z * cursor.z + c.z * cursor.x);
+		float dzx = ia * (triY.x * (c.getZ() - b.getZ()) + triY.y * (a.getZ() - c.getZ()) + triY.z * (b.getZ() - a.getZ()));
+		float dzy = ia * (triX.x * (b.getZ() - c.getZ()) + triX.y * (c.getZ() - a.getZ()) + triX.z * (a.getZ() - b.getZ())) - (dzx * width);
+		float drawDepth = ia * (a.getZ() * cursor.y + b.getZ() * cursor.z + c.getZ() * cursor.x);
 		int bufferRow = (yMin * bufferHeight);
 		// Loop over pixels and process the triangle pixel depth versus the existing value in buffer.
 		for (int iy = yMin; iy < yMax; iy++) {
@@ -414,14 +414,14 @@ public class OcclusionBuffer implements Disposable {
 	 * @param halfExt Half extents
 	 * @param vertices Vertices output */
 	private static void setAABBVertices (Vector3 center, Vector3 halfExt, Vector3[] vertices) {
-		vertices[0].set(center.x - halfExt.x, center.y - halfExt.y, center.z - halfExt.z);
-		vertices[1].set(center.x + halfExt.x, center.y - halfExt.y, center.z - halfExt.z);
-		vertices[2].set(center.x + halfExt.x, center.y + halfExt.y, center.z - halfExt.z);
-		vertices[3].set(center.x - halfExt.x, center.y + halfExt.y, center.z - halfExt.z);
-		vertices[4].set(center.x - halfExt.x, center.y - halfExt.y, center.z + halfExt.z);
-		vertices[5].set(center.x + halfExt.x, center.y - halfExt.y, center.z + halfExt.z);
-		vertices[6].set(center.x + halfExt.x, center.y + halfExt.y, center.z + halfExt.z);
-		vertices[7].set(center.x - halfExt.x, center.y + halfExt.y, center.z + halfExt.z);
+		vertices[0].set(center.getX() - halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[1].set(center.getX() + halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[2].set(center.getX() + halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[3].set(center.getX() - halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() - halfExt.getZ());
+		vertices[4].set(center.getX() - halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() + halfExt.getZ());
+		vertices[5].set(center.getX() + halfExt.getX(), center.getY() - halfExt.getY(), center.getZ() + halfExt.getZ());
+		vertices[6].set(center.getX() + halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() + halfExt.getZ());
+		vertices[7].set(center.getX() - halfExt.getX(), center.getY() + halfExt.getY(), center.getZ() + halfExt.getZ());
 	}
 
 	/** Sets the projection matrix to be used for rendering. Usually this will be set to Camera.combined.

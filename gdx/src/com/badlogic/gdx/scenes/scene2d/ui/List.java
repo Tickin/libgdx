@@ -164,7 +164,7 @@ public class List<T> extends Widget implements Cullable {
 
 		font.setColor(fontColorUnselected.r, fontColorUnselected.g, fontColorUnselected.b, fontColorUnselected.a * parentAlpha);
 		for (int i = 0; i < items.size; i++) {
-			if (cullingArea == null || (itemY - itemHeight <= cullingArea.y + cullingArea.height && itemY >= cullingArea.y)) {
+			if (cullingArea == null || (itemY - itemHeight <= cullingArea.getY() + cullingArea.height && itemY >= cullingArea.getY())) {
 				T item = items.get(i);
 				boolean selected = selection.contains(item);
 				if (selected) {
@@ -176,7 +176,7 @@ public class List<T> extends Widget implements Cullable {
 					font.setColor(fontColorUnselected.r, fontColorUnselected.g, fontColorUnselected.b,
 						fontColorUnselected.a * parentAlpha);
 				}
-			} else if (itemY < cullingArea.y) {
+			} else if (itemY < cullingArea.getY()) {
 				break;
 			}
 			itemY -= itemHeight;

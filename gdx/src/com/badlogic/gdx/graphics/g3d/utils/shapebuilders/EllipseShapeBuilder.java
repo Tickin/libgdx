@@ -34,14 +34,14 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 
 	/** Build a circle */
 	public static void build (MeshPartBuilder builder, float radius, int divisions, final Vector3 center, final Vector3 normal) {
-		build(builder, radius, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z);
+		build(builder, radius, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ());
 	}
 
 	/** Build a circle */
 	public static void build (MeshPartBuilder builder, float radius, int divisions, final Vector3 center, final Vector3 normal, final Vector3 tangent,
 		final Vector3 binormal) {
-		build(builder, radius, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, tangent.x, tangent.y, tangent.z,
-			binormal.x, binormal.y, binormal.z);
+		build(builder, radius, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), tangent.getX(), tangent.getY(), tangent.getZ(),
+			binormal.getX(), binormal.getY(), binormal.getZ());
 	}
 
 	/** Build a circle */
@@ -59,14 +59,14 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 
 	/** Build a circle */
 	public static void build (MeshPartBuilder builder, float radius, int divisions, final Vector3 center, final Vector3 normal, float angleFrom, float angleTo) {
-		build(builder, radius, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, angleFrom, angleTo);
+		build(builder, radius, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), angleFrom, angleTo);
 	}
 
 	/** Build a circle */
 	public static void build (MeshPartBuilder builder, float radius, int divisions, final Vector3 center, final Vector3 normal, final Vector3 tangent,
 		final Vector3 binormal, float angleFrom, float angleTo) {
-		build(builder, radius, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, tangent.x, tangent.y, tangent.z,
-			binormal.x, binormal.y, binormal.z, angleFrom, angleTo);
+		build(builder, radius, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), tangent.getX(), tangent.getY(), tangent.getZ(),
+			binormal.getX(), binormal.getY(), binormal.getZ(), angleFrom, angleTo);
 	}
 
 	/** Build a circle */
@@ -86,14 +86,14 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 	/** Build a ellipse */
 	public static void build (MeshPartBuilder builder, float width, float height, int divisions, final Vector3 center,
 		final Vector3 normal) {
-		build(builder, width, height, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z);
+		build(builder, width, height, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ());
 	}
 
 	/** Build a ellipse */
 	public static void build (MeshPartBuilder builder, float width, float height, int divisions, final Vector3 center,
 		final Vector3 normal, final Vector3 tangent, final Vector3 binormal) {
-		build(builder, width, height, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, tangent.x, tangent.y,
-			tangent.z, binormal.x, binormal.y, binormal.z);
+		build(builder, width, height, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), tangent.getX(), tangent.getY(),
+			tangent.getZ(), binormal.getX(), binormal.getY(), binormal.getZ());
 	}
 
 	/** Build a ellipse */
@@ -113,14 +113,14 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 	/** Build a ellipse */
 	public static void build (MeshPartBuilder builder, float width, float height, int divisions, final Vector3 center,
 		final Vector3 normal, float angleFrom, float angleTo) {
-		build(builder, width, height, 0f, 0f, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, angleFrom, angleTo);
+		build(builder, width, height, 0f, 0f, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), angleFrom, angleTo);
 	}
 
 	/** Build a ellipse */
 	public static void build (MeshPartBuilder builder, float width, float height, int divisions, final Vector3 center,
 		final Vector3 normal, final Vector3 tangent, final Vector3 binormal, float angleFrom, float angleTo) {
-		build(builder, width, height, 0f, 0f, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, tangent.x,
-			tangent.y, tangent.z, binormal.x, binormal.y, binormal.z, angleFrom, angleTo);
+		build(builder, width, height, 0f, 0f, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), tangent.getX(),
+			tangent.getY(), tangent.getZ(), binormal.getX(), binormal.getY(), binormal.getZ(), angleFrom, angleTo);
 	}
 
 	/** Build a ellipse */
@@ -140,7 +140,7 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 		if (tmpV2.len2() > tmpV1.len2()) tmpV1.set(tmpV2);
 		tmpV2.set(tmpV1.nor()).crs(normalX, normalY, normalZ).nor();
 		build(builder, width, height, innerWidth, innerHeight, divisions, centerX, centerY, centerZ, normalX, normalY, normalZ,
-			tmpV1.x, tmpV1.y, tmpV1.z, tmpV2.x, tmpV2.y, tmpV2.z, angleFrom, angleTo);
+			tmpV1.getX(), tmpV1.getY(), tmpV1.getZ(), tmpV2.getX(), tmpV2.getY(), tmpV2.getZ(), angleFrom, angleTo);
 	}
 
 	/** Build an ellipse */
@@ -153,8 +153,8 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 	/** Build an ellipse */
 	public static void build (MeshPartBuilder builder, float width, float height, float innerWidth, float innerHeight,
 		int divisions, Vector3 center, Vector3 normal) {
-		build(builder, width, height, innerWidth, innerHeight, divisions, center.x, center.y, center.z, normal.x, normal.y,
-			normal.z, 0f, 360f);
+		build(builder, width, height, innerWidth, innerHeight, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(),
+			normal.getZ(), 0f, 360f);
 	}
 
 	/** Build an ellipse */
@@ -200,8 +200,8 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 			angle = ao + step * i;
 			final float x = MathUtils.cos(angle);
 			final float y = MathUtils.sin(angle);
-			currEx.position.set(centerX, centerY, centerZ).add(sxEx.x * x + syEx.x * y, sxEx.y * x + syEx.y * y,
-				sxEx.z * x + syEx.z * y);
+			currEx.position.set(centerX, centerY, centerZ).add(sxEx.getX() * x + syEx.getX() * y, sxEx.getY() * x + syEx.getY() * y,
+				sxEx.getZ() * x + syEx.getZ() * y);
 			currEx.uv.set(.5f + .5f * x, .5f + .5f * y);
 			i1 = builder.vertex(currEx);
 
@@ -212,8 +212,8 @@ public class EllipseShapeBuilder extends BaseShapeBuilder {
 				if (i != 0) builder.line(i1, i2);
 				i2 = i1;
 			} else {
-				currIn.position.set(centerX, centerY, centerZ).add(sxIn.x * x + syIn.x * y, sxIn.y * x + syIn.y * y,
-					sxIn.z * x + syIn.z * y);
+				currIn.position.set(centerX, centerY, centerZ).add(sxIn.getX() * x + syIn.getX() * y, sxIn.getY() * x + syIn.getY() * y,
+					sxIn.getZ() * x + syIn.getZ() * y);
 				currIn.uv.set(.5f + us * x, .5f + vs * y);
 				i2 = i1;
 				i1 = builder.vertex(currIn);

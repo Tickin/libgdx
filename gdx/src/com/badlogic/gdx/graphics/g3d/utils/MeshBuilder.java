@@ -472,29 +472,29 @@ public class MeshBuilder implements MeshPartBuilder {
 	private final static void transformPosition (final float[] values, final int offset, final int size, Matrix4 transform) {
 		if (size > 2) {
 			vTmp.set(values[offset], values[offset + 1], values[offset + 2]).mul(transform);
-			values[offset] = vTmp.x;
-			values[offset + 1] = vTmp.y;
-			values[offset + 2] = vTmp.z;
+			values[offset] = vTmp.getX();
+			values[offset + 1] = vTmp.getY();
+			values[offset + 2] = vTmp.getZ();
 		} else if (size > 1) {
 			vTmp.set(values[offset], values[offset + 1], 0).mul(transform);
-			values[offset] = vTmp.x;
-			values[offset + 1] = vTmp.y;
+			values[offset] = vTmp.getX();
+			values[offset + 1] = vTmp.getY();
 		} else
-			values[offset] = vTmp.set(values[offset], 0, 0).mul(transform).x;
+			values[offset] = vTmp.set(values[offset], 0, 0).mul(transform).getX();
 	}
 
 	private final static void transformNormal (final float[] values, final int offset, final int size, Matrix3 transform) {
 		if (size > 2) {
 			vTmp.set(values[offset], values[offset + 1], values[offset + 2]).mul(transform).nor();
-			values[offset] = vTmp.x;
-			values[offset + 1] = vTmp.y;
-			values[offset + 2] = vTmp.z;
+			values[offset] = vTmp.getX();
+			values[offset + 1] = vTmp.getY();
+			values[offset + 2] = vTmp.getZ();
 		} else if (size > 1) {
 			vTmp.set(values[offset], values[offset + 1], 0).mul(transform).nor();
-			values[offset] = vTmp.x;
-			values[offset + 1] = vTmp.y;
+			values[offset] = vTmp.getX();
+			values[offset + 1] = vTmp.getY();
 		} else
-			values[offset] = vTmp.set(values[offset], 0, 0).mul(transform).nor().x;
+			values[offset] = vTmp.set(values[offset], 0, 0).mul(transform).nor().getX();
 	}
 
 	private final void addVertex (final float[] values, final int offset) {
@@ -538,15 +538,15 @@ public class MeshBuilder implements MeshPartBuilder {
 	public short vertex (Vector3 pos, Vector3 nor, Color col, Vector2 uv) {
 		if (vindex > Short.MAX_VALUE) throw new GdxRuntimeException("Too many vertices used");
 
-		vertex[posOffset] = pos.x;
-		if (posSize > 1) vertex[posOffset + 1] = pos.y;
-		if (posSize > 2) vertex[posOffset + 2] = pos.z;
+		vertex[posOffset] = pos.getX();
+		if (posSize > 1) vertex[posOffset + 1] = pos.getY();
+		if (posSize > 2) vertex[posOffset + 2] = pos.getZ();
 
 		if (norOffset >= 0) {
 			if (nor == null) nor = tmpNormal.set(pos).nor();
-			vertex[norOffset] = nor.x;
-			vertex[norOffset + 1] = nor.y;
-			vertex[norOffset + 2] = nor.z;
+			vertex[norOffset] = nor.getX();
+			vertex[norOffset + 1] = nor.getY();
+			vertex[norOffset + 2] = nor.getZ();
 		}
 
 		if (colOffset >= 0) {
@@ -561,8 +561,8 @@ public class MeshBuilder implements MeshPartBuilder {
 		}
 
 		if (uv != null && uvOffset >= 0) {
-			vertex[uvOffset] = uv.x;
-			vertex[uvOffset + 1] = uv.y;
+			vertex[uvOffset] = uv.getX();
+			vertex[uvOffset + 1] = uv.getY();
 		}
 
 		addVertex(vertex, 0);
@@ -894,8 +894,8 @@ public class MeshBuilder implements MeshPartBuilder {
 	@Deprecated
 	public void circle (float radius, int divisions, final Vector3 center, final Vector3 normal, final Vector3 tangent,
 		final Vector3 binormal, float angleFrom, float angleTo) {
-		circle(radius, divisions, center.x, center.y, center.z, normal.x, normal.y, normal.z, tangent.x, tangent.y, tangent.z,
-			binormal.x, binormal.y, binormal.z, angleFrom, angleTo);
+		circle(radius, divisions, center.getX(), center.getY(), center.getZ(), normal.getX(), normal.getY(), normal.getZ(), tangent.getX(), tangent.getY(), tangent.getZ(),
+			binormal.getX(), binormal.getY(), binormal.getZ(), angleFrom, angleTo);
 	}
 
 	@Override

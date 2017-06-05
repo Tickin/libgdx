@@ -108,7 +108,7 @@ public class NoncontinuousRenderingTest extends GdxTest {
 		Camera cam = stage.getCamera();
 		batch.setProjectionMatrix(cam.combined);
 		batch.begin();
-		batch.draw(region, cam.position.x - texture.getWidth() / 2, cam.position.y - texture.getHeight() / 2, 
+		batch.draw(region, cam.position.getX() - texture.getWidth() / 2, cam.position.getY() - texture.getHeight() / 2, 
 			texture.getWidth() / 2f, texture.getHeight() / 2f, (float)texture.getWidth(), (float)texture.getHeight(), 1f, 1f, -((elapsed / 2f) % 1f) * 360f);
 		batch.end();
 		
