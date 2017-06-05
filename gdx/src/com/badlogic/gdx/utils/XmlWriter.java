@@ -39,16 +39,15 @@ import java.io.Writer;
  * @author Nathan Sweet
  */
 //@on
-public class XmlWriter extends Writer {
-	private final Writer writer;
-	private final Array<String> stack = new Array();
-	private String currentElement;
+public class XmlWriter extends DataWriter {
+	private final Array<XmlValue> stack = new Array();
+	private XmlValue currentElement;
 	private boolean indentNextClose;
 
 	public int indent;
 
 	public XmlWriter (Writer writer) {
-		this.writer = writer;
+		super(writer);
 	}
 
 	private void indent () throws IOException {
@@ -63,7 +62,7 @@ public class XmlWriter extends Writer {
 		indent();
 		writer.write('<');
 		writer.write(name);
-		currentElement = name;
+		currentElement = new XmlValue(name, currentElement);
 		return this;
 	}
 
@@ -103,6 +102,7 @@ public class XmlWriter extends Writer {
 		return this;
 	}
 
+	@Override
 	public XmlWriter pop () throws IOException {
 		if (currentElement != null) {
 			writer.write("/>\n");
@@ -111,7 +111,7 @@ public class XmlWriter extends Writer {
 			indent = Math.max(indent - 1, 0);
 			if (indentNextClose) indent();
 			writer.write("</");
-			writer.write(stack.pop());
+			writer.write(stack.pop().toString());
 			writer.write(">\n");
 		}
 		indentNextClose = true;
@@ -125,12 +125,19 @@ public class XmlWriter extends Writer {
 		writer.close();
 	}
 
+	@Override
 	public void write (char[] cbuf, int off, int len) throws IOException {
 		startElementContent();
 		writer.write(cbuf, off, len);
 	}
 
-	public void flush () throws IOException {
-		writer.flush();
+	@Override
+	public DataWriter first (String name) throws IOException {
+		return element(name);
+	}
+
+	@Override
+	public DataWriter packing (String name, Object text) throws IOException {
+		return element(name, text);
 	}
 }

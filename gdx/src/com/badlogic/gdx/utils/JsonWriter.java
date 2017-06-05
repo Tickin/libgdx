@@ -24,8 +24,7 @@ import java.util.regex.Pattern;
 
 /** Builder style API for emitting JSON.
  * @author Nathan Sweet */
-public class JsonWriter extends Writer {
-	final Writer writer;
+public class JsonWriter extends DataWriter {
 	private final Array<JsonObject> stack = new Array();
 	private JsonObject current;
 	private boolean named;
@@ -33,11 +32,7 @@ public class JsonWriter extends Writer {
 	private boolean quoteLongValues = false;
 
 	public JsonWriter (Writer writer) {
-		this.writer = writer;
-	}
-
-	public Writer getWriter () {
-		return writer;
+		super(writer);
 	}
 
 	/** Sets the type of JSON output. Default is {@link OutputType#minimal}. */
@@ -126,6 +121,7 @@ public class JsonWriter extends Writer {
 		return name(name).json(json);
 	}
 
+	@Override
 	public JsonWriter pop () throws IOException {
 		if (named) throw new IllegalStateException("Expected an object, array, or value since a name was set.");
 		stack.pop().close();
@@ -133,12 +129,9 @@ public class JsonWriter extends Writer {
 		return this;
 	}
 
+	@Override
 	public void write (char[] cbuf, int off, int len) throws IOException {
 		writer.write(cbuf, off, len);
-	}
-
-	public void flush () throws IOException {
-		writer.flush();
 	}
 
 	public void close () throws IOException {
@@ -209,5 +202,15 @@ public class JsonWriter extends Writer {
 			}
 			return '"' + buffer.replace('"', "\\\"").toString() + '"';
 		}
+	}
+
+	@Override
+	public DataWriter first (String name) throws IOException {
+		return name(name);
+	}
+
+	@Override
+	public DataWriter packing (String name, Object text) throws IOException {
+		return json(name, (String)text);
 	}
 }
