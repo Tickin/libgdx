@@ -78,6 +78,7 @@ public class Plane implements Serializable {
 	 * @param point3 */
 	public void set (Vector3 point1, Vector3 point2, Vector3 point3) {
 		normal.set(point1).sub(point2).crs(point2.getX()-point3.getX(), point2.getY()-point3.getY(), point2.getZ()-point3.getZ()).nor();
+
 		d = -point1.dot(normal);
 	}
 
