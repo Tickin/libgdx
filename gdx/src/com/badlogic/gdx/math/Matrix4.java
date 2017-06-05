@@ -26,7 +26,7 @@ import java.io.Serializable;
  * </pre>
  * 
  * @author badlogicgames@gmail.com */
-public class Matrix4 implements Serializable {
+public class Matrix4 implements Serializable, Matrix<Matrix4> {
 	private static final long serialVersionUID = -2717655254359579617L;
 	/** XX: Typically the unrotated X component for scaling, also the cosine of the angle when rotated on the Y and/or Z axis. On
 	 * Vector3 multiplication this value is multiplied with the source X component and added to the target X component. */

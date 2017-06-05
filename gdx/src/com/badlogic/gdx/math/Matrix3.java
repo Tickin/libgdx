@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * transforms.
  * 
  * @author mzechner */
-public class Matrix3 implements Serializable {
+public class Matrix3 implements Serializable, Matrix<Matrix3> {
 	private static final long serialVersionUID = 7907569533774959788L;
 	public static final int M00 = 0;
 	public static final int M01 = 3;
